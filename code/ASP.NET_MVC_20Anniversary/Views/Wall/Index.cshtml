@@ -1,0 +1,165 @@
+﻿@using System.Web.Optimization;
+@{
+    ViewBag.Title = "照片牆 - ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section headerCSS {
+    @*<link href="@Url.Content("~/css/animate.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/css/photo-wall.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/css/colorbox.css")" rel="stylesheet" />*@
+    @Styles.Render("~/css/wall_css")
+}
+
+@section headerScript {
+
+}
+
+<div id="main" class="fade out" >
+
+@*    <div id="home">
+        <div class="people-arranged-in-20"></div>
+        <div class="mask"></div>
+        <div class="radiation"></div>
+        
+        <div class="pos grey">
+            <div class="line"></div>
+        </div>
+
+        <div class="logo-slogan-wrap">
+            <div class="slogan">
+                <h2>
+                    Across 
+                    <span class="roll">
+                        20<sup>th</sup>               
+                    </span> 
+                    Across 
+                    Dream
+                </h2>
+            </div>
+            <div class="logo-20"><span></span></div>
+        </div>
+
+        <div class="pos" style="z-index: 3;">
+            <a class="scrollTo" href="#msg_strat">scroll down</a>
+        </div>
+        
+
+
+    </div>
+*@
+
+    
+    <div id="photoWall">        
+        <div id="scroll_container" class="row" style="min-height: 10px;">
+            <div id="msg_strat"><h2>照片牆</h2></div>
+            <ol id="msg_container">
+            </ol>
+
+            @*<a href='@Url.Action("LoadPartialMsg", "Home")' class='next jscroll-next-parent'>more</a>*@
+        </div>
+    </div>
+
+    <a class="scrollTo" href="#home">scroll up</a>
+
+</div>
+
+
+
+
+@section bodyScript{
+    @Scripts.Render("~/js/wall_js")
+    @*<script src="~/js/jquery.lazyloadxt.min.js"></script>
+    <script src="~/js/photo-wall.js" type="text/javascript"></script>
+    <script src="~/js/jquery.colorbox-min.js" type="text/javascript"></script>*@
+    @*
+    <!-- nicescroll -->
+    <script src="@Url.Content("~/js/jquery.nicescroll.js")"></script>
+    <script src="@Url.Content("~/js/jquery.nicescroll.plus.js")"></script>
+    *@
+    @*
+    <script src="//areaaperta.com/nicescroll/js/jquery.nicescroll.min.js"></script>
+    <script src="//areaaperta.com/nicescroll/js/jquery.nicescroll.plus.js"></script>
+    *@
+
+    <script>
+        var nice = false;
+        $(function () {
+
+            // menu
+            $(".indicator-current").addClass("active1");
+
+            /* animate */
+            $(".people-arranged-in-20, .mask, .radiation, .logo-slogan-wrap, .line, .scrollTo").hide();
+            //$(".logo-20 span, .slogan, .slogan p span.roll:eq(0), .slogan p span.roll:eq(1)").addClass("animated");
+            $(".logo-slogan-wrap, .people-arranged-in-20").addClass("animated");
+
+            $(".people-arranged-in-20").fadeIn(2000).delay(2000).addClass("backgroundMove");
+            $(".logo-slogan-wrap").delay(1500).fadeIn(0).addClass("bounceInUp");
+            $(".mask, .radiation").delay(1500).fadeIn(3000);
+            if ($.support.webkit || $.support.msie) {
+                alert("This is WebKit!");
+            }
+            $(".line, #home .scrollTo").delay(1500).fadeIn(1000);
+
+            $(".indicator-current").addClass("active1");
+
+            //load_msg(15);
+
+            $(".scrollTo").click(function () {
+                var toID = $(this).attr("href");
+                $('html, body').animate({
+                    scrollTop: $(toID).offset().top
+                }, 1000);
+                //$(".radiation").hide();
+                
+                $("#photoWall .scrollTo").delay(1000).fadeIn(1000);
+
+                //load(60);
+                return false;
+            });
+
+            if ($("body").scrollTop > 5 ) {
+                $(".radiation").hide();
+            }
+            $(document).scroll(function () {
+                check_bottom_load();                
+            });
+
+            //init_scroll();
+            init_resize();
+            load(default_photo_load);
+
+        });
+        function init_resize() {
+            $(window).resize(check_bottom_load);
+        }
+        function load(count) {
+            var url = '@Url.Action("LoadPartialMsg", "Wall")';
+            $.ajax(url, {
+                data: { count: count },
+                type: 'POST',
+                success: function (rs) {
+                    console.log("loaded:"+count);
+                    insert_wall_objects(rs);
+                    //check_bottom_load();
+                }
+            });
+        }
+        function insert_wall_objects(rs) {
+            $("#msg_container").append(rs);
+            $(window).lazyLoadXT();
+            resizeWidth();
+        }
+        function check_bottom_load() {
+            @* 如果至頁面底部就會觸發下面的事件*@            
+            //if (nice.page.maxh <= (nice.getScrollTop() + 3)){
+            if (($(window).height() + $(document).scrollTop()) >= $(document).height()) {
+                load(default_photo_more);
+                NProgress.start();
+                $("#nprogress .spinner").hide();
+                NProgress.done();
+            }
+        }
+    </script>
+}

@@ -1,0 +1,639 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>觀測站 - 土石流防災資訊</title>
+<!-- <meta name="viewport" content="width=device-width; initial-scale=1.0;minimum-scale=1.0; maximum-scale=1.0; user-scalable=no;"/> -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<!--載入css-->
+<link rel="stylesheet" href="css/reset.css" />
+<link rel="stylesheet" href="css/main.css?1" />
+<link rel="stylesheet" href="css/text.css" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" />
+
+<!-- <script type="text/javascript" src="inc/js/cordova.js"></script> -->
+
+<!-- jquery -->
+<script type="text/javascript" src="inc/js/jquery-1.8.3.min.js"></script>
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="//code.goliath5.com/jquery.easing.js"></script>  
+
+<!--PHP函式庫-->
+<script type="text/javascript" src="inc/js/php.js"></script>
+<!--jquery myBox函式庫-->
+<script type="text/javascript" src="inc/js/mybox-0.2.min.js"></script>
+
+<!--jquery myBox函式庫-->
+<script type="text/javascript" src="inc/js/jquery.corner.js"></script>
+
+
+<!--Memory -->
+<script type="text/javascript" src="inc/js/memory.js"></script>
+
+
+<!--未分類函式庫-->
+<script type="text/javascript" src="inc/js/include.js"></script>
+
+<!--拿來讀 config.js -->
+<script type="text/javascript" src="inc/js/config.js"></script>
+
+<!--加速click功能 -->
+<script type="text/javascript" src="inc/js/fastclick.js"></script>
+
+<!--APP UI -->
+<script type="text/javascript" src="inc/js/app-ui.js"></script>
+			
+<script language="javascript">
+
+function Load() {
+	//document.addEventListener("online", onOnLine, false);
+	//document.addEventListener("offline", onOffLine, false);
+
+	 var UA = strtoupper(navigator.userAgent);
+	 onDeviceReady();
+	 /*if(is_string_like(UA,'%ANDROID%') || is_string_like(UA,'%IPHONE%') || is_string_like(UA,'%MOBILE%') )
+	 {
+	  document.addEventListener("deviceready", onDeviceReady, false);   
+	 }
+	 else
+	 {
+	  onDeviceReady();
+	 }*/
+
+}
+
+function onDeviceReady() {
+	$(document).ready(function(){							
+		
+	    $(document).bind("mobileinit", function () { $.mobile.defaultPageTransition = 'none'; });
+	    FastClick.attach(document.body);
+	    //取得螢幕大小
+		window['wh']=getWindowSize();		
+
+		//重新定義按下回上頁鍵
+		/*
+		document.removeEventListener("backbutton", function(e) {
+		}, false);
+		document.addEventListener("backbutton", function(e) {
+			//e.preventDefault();
+			if (confirm("你確定要離開【地圖版】嗎??") == true) {
+				location.href="index.htm";
+				return true;
+			} else {
+				return false;
+			}
+		}, true);
+		*/
+		// 程式碼從這結束-----------------------------------------End
+
+
+		// APP UI - start ========================================================================		
+		appUI();
+		
+		var winW = $(window).width();
+		var winH = $(window).height();
+		
+		var iframeH = (winW/4)*3 ;	
+		$(".iframe-loading-wrapper").width(winW).height(iframeH);
+		
+		var headerH = $(".header").height();
+		var thRegionW = winW - $("tbody .order").width() - $("tbody .station").width() - $("tbody .rainfall").width();
+		$("thead, thead tr").width(winW);
+		$("thead .region").width(thRegionW);
+		
+		
+		$("#page-all-observation-info").css({'left':0, 'top': winH });
+		
+		
+		$(".js-back").click(function(){
+			// 是否要... 暫停/停止輪播觀測站影像 ?
+			PauseCCD();
+			
+		});	
+		
+		$("#page-all-observation-info .js-stop").click(function(){
+			if ( winW < 600 ) {
+				$("#page-all-observation-info").animate({'left': 0 ,'top': winH });
+				$("#page-all-observation-info .header").animate({'left': 0 , 'top': winH });	
+				$(".out-page [data-role='panel']").removeClass("show");
+			} else {
+				$("#page-all-observation-info").css({'left': 0 , 'top': winH });
+				$("#page-all-observation-info .header").css({'left': 0 , 'top': winH });	
+				$(".out-page [data-role='panel']").removeClass("show");
+			}		
+		
+			PauseAllStationCCD();
+		});	
+		
+		/* 前往檢視資訊 觀測站 */
+		$(".js-show-detail-observation").click(function(){
+			
+			$(".out-page").hide();
+			$("*[data-role='panel']").removeClass("show"); //因為頁面推開所以要先隱藏起來			
+			if ( winW < 600 ) {
+				$("#page-observation-info, #page-observation-info .header").show().animate({'left':0} , 200 );
+				//$(".main-page, .main-page .header, .main-page .footer, .detail-view thead").show().stop().animate({'left': "-" + winW}); //推開頁面
+			} else {
+				$("#page-observation-info, #page-observation-info .header").css({'left':0}).fadeIn();
+				//$(".main-page, .main-page .header, .main-page .footer, .detail-view thead").css({'left': "-" + winW});	//推開頁面			
+			}			
+
+			/* 按鈕圖示設回來 ------------------------*/
+			$(".js-go-play").removeClass("pause");
+
+			/* 觀測站影像 --------------------------*/
+			//請Cool替換StationID
+			$("#iframeCCDdiv").html("<iframe id='iframeCCD' src='http://dfm.swcb.gov.tw/DebrisFinal/ShowCCDImg-FB.asp?StationID=14&CCDId=1' width="+ winW +" height="+ iframeH +" frameborder='0'></iframe>");
+				
+			
+			
+			/* 請Cool在.ccd-num產生切換CCD的選單 -----------*/
+			/*
+			 * 說明：有幾個CCD就放幾個span，第一個span要加class=active
+			 * html Sample : <span class=active></span><span></span><span></span><span></span>
+			 */			
+			//$(".ccd-num").html("");
+			
+			
+			/* 顯示切換CCD的選單提示 ---------------- */
+			/*
+			setTimeout(function(){
+			  $("#ccd-panel").addClass("show");
+			},300);			
+			setTimeout(function(){
+			  $("#ccd-panel").removeClass("show");
+			},1800);
+			*/
+
+		});	
+		
+		/* 手動切換該觀測站CCD影像 -------------------------- */
+		$("#ccd-panel a").click(function(){
+			var n =$(this).parent("li").index();
+			var nCCD = n + 1;
+			$(".ccd-num span").removeClass("active"); 
+			$(".ccd-num span:eq(" + n + ")").addClass("active");
+			$("#ccd-panel").removeClass("show");
+			
+			//替換CCD名稱
+			var txtCCD = $(this).text();
+			$("#page-observation-info .ccd-name").text(txtCCD);
+			
+			//請Cool替換StationID
+			$("#iframeCCDdiv").html("<iframe id='iframeCCD' src='http://dfm.swcb.gov.tw/DebrisFinal/ShowCCDImg-FB.asp?StationID=14&CCDId="+ nCCD +"' width="+ winW +" height="+ iframeH +" frameborder='0'></iframe>");
+			
+			//停止輪播
+			PauseCCD();
+		});
+		
+
+		/* 輪播單個觀測站影像 -------------------------- */
+		//$(".js-play").unbind("click");
+		$(".js-go-play").click(function(){
+
+			if( $(this).hasClass("pause"))
+			{
+				//暫停輪播單個觀測站影像
+				PauseCCD();
+			} 
+			else 
+			{				
+				// 開始輪播單個觀測站影像，每5秒播一個CCD
+				PlayCCD();
+			}
+		});
+
+
+		/* 前往輪播全部觀測站的影像 -------------------------- */
+		//$(".js-play-all").unbind("click");
+		$(".js-go-play-all").click(function(){
+
+			$(".out-page").hide();				
+			if ( winW < 600 ) {
+				$("#page-all-observation-info, #page-all-observation-info .header, #page-all-observation-info .footer").show().animate({'left':0 , 'top' : 0} , 200 );
+			} else {
+				$("#page-all-observation-info, #page-all-observation-info .header, #page-all-observation-info .footer").css({'left':0, 'top' : 0}).fadeIn();					
+			}
+
+			/* 全部觀測站影像 --------------------------*/
+			PlayAllStationCCD();
+		});
+
+		/* 控制全部觀測站影像的輪播 ----------------------------*/
+		$(".js-play-all-control").click(function(){
+			if( $(this).hasClass("pause"))
+			{			
+				// 暫停輪播全部觀測站影像
+				$(this).removeClass("pause");
+				$(this).addClass("play");
+				PauseAllStationCCD();
+			} 
+			else 
+			{				
+				// 開始輪播全部觀測站影像，每5秒播一個CCD
+				$(this).removeClass("play");
+				$(this).addClass("pause");
+				PlayAllStationCCD();
+			}
+
+		});
+		
+		/* 請Cool 播放單站CCD ------------------------------------------*/
+		function PlayCCD (){
+			$(".js-go-play").addClass("pause");
+			$("#ccd-panel").removeClass("show");		
+		
+			// 開始輪播單個觀測站影像，每5秒播一個CCD
+			
+			/*--------------------------------
+			* 請控制 ".ccd-num" 如下：
+			*
+			* 先 全部移掉class名稱'active'
+			* $(".ccd-num span").removeClass("active"); 
+			*
+			* 再 將播放的第n個加上class名稱'active'
+			* $(".ccd-num span:eq(n)").addClass("active");
+			*
+			*/			
+		}
+		
+		/* 請Cool暫停及停止播放單站CCD ------------------------------------------*/
+		function PauseCCD (){
+			$(".js-go-play").removeClass("pause");
+			$("#ccd-panel").removeClass("show");			
+		}
+
+		/* 請Cool 播放全部觀測站CCD ------------------------------------------*/
+		function PlayAllStationCCD (){
+			
+			// 開始輪播全部觀測站影像，每5秒播一個CCD
+			
+			// for test
+			$("#iframeCCDAlldiv").html("<iframe id='iframeCCDAll' src='http://dfm.swcb.gov.tw/DebrisFinal/ShowCCDImg-FB.asp?StationID=3&CCDId=1' width="+ winW +" height="+ iframeH +" frameborder='0'></iframe>");
+		}
+		
+		/* 請Cool 暫停及停止播放全部觀測站CCD ------------------------------------------*/
+		function PauseAllStationCCD (){
+			
+		}
+		
+
+	});	
+}
+</script>
+
+</head>
+<body id="observation" onLoad="Load();">
+
+<!-- Main Page ========================================================= -->
+<div data-role="page" class="main-page">
+	<div data-role="header" class="header">
+		<div class="action left"><a href="index.html" class="btn menu js-menu">選單</a></div>
+		<div class="action center"><strong>全部觀測站</strong></div>
+	</div><!-- header-->
+
+	<div data-role="footer" class="footer">
+		<div class="action center" style="left:0; right:0;">
+			<a class="play-all js-go-play-all">輪播全部觀測站影像</a>
+		</div>
+	</div><!-- footer-->
+
+
+	<div role="main" class="main">
+		<div data-role="detail" class="detail-view do-active">
+			<!-- table>tr*20>td.order{$}+td.region{XX縣XX鄉}+td.station{豐丘}+td.rainfall{10.0} -->
+			<!-- table>tr.js-show-detail-rainfall*20>td.order{$}+td.region{XX縣XX鄉}+td.station{豐丘}+td.rainfall{10.0} -->
+
+			<table>
+				<thead>
+				<tr>
+					<th class="station">觀測站</th>	
+					<th class="region">地區</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr class="thead">
+					<th class="station">&nbsp;</th>
+					<th class="region">&nbsp;</th>
+				</tr>
+				<tr class="js-show-detail-observation">
+					<td class="station">大粗坑</td>
+					<td class="region">XX縣XX鄉XX里</td>
+				</tr>
+				<tr class="js-show-detail-observation">
+					<td class="station">集來</td>
+					<td class="region">XX縣XX鄉XX里</td>
+				</tr>
+				<tr class="js-show-detail-observation">
+					<td class="station">大粗坑</td>
+					<td class="region">XX縣XX鄉XX里</td>
+				</tr>
+				<tr class="js-show-detail-observation">
+					<td class="station">集來</td>
+					<td class="region">XX縣XX鄉XX里</td>
+				</tr>
+				<tr class="js-show-detail-observation">
+					<td class="station">大粗坑</td>
+					<td class="region">XX縣XX鄉XX里</td>
+				</tr>
+				<tr class="js-show-detail-observation">
+					<td class="station">集來</td>
+					<td class="region">XX縣XX鄉XX里</td>
+				</tr>
+				<tr class="js-show-detail-observation">
+					<td class="station">大粗坑</td>
+					<td class="region">XX縣XX鄉XX里</td>
+				</tr>
+				<tr class="js-show-detail-observation">
+					<td class="station">集來</td>
+					<td class="region">XX縣XX鄉XX里</td>
+				</tr>
+				<tr class="js-show-detail-observation">
+					<td class="station">大粗坑</td>
+					<td class="region">XX縣XX鄉XX里</td>
+				</tr>
+				<tr class="js-show-detail-observation">
+					<td class="station">集來</td>
+					<td class="region">XX縣XX鄉XX里</td>
+				</tr>
+				<tr class="js-show-detail-observation">
+					<td class="station">大粗坑</td>
+					<td class="region">XX縣XX鄉XX里</td>
+				</tr>
+				<tr class="js-show-detail-observation">
+					<td class="station">集來</td>
+					<td class="region">XX縣XX鄉XX里</td>
+				</tr>
+				<tr class="js-show-detail-observation">
+					<td class="station">大粗坑</td>
+					<td class="region">XX縣XX鄉XX里</td>
+				</tr>
+				<tr class="js-show-detail-observation">
+					<td class="station">集來</td>
+					<td class="region">XX縣XX鄉XX里</td>
+				</tr>
+				<tr class="js-show-detail-observation">
+					<td class="station">大粗坑</td>
+					<td class="region">XX縣XX鄉XX里</td>
+				</tr>
+				<tr class="js-show-detail-observation">
+					<td class="station">集來</td>
+					<td class="region">XX縣XX鄉XX里</td>
+				</tr>
+				<tr class="js-show-detail-observation">
+					<td class="station">大粗坑</td>
+					<td class="region">XX縣XX鄉XX里</td>
+				</tr>
+				<tr class="js-show-detail-observation">
+					<td class="station">集來</td>
+					<td class="region">XX縣XX鄉XX里</td>
+				</tr>
+				<tr class="js-show-detail-observation">
+					<td class="station">大粗坑</td>
+					<td class="region">XX縣XX鄉XX里</td>
+				</tr>
+				<tr class="js-show-detail-observation">
+					<td class="station">集來</td>
+					<td class="region">XX縣XX鄉XX里</td>
+				</tr>
+				<tr class="js-show-detail-observation">
+					<td class="station">大粗坑</td>
+					<td class="region">XX縣XX鄉XX里</td>
+				</tr>
+				<tr class="js-show-detail-observation">
+					<td class="station">集來</td>
+					<td class="region">XX縣XX鄉XX里</td>
+				</tr>
+				<tr class="js-show-detail-observation">
+					<td class="station">大粗坑</td>
+					<td class="region">XX縣XX鄉XX里</td>
+				</tr>
+				<tr class="js-show-detail-observation">
+					<td class="station">集來</td>
+					<td class="region">XX縣XX鄉XX里</td>
+				</tr>
+				</tbody>
+			</table>
+
+		</div>
+
+	</div><!-- main-->
+
+</div><!-- Main Page ========================================================= -->
+
+
+
+<!-- Out Page 檢視觀測站 =============================================================== -->
+<div data-role="page" class="out-page" id="page-observation-info" >
+	<div data-role="header" class="header">
+		<div class="action left"><a class="btn back js-back">選單</a><strong>集來 觀測站</strong></div>
+		<div class="action right">
+			<ul>
+				<li>
+				<!-- <a req="ccd" class="btn btn-no-icon ccd-num js-open-action-panel">
+					<span class="active"></span>
+					<span></span>
+					<span></span>
+					<span></span>
+				</a> -->
+				</li><!--
+				--><li><a class="btn play js-go-play">輪播本站影像</a></li>
+			</ul>
+		</div>
+
+	</div><!-- header-->
+	
+	<!--
+	<div data-role="footer" class="footer hide" style=" text-align: center;">
+		<div class="action right">
+			<a req="ccd" class="ccd-num js-open-action-panel">
+				<span class="active"></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</a>
+		</div>
+		<div class="action center">
+			<a class="btn play js-play">輪播本站影像</a>
+		</div>
+	</div>
+	-->
+	<!-- footer-->	
+	
+
+	<div role="main" class="main">
+		<!-- <iframe id="iframeRainChart" src="http://fema.swcb.gov.tw/DataInfo/Rainfall/RainChartForAndroid.aspx?id=774&height=480&width=480" width="480" height="480" frameborder="0"></iframe> -->
+		
+
+		<div class="ccd-name arrow-down">
+			上游攝影機影像
+		</div>
+		<div req="ccd" class="btn btn-no-icon ccd-num js-open-action-panel">
+			<span class="active"></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+			
+		<div id="iframeCCDdiv" class="iframe-loading-wrapper">
+			<!--<iframe id="iframeCCD" frameborder="0"></iframe>-->
+		</div>				
+
+		<div data-role="detail" id="station-info" class="detail-view">
+			
+			<ul>
+				<!--
+				<li>
+					<label>觀測站</label>
+					<span>大粗坑</span>
+				</li>				
+				-->
+				<li>					
+					<label>地區</label>
+					<span>高雄市杉林區集來里</span>
+				</li>
+				</a>				<li>
+					<label>10分鐘雨量</label>
+					<span>0.0 mm</span>
+				</li>
+				<li>
+					<label>一小時雨量</label>
+					<span>0.0 mm</span>
+				</li>
+				<li>
+					<label>三小時雨量</label>
+					<span>0.0 mm</span>
+				</li>
+				<li>
+					<label>六小時雨量</label>
+					<span>0.0 mm</span>
+				</li>
+				<li>
+					<label>12小時雨量</label>
+					<span>0.0 mm</span>
+				</li>
+				<li>
+					<label>當日累積雨量</label>
+					<span>0.0 mm</span>
+				</li>
+				<li>
+					<label>24小時雨量</label>
+					<span>0.0 mm</span>
+				</li>
+				<li>
+					<label>土石流警戒基準值</label>
+					<span>500</span>
+				</li>
+			</ul>
+
+		</div>
+		
+
+	</div><!-- main-->
+
+	<div data-role="panel" id="ccd-panel" class="action-panel only-text" style="top: 5em; left:0; right:0; text-align: center;">		
+		<ul>
+			<li><a>上游攝影機</a></li><!-- 
+			 --><li><a>中游攝影機</a></li><!-- 
+			 --><li><a>下游攝影機</a></li><!-- 
+			 --><li><a>攝影機4</a></li>
+		</ul>
+		<span class="indicator n2" style="right: ;"></span>
+	</div>
+
+
+</div><!-- Out Page 檢視觀測站 ========================================================= -->
+
+
+<!-- Out Page 輪播全部觀測站影像 =============================================================== -->
+<div data-role="page" class="out-page" id="page-all-observation-info" >
+	
+	<div data-role="header" class="header">
+		<div class="action left"><a class="btn close js-stop">停止</a><!--&nbsp;&nbsp;--><strong>輪播全部觀測站影像</strong></div>
+		<div class="action right">
+			<a class="btn pause js-play-all-control">暫停</a>
+		</div>
+	</div><!-- header-->
+
+	<!--
+	<div data-role="footer" class="footer">
+		<div class="action right">
+			<a class="btn stop js-back">停止</a>
+		</div>		
+		<div class="action center">
+			<a class="btn pause js-play-all-control">暫停</a>
+		</div>	
+	</div>
+	-->
+	<!-- footer-->
+
+
+	<div role="main" class="main">
+		<div class="ccd-name">
+			集來 - 上游攝影機影像
+		</div>
+			
+		<div id="iframeCCDAlldiv" class="iframe-loading-wrapper">
+			<!--<iframe id="iframeCCDAll" frameborder="0"></iframe>-->
+		</div>				
+
+		<div data-role="detail" id="station-info" class="detail-view">
+			
+			<ul>
+				<!--
+				<li>
+					<label>觀測站</label>
+					<span>大粗坑</span>
+				</li>				
+				-->
+				<li>					
+					<label>地區</label>
+					<span>高雄市杉林區集來里</span>
+				</li>
+				</a>				<li>
+					<label>10分鐘雨量</label>
+					<span>0.0 mm</span>
+				</li>
+				<li>
+					<label>一小時雨量</label>
+					<span>0.0 mm</span>
+				</li>
+				<li>
+					<label>三小時雨量</label>
+					<span>0.0 mm</span>
+				</li>
+				<li>
+					<label>六小時雨量</label>
+					<span>0.0 mm</span>
+				</li>
+				<li>
+					<label>12小時雨量</label>
+					<span>0.0 mm</span>
+				</li>
+				<li>
+					<label>當日累積雨量</label>
+					<span>0.0 mm</span>
+				</li>
+				<li>
+					<label>24小時雨量</label>
+					<span>0.0 mm</span>
+				</li>
+				<li>
+					<label>土石流警戒基準值</label>
+					<span>500</span>
+				</li>
+			</ul>
+
+		</div>
+		
+
+	</div><!-- main-->
+
+</div><!-- Out Page 輪播全部觀測站影像 ========================================================= -->
+
+<div class="go-loading-wait"></div>
+
+</body>
+</html>		

@@ -1,0 +1,330 @@
+	body {
+		margin-bottom: 13em;
+	}
+	.timeline-wrapper {
+		position: relative;
+		position: fixed;
+		bottom: 0;
+		left: 10px;
+		right: 0;
+		z-index: 1;
+		background: #181D2D;
+		overflow: hidden;
+	}
+
+	.timeline-wrapper .control {
+		position: absolute;
+		right: 0;
+		z-index: 3;
+		display: inline-block;
+		padding-left: 10px;
+		width: 50px;
+		height: 160px;
+		background: #181D2D;  /* 用底色遮住超出的 .timeline ... */
+	}
+	.timeline-wrapper .control button {
+		outline: none;		
+		width: 24px;
+		height: 24px;
+		border: 2px solid #666;
+		border-radius: 50%;
+		background: #000;
+	}
+	
+	.timeline-wrapper .control button[disabled] {
+		background: #181D2D;
+		color: #666;
+		border-color: #181D2D;
+	}
+
+
+	.timeline { 
+		position: relative;
+		left: 0px;
+		right: 160px;
+		margin: -65px 100px 15px 30px;
+		white-space: nowrap;
+		/*禁止選取*/
+		-webkit-user-select: none;  /* Chrome all / Safari all */
+		-moz-user-select: none;     /* Firefox all */
+		-ms-user-select: none;      /* IE 10+ */
+		/* No support for these yet, use at own risk */
+		-o-user-select: none;
+		user-select: none; 
+	}
+	.timeline [data-year] {
+		position: relative;
+		display: inline-block;
+		height: 4px;
+		margin-left: -1px;
+		border-top: 200px solid #181D2D; 	/* 年份分隔線的上突出部分, 值越大就突出越多 */
+		border-bottom: 24px solid #181D2D; 	/* 年份分隔線的下突出部分, 值越大就突出越多 */
+		border-left: 1px solid /*#7FC3DB*/ #404960; 	/* 分隔線顏色*/
+		border-right: 1px solid /*#7FC3DB*/ #404960;	/* 分隔線顏色*/
+		background: #3890A5;		
+	}
+	.timeline .tag /* js寫出來的年份文字 */ {
+		position: absolute;
+		top: 15px;
+		left: -15px;
+		font-size: 0.75em;
+		color: #7FC3DB;		
+	}
+	
+	.timeline .tag.last /* js寫出來的年份文字 - 最後一個再加一年 */ {
+		position: absolute;
+		left: auto;
+		right: -15px;
+	}
+	.timeline .tag:hover {
+		color: #ff3;
+		cursor: pointer;
+	}
+	.timeline .tag.last:hover /*fixed */ {
+		color: #7FC3DB;
+		cursor: default;
+	}
+	
+	.timeline a /* =.timeline [data-date]*/ /* 時間軸上的小圓點 */ {
+		position: absolute;
+		display: block;
+		top: -6px;
+		z-index: 1;	
+		width: 12px;
+		height: 12px;
+		background: /*#7FC3DB*/ /*#404960*/ #222 ;
+		border-radius: 50%;
+		border: 2px solid #3890A5;
+/*		overflow: hidden;
+		white-space: nowrap;
+		text-indent: 100%;*/		
+	}
+
+	.timeline a:before /* 在 item 左邊拉出向下指的線*/ {
+		content: "";
+		display: block;
+		position: absolute;
+		top: -50px;
+		left: 5px;
+		z-index: 1;
+		height: 50px;
+		border-left: 2px solid #3890A5;
+		-webkit-transition: all .25s ease-out;
+		   -moz-transition: all .25s ease-out;
+		    -ms-transition: all .25s ease-out;
+		     -o-transition: all .25s ease-out;
+		        transition: all .25s ease-out;		
+	}
+
+	.item /* 時間軸上的事件名稱 */ {
+		position: absolute;
+		top: -50px;
+		left: 5px;
+		z-index: 2;
+		width: auto;
+		padding: 5px 1em;
+		white-space: nowrap;
+		font-size: 0.8125em;
+		border: 1px solid #307289;
+		background: #3890A5;
+		color: #DDEDF2;
+		-webkit-transition: all .25s ease-out;
+		   -moz-transition: all .25s ease-out;
+		    -ms-transition: all .25s ease-out;
+		     -o-transition: all .25s ease-out;
+		        transition: all .25s ease-out;
+	}
+
+	.timeline a.pos1:before {
+		top: -45px;
+		height: 45px;
+	}
+	.timeline a.pos1 .item {
+		top: -45px;
+	}	
+	.timeline a.pos2:before {
+		top: -80px;
+		height: 80px;
+	}
+	.timeline a.pos2 .item {
+		top: -80px;
+	}
+
+
+
+	/* hover style --------- */
+	.timeline a:hover {
+		background: #307289;
+		border-color: #ccc;
+		z-index: 10;
+	} 
+	.timeline a:hover .item {
+		border-color: #fff;
+		background: #307289;	
+		color: #fff;	
+	}
+	.timeline a:hover:before {
+		border-color: #7FC3DB;
+	}
+
+
+	/* active style --------- */
+	.timeline a.active {
+		border-color: #fff;
+		background: #933;
+		z-index: 9;
+		/*border-width: 4px;*/
+		top: -6px;
+	} 
+	.timeline a.active .item {
+		/*top: -140px;*/
+		top: -115px;
+		background: #933;
+		border-color: #fff;
+		color: #fff;
+	}
+	.timeline a.active:before {
+		/*top: -140px;
+		height: 140px;*/
+		top: -115px;
+		height: 115px;
+		border-color: #fff;
+	}
+
+	/*----------------------*/
+	.event-list {
+		text-align: center;
+	}
+
+	.event-item {
+		display: inline-block;
+		width: 240px;
+		margin: 0 10px 10px 0;
+		padding: 10px;
+		border: 5px solid transparent;
+		background: #404960;
+		vertical-align: top;
+		-webkit-transition: all .3s ease-out;
+		   -moz-transition: all .3s ease-out;
+		    -ms-transition: all .3s ease-out;
+		     -o-transition: all .3s ease-out;
+		        transition: all .3s ease-out;
+	}
+
+	.event-item:hover {
+		background: #333947;
+		border: 5px solid #222;
+	}
+	.event-item:hover strong {
+		background: #307289;
+	}
+
+	.event-item strong,
+	.event-item em,
+	.event-item span {
+		display: block;
+		text-align: left;
+	}
+
+	.event-item strong {
+		padding: 10px;
+
+		width: 220px;
+		white-space:nowrap;
+		text-overflow:ellipsis;
+		-o-text-overflow:ellipsis;
+		overflow: hidden;
+
+		background: #333947;
+		color: #fff;
+		font-weight: bold;
+		text-align: center;
+		
+		-webkit-transition: all .15s ease-out;
+		   -moz-transition: all .15s ease-out;
+		    -ms-transition: all .15s ease-out;
+		     -o-transition: all .15s ease-out;
+		        transition: all .15s ease-out;
+
+	}
+
+	.event-item em {
+		margin-top: 10px;
+		padding: 8px;
+		border-top: 1px dotted #999;
+		font-style: normal;
+		font-size: 0.8125em;
+		text-align: center;
+	}
+
+	.event-item>span {
+		padding: 10px;
+		height: 160px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		line-height: 1.75;
+		font-size: 0.875em;
+	} 
+
+
+	/*:target {
+		border: 5px solid #fff;
+	}*/
+
+	.focusOn {
+		border: 5px solid #fff;
+		background: #222;
+	}
+
+	.focusOn strong {
+		background: #933;
+	}
+
+	.tip-no-event {
+		display: none;
+		position: fixed;	
+		bottom: 100px;
+		color: #3890A5;
+	}
+
+	.tip-go-all {
+		display: none;
+		position: fixed;	
+		bottom: 20px;
+		font-size: 0.8125em;
+		color: #7FC3DB;
+	}	
+
+/*-----------------------------------*/
+
+	.event-info {
+    margin: 30px 0;
+	}
+	.event-info strong {
+		display: block;
+		font-size: 1.5em;
+		padding: 25px 0;
+	}
+	.event-info em {
+		margin-left: 15px;
+		padding-left: 15px;
+		border-left: 2px solid #fff;
+		font-style: normal;
+		font-size: 0.8125em;
+	} 
+
+	.event-info span {
+		display: block;
+	}
+
+  .event-info span .wrapper {
+    border-top: 1px dotted #ccc;
+    padding: 20px 0;    
+    line-height: 1.75;   
+  }
+
+  /*----------------*/
+  .item.tip {
+  	background: #c30;
+  }
+

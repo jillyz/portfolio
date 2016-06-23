@@ -1,0 +1,440 @@
+﻿@import url(http://fonts.googleapis.com/css?family=Anton);
+
+html, body
+{
+	background: /*#d4e4f2*/ /*#f5e5b4*/ #6f276b /*#c06e27*/ ;
+}
+
+#main
+{
+	background: #f4f4f4;
+}
+
+#main, .nav-next
+{
+    color: #fff;
+    -webkit-text-shadow: -1px -1px 0 rgba(0,0,0,0.4);
+    text-shadow: -1px -1px 0 rgba(0,0,0,0.4);
+}
+
+h2
+{
+    display: none;
+}
+
+/*================================================
+    Milestone content
+==============================================*/
+
+#fullpage
+{
+	margin: 0 auto ;
+	text-align: center;
+}
+
+.section
+{
+	position: relative;
+	margin: 0 auto;
+	width: 100%;
+	height: 500px;
+	box-sizing: border-box;
+    text-align: center;
+}
+
+	.section h3
+	{	
+		padding: 10px 30px;
+		padding-top: 2em;
+		font-family: 'Anton', '微軟正黑體' , 'sans-serif';
+		font-size: 6em; 
+        letter-spacing: 5px;        
+	}
+
+	.section h3 small {
+        display: block;
+        margin-top: 1em;
+        padding-top: 1em;
+        width: auto;
+        border-top: 1px dotted #fff;
+		font-size: 0.5em;
+		vertical-align: middle;
+		font-weight: bold;
+        letter-spacing: 0;
+        line-height: 150%;
+	}
+	.section p
+	{
+		width: auto;
+		margin: 0;
+		line-height: 200%;
+	}
+
+        .section p img
+        {
+            margin: 20px 0;
+			width: auto;
+			max-width: 100%;
+        }
+
+
+/* RWD ====================================== */
+
+@media screen and (max-width: 767px )    
+{
+    #nav { display: none; }
+	.section > div { padding-top: 5%;}
+	.section h3 { padding-top: 2em; font-size: 5em; }
+	.section h3 small { font-size: 0.4em;  }
+	.section p { padding: 0.2em 2em ; text-align: left; line-height: 180%; }
+
+	#fullPage-nav { display: none; }
+}
+
+@media screen and (min-width: 768px )    
+{
+	.section > div { padding-top: 10%;}
+	.section h3, .section p { padding-top: 1em; margin: 0 auto; width: 80%; min-width: 600px; height: auto; text-align: center; }
+}
+
+@media screen and (max-width: 480px )    
+{
+	.section h3 { font-size: 3.5em; }
+}
+
+@media only screen and (max-width: 800px )  and (min-width: 600px) and (orientation:landscape)
+{
+	.section h3 { padding-top: 1em; }
+}
+
+/*------- pic ----------------------------------------------------------------*/
+
+@media screen and (max-width: 767px )    
+{
+	.section.year-1991
+	{
+		background: url(../images/Milestone/1991.jpg?20140618) 30% 50% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-1992
+	{
+		background: url(../images/Milestone/1992.jpg?20140618) 90% 50% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-1995
+	{
+		background: url(../images/Milestone/1995.jpg?20140618) 50% 50% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-1996
+	{
+		background: url(../images/Milestone/1996.jpg?20140618) 50% 50% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-1997
+	{
+		background: url(../images/Milestone/1997.jpg?20140618) 10% 50% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-1999
+	{
+		background: url(../images/Milestone/1999.jpg?20140618) 100% 50% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-2001
+	{
+		background: url(../images/Milestone/2001.jpg?20140618) 20% 50% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-2002
+	{
+		background: url(../images/Milestone/2002.jpg?20140618) 50% 50% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-2003
+	{
+		background: url(../images/Milestone/2003.jpg?20140618) 50% 30% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-2004
+	{
+		background: url(../images/Milestone/2004.jpg?20140618) 60% 50% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-2007
+	{
+		background: #6f276b /*#7d3e26*/;
+	}
+
+	.section.year-2008
+	{
+		background: url(../images/Milestone/2008.jpg?20140618) 45% 50% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-2009
+	{
+		background: url(../images/Milestone/2009.jpg?20140618) 80% 50% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-2010
+	{
+		background: url(../images/Milestone/2010.jpg?20140618) 35% 50% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-2011
+	{
+		background: url(../images/Milestone/2011.jpg?20140618) 90% 50% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-2013
+	{
+		background: url(../images/Milestone/2013.jpg?20140618) 75% 50% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-2014
+	{
+		background: url(../images/Milestone/2014.jpg?20140618) 50% 50% no-repeat;
+		background-size: cover;
+	}
+}
+@media screen and (min-width: 599px )
+{
+	.section.year-1991
+	{
+		background: url(../images/Milestone/1991-2x.jpg?20140618) 30% 50% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-1992
+	{
+		background: url(../images/Milestone/1992-2x.jpg?20140618) 90% 50% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-1995
+	{
+		background: url(../images/Milestone/1995-2x.jpg?20140618) 50% 50% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-1996
+	{
+		background: url(../images/Milestone/1996-2x.jpg?20140618) 50% 50% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-1997
+	{
+		background: url(../images/Milestone/1997-2x.jpg?20140618) 10% 50% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-1999
+	{
+		background: url(../images/Milestone/1999-2x.jpg?20140618) 100% 50% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-2001
+	{
+		background: url(../images/Milestone/2001-2x.jpg?20140618) 20% 50% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-2002
+	{
+		background: url(../images/Milestone/2002-2x.jpg?20140618) 50% 50% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-2003
+	{
+		background: url(../images/Milestone/2003-2x.jpg?20140618) 50% 30% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-2004
+	{
+		background: url(../images/Milestone/2004-2x.jpg?20140618) 60% 50% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-2007
+	{
+		background: #6f276b /*#7d3e26*/;
+	}
+
+	.section.year-2008
+	{
+		background: url(../images/Milestone/2008-2x.jpg?20140618) 45% 50% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-2009
+	{
+		background: url(../images/Milestone/2009-2x.jpg?20140618) 80% 50% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-2010
+	{
+		background: url(../images/Milestone/2010-2x.jpg?20140618) 35% 50% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-2011
+	{
+		background: url(../images/Milestone/2011-2x.jpg?20140618) 90% 50% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-2013
+	{
+		background: url(../images/Milestone/2013-2x.jpg?20140618) 75% 50% no-repeat;
+		background-size: cover;
+	}
+
+	.section.year-2014
+	{
+		background: url(../images/Milestone/2014-2x.jpg?20140618) 50% 50% no-repeat;
+		background-size: cover;
+	}
+}
+@media screen and (min-width: 600px )
+{
+    .section.year-2014 > div > div
+    {
+        margin: 0 auto;
+        padding-bottom: 3em;
+        width: 650px;
+		background: #c30;
+        background: rgba(204,51,0,0.7);
+    }
+    .section.year-2014 p
+    {
+        text-align: left;
+    }
+}
+@media screen and (max-width: 768px ) {
+    .section.year-2014 p , .section.year-2014 h3 
+    {
+		background: #c30;
+        background: rgba(204,51,0,0.7);
+    }
+}
+
+/*======================================================
+	fullPage-tooltip
+=====================================================*/
+.fullPage-tooltip
+{
+	/*width: 25em;*/
+	padding: 8px 10px;
+	background: #333;
+	background: rgba(0,0,0,0.5);
+	font-size: 0.8em;
+	white-space: nowrap;
+	border-radius: 5px;
+	text-align: left;
+}
+
+/*=========================================================
+    fullPage-nav ( 覆蓋 jquery.fullPage.css 樣式 )
+=======================================================*/
+
+#fullPage-nav {
+	position: absolute;
+	position: fixed;
+	top: 50%;
+	margin-top: -170px;
+	text-align: center;
+}
+
+	#fullPage-nav ul
+	{
+		margin: 0 auto;
+	}
+	#fullPage-nav ul , #fullPage-nav ul li {
+		margin: 0;
+		padding:0;
+		list-style: none;	
+	}
+
+	#fullPage-nav ul li a {
+		display: block;
+		margin: 10px 0;
+		border: 2px solid #f4f4f4;
+		width: 8px;
+		height: 8px;
+		behavior: url(PIE.htc);
+		border-radius: 50%;
+		background: #f4f4f4;
+		text-indent: -9999px;
+		-webkit-transition: all ease 0.5s;
+		-moz-transition: all ease 0.5s;
+		-o-transition: all ease 0.5s;
+		transition: all ease 0.5s;
+		box-shadow: rgba(0,0,0,0.3) 1px 0;
+	}
+
+	#fullPage-nav ul li a:hover{
+		background: #999;
+	}
+
+	#fullPage-nav ul li a.active {
+		margin: 10px 0;
+		border: 2px solid #fff;
+		width: 8px;
+		height: 8px;
+		background: #c30;
+	}
+
+/* ----- scroll-tip -----  */
+
+.scroll-tip
+{
+	display: block;
+	position: absolute;
+	background-size: 100%;
+	opacity: 0.5;
+}
+@media screen and (min-width: 600px )
+{
+	.scroll-tip
+	{
+		right: 50%;
+		bottom: 40px;
+		margin-right: -64px;
+		width: 128px;
+		height: 48px;
+		background: url(../images/Milestone/scroll-tip-mouse-keyboard.png) 50% 50% no-repeat;
+	}
+}
+@media screen and (max-width: 599px )
+{
+	.scroll-tip
+	{
+
+		right: 50%;
+		bottom: 30px;
+		margin-right: -18px;
+		width: 36px;
+		height: 21px;
+		background: url(../images/site/arrow-down.png) 50% 50% no-repeat;
+	}
+}

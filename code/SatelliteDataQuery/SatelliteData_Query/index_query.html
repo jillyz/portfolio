@@ -1,0 +1,1139 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+ <head>  
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="Resource-Type" content="document">
+  <meta name="Distribution" content="Global">
+  <meta name="Author" content="FCU GIS-John,FCU GIS-Jill,FCU GIS-Maxine,FCU GIS-Cool">
+  <meta property="og:url" content="http://192.168.3.121:90/nspo_esok">
+  <meta name="Keywords" content="NSPO ESOK">
+  <meta name="Generator" content="pspad,notepad,vim">
+  <meta name="description" content="太空中心衛星資料庫，快速查詢與即時服務系統">  
+  <title>衛星資料查詢 - 太空中心衛星資料庫快速查詢與即時服務系統</title>
+
+
+  <link href="css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="css/style.css" rel="stylesheet" type="text/css">
+  <link href="css/query.css" rel="stylesheet" type="text/css"><!-- 這支檔案是重點 -->
+  <link href="css/jquery.ui.datepicker.min.css" rel="stylesheet" type="text/css">
+  <link href="css/colorbox.css" rel="stylesheet" type="text/css"><!-- colorbox -->
+
+  <script src="js/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
+  <script src="js/jquery/jquery.ui.datepicker.min.js" type="text/javascript"></script>
+  <script src="js/php/php.js" type="text/javascript"></script>
+  <script src="js/jquery/mybox-0.3.min.js" type="text/javascript"></script>
+  <script src="js/include.js" type="text/javascript"></script>
+  <script src="js/query.js" type="text/javascript"></script><!-- 這支檔案是重點 -->
+  <script language="javascript" src="js/jquery/jquery.colorbox.js"></script><!-- colorbox -->
+
+
+ 
+<script language="javascript">
+
+</script>
+
+</head>
+
+<body class="query-body">
+ 
+
+<div id="header" class="header clearfix">
+
+    <!-- left -->
+    <div class="clearfix">
+      <a class="title" href="http://192.168.3.121:90/nspo_esok/index.php"></a>
+      <ul class="menu clearfix">
+        <li><a href="http://192.168.3.121:90/nspo_esok/index.php" class="home is-icon"><!-- 首頁 --></a></li><!--
+         --><li class="has-sub about" style="position: relative;">
+                <a href="http://192.168.3.121:90/nspo_esok/about.php" class="about">關於</a>
+                <iframe frameborder="0" width="115" height="130" style="position: absolute; top: 72px;"></iframe>
+                 <div class="sub-menu about">
+                   <ul>
+                    <li><a href="http://192.168.3.121:90/nspo_esok/about.php">平台</a></li>
+                    <li><a href="http://192.168.3.121:90/nspo_esok/about.php#mission">衛星任務</a></li>
+                    <li><a href="http://192.168.3.121:90/nspo_esok/about.php#product">產品資訊</a></li>
+                  </ul>
+                </div>
+            </li><!--
+         --><li><a href="http://192.168.3.121:90/nspo_esok/query.php" class="query">衛星資料查詢</a></li><!--          -
+         --><li><a href="http://192.168.3.121:90/nspo_esok/events.php" class="event">特殊事件夾</a></li><!--
+         --><li><a href="http://192.168.3.121:90/nspo_esok/research.php" class="research">成果展示</a></li><!--
+         --><li><a href="http://192.168.3.121:90/nspo_esok/tools.php" class="tool is-icon"><!-- 工具程式 --></a></li><!--
+         --><li><a href="http://192.168.3.121:90/nspo_esok/qa.php" class="qa is-icon"><!-- 常見問題 --></a></li><!--
+         --><li><a href="http://192.168.3.121:90/nspo_esok/contact.php" class="feedback is-icon"><!-- 聯絡我們 --></a></li>
+          <li>
+            <a href="http://192.168.3.121:90/nspo_esok/query.php?&change_language=en" id="trans-lang">English</a>
+          </li>
+      </ul>
+    </div><!-- left -->
+
+    <!-- right -->
+    <div class="right clearfix"> 
+        <ul>
+          <li><a class="login">登入</a></li><!-- 
+           --><li><a href="http://192.168.3.121:90/nspo_esok/register.php" class="register">註冊</a></li>
+        </ul>
+    </div><!-- right -->
+
+</div><!-- header -->
+
+
+<!-- 
+*****************************************************
+*****************************************************
+
+以下開始為本頁重點
+
+*****************************************************
+*****************************************************
+-->
+
+
+<div class="main">
+
+
+<div class="data-query" style=" margin-top: 6px;">  
+  <div class="wrapper">
+    <div class="block">
+
+      <div class="info">
+        <span class="time">
+          <input type='text' req='input_form' reqq='date' id='ALL_SEARCH_SDATE'> ~ <input type='text' req='input_form' reqq='date' id='ALL_SEARCH_EDATE'>
+        </span><!--
+         --><strong><!--1:福衛二號遙測影像,2:福衛二號高空大氣閃電觀測,3:福衛三號大氣電離層掩星-->
+          <label for="FS2IMAGE_CHECKBOX"><input req='input_form' reqq='checkbox' name="ALL_SEARCH_CHECKBOX[]" id="FS2IMAGE_CHECKBOX" value="1" type="checkbox" checked>福衛二號遙測影像</label>
+          <em id='ALL_SEARCH_F2IMAGE_COUNTS_SPAN'>56747</em>
+        </strong><!--
+         --><strong>
+          <label for="FS2ISUAL_CHECKBOX"><input req='input_form' reqq='checkbox' name="ALL_SEARCH_CHECKBOX[]" id="FS2ISUAL_CHECKBOX" value="2" type="checkbox" checked>福衛二號高空大氣閃電觀測</label>
+          &nbsp;<img src="images/info-tip.png" title="目前暫未提供近兩年資料" >
+          <em id='ALL_SEARCH_FS2ISUAL_COUNTS_SPAN'>13495</em>
+        </strong><!--
+         --><strong>
+          <label for="FS3DATA_CHECKBOX"><input req='input_form' reqq='checkbox' name="ALL_SEARCH_CHECKBOX[]" id="FS3DATA_CHECKBOX" value="3" type="checkbox" checked>福衛三號大氣/電離層掩星</label>
+          <em id='ALL_SEARCH_FS3RO_COUNTS_SPAN'>14280</em>
+        </strong>
+      </div>
+
+      <div id="chart" style="background: url(data/chart.png);">
+        <!-- 這裡預計要顯示圖表 -->
+      </div>
+
+    </div>
+    <a href="#dataType" id="btnDataQuery" class="query scrollTo"><!-- 查詢 --></a>
+  </div>
+</div><!-- data-query -->
+
+
+<div class="wrapper" style="position: relative;">
+  <div class="re-query">
+    <button><!-- 重新查詢 --></button>
+  </div>
+</div>
+
+<div class="query-tip">    
+    請由上方查詢<br/>所需的時間區間以及資料類型</div>
+
+<div class="loading" style="display: none;">
+</div>
+
+<div class="result-block" style="display: none;">
+
+  <div id="TAB" class="data-type clearfix">
+    <div class="wrapper">
+      <a id="TAB_F2_IMAGE" href="#" class="actived">福衛二號遙測影像</a>
+      <a id="TAB_F2_ISUAL" href="#">福衛二號高空大氣閃電觀測</a>
+      <a id="TAB_F3_OCCULTATION" href="#">福衛三號大氣/電離層掩星</a> 
+      <!-- <button class="cart-item">購物車 (<span>0</span>) </button> -->
+    </div>
+  </div><!-- data-type -->
+
+<div id="output"><div class="data-result">  
+
+  <div class="wrapper clearfix">
+    <div class="filter">
+      
+      <div class="type">
+
+        <div class="type-collapse">產品類型</div>
+
+        <div class="type-item">
+
+          <div>
+            <label class="cate selected" for="chk_MS"><input type="checkbox" name="chk_MS" id="chk_MS" checked="">多光譜MS</label>
+            <ul>
+              <li><label for="chk_MS_L1A" class="selected"><input type="checkbox" value="MS_L1A" name="MS_PAN_DATA[]" id="chk_MS_L1A">L1A</label></li>
+              <li><label for="chk_MS_L2" class="selected"><input type="checkbox" value="MS_L2" name="MS_PAN_DATA[]" id="chk_MS_L2">L2</label></li>
+            </ul>
+          </div>
+
+          <div>
+            <label class="cate selected" for="chk_PAN"><input type="checkbox" name="chk_PAN" id="chk_PAN" checked="">全色態PAN</label>
+            <ul>
+              <li><label for="chk_PAN_L1A" class="selected"><input type="checkbox" value="PAN_L1A" name="MS_PAN_DATA[]" id="chk_PAN_L1A">L1A</label></li>
+              <li><label for="chk_PAN_L2" class="selected"><input type="checkbox" value="PAN_L2" name="MS_PAN_DATA[]" id="chk_PAN_L2">L2</label></li>
+            </ul>
+          </div>
+
+          <h4>最大雲覆量</h4>
+          <select name="CLOUD_COVER" id="CLOUD_COVER">
+            <option value="0">0%</option>
+            <option value="10">10%</option>
+            <option value="20">20%</option>
+            <option value="30">30%</option>
+            <option value="40">40%</option>
+            <option value="50">50%</option>
+            <option value="60">60%</option>
+            <option value="70">70%</option>
+            <option value="80">80%</option>
+            <option value="90">90%</option>
+            <option value="100">100%</option>
+          </select>
+
+        </div><!-- type-item -->
+
+      </div><!-- type -->
+
+      <div class="time">
+        
+        <div class="time-collapse toggle">時間 - 年月份</div>
+
+        <div class="time-item">
+        <label for="m2012" class="cate selected">
+        <input type="checkbox" value="2012" name="mY[]" id="m2012" checked="">2012</label><ul><li>                <label for="m201201" class="selected">                  <input type="checkbox" req="201201" name="YM[]" id="m201201" value="01">01                </label>              </li><li>                <label for="m201202" class="selected">                  <input type="checkbox" req="201202" name="YM[]" id="m201202" value="02">02                </label>              </li><li>                <label for="m201203" class="selected">                  <input type="checkbox" req="201203" name="YM[]" id="m201203" value="03">03                </label>              </li><li>                <label for="m201204" class="selected">                  <input type="checkbox" req="201204" name="YM[]" id="m201204" value="04">04                </label>              </li><li>                <label for="m201205" class="selected">                  <input type="checkbox" req="201205" name="YM[]" id="m201205" value="05">05                </label>              </li><li>                <label for="m201206" class="selected">                  <input type="checkbox" req="201206" name="YM[]" id="m201206" value="06">06                </label>              </li><li>                <label for="m201207" class="selected">                  <input type="checkbox" req="201207" name="YM[]" id="m201207" value="07">07                </label>              </li><li>                <label for="m201208" class="selected">                  <input type="checkbox" req="201208" name="YM[]" id="m201208" value="08">08                </label>              </li><li>                <label for="m201209" class="selected">                  <input type="checkbox" req="201209" name="YM[]" id="m201209" value="09">09                </label>              </li><li>                <label for="m201210" class="selected">                  <input type="checkbox" req="201210" name="YM[]" id="m201210" value="10">10                </label>              </li><li>                <label for="m201211" class="selected">                  <input type="checkbox" req="201211" name="YM[]" id="m201211" value="11">11                </label>              </li><li>                <label for="m201212" class="selected">                  <input type="checkbox" req="201212" name="YM[]" id="m201212" value="12">12                </label>              </li></ul><label for="m2013" class="cate selected">               <input type="checkbox" value="2013" name="mY[]" id="m2013" checked="">2013              </label>               <ul><li>                <label for="m201301" class="selected">                  <input type="checkbox" req="201301" name="YM[]" id="m201301" value="01">01                </label>              </li><li>                <label for="m201302" class="selected">                  <input type="checkbox" req="201302" name="YM[]" id="m201302" value="02">02                </label>              </li><li>                <label for="m201303" class="selected">                  <input type="checkbox" req="201303" name="YM[]" id="m201303" value="03">03                </label>              </li><li>                <label for="m201304" class="selected">                  <input type="checkbox" req="201304" name="YM[]" id="m201304" value="04">04                </label>              </li><li>                <label for="m201305" class="selected">                  <input type="checkbox" req="201305" name="YM[]" id="m201305" value="05">05                </label>              </li><li>                <label for="m201306" class="selected">                  <input type="checkbox" req="201306" name="YM[]" id="m201306" value="06">06                </label>              </li><li>                <label for="m201307" class="selected">                  <input type="checkbox" req="201307" name="YM[]" id="m201307" value="07">07                </label>              </li><li>                <label for="m201308" class="selected">                  <input type="checkbox" req="201308" name="YM[]" id="m201308" value="08">08                </label>              </li><li>                <label for="m201309" class="selected">                  <input type="checkbox" req="201309" name="YM[]" id="m201309" value="09">09                </label>              </li><li>                <label for="m201310" class="selected">                  <input type="checkbox" req="201310" name="YM[]" id="m201310" value="10">10                </label>              </li><li>                <label for="m201311" class="selected">                  <input type="checkbox" req="201311" name="YM[]" id="m201311" value="11">11                </label>              </li><li>                <label for="m201312" class="selected">                  <input type="checkbox" req="201312" name="YM[]" id="m201312" value="12">12                </label>              </li></ul><label for="m2014" class="cate selected">               <input type="checkbox" value="2014" name="mY[]" id="m2014" checked="">2014              </label>               <ul><li>                <label for="m201401" class="selected">                  <input type="checkbox" req="201401" name="YM[]" id="m201401" value="01">01                </label>              </li><li>                <label for="m201402" class="selected">                  <input type="checkbox" req="201402" name="YM[]" id="m201402" value="02">02                </label>              </li><li>                <label for="m201403" class="selected">                  <input type="checkbox" req="201403" name="YM[]" id="m201403" value="03">03                </label>              </li><li>                <label for="m201404" class="selected">                  <input type="checkbox" req="201404" name="YM[]" id="m201404" value="04">04                </label>              </li><li>                <label for="m201405" class="selected">                  <input type="checkbox" req="201405" name="YM[]" id="m201405" value="05">05                </label>              </li><li>                <label for="m201406" class="selected">                  <input type="checkbox" req="201406" name="YM[]" id="m201406" value="06">06                </label>              </li><li>                <label for="m201407" class="selected">                  <input type="checkbox" req="201407" name="YM[]" id="m201407" value="07">07                </label>              </li><li>                <label for="m201408" class="selected">                  <input type="checkbox" req="201408" name="YM[]" id="m201408" value="08">08                </label>              </li><li>                <label for="m201409" class="selected">                  <input type="checkbox" req="201409" name="YM[]" id="m201409" value="09">09                </label>              </li><li>                <label for="m201410" class="selected">                  <input type="checkbox" req="201410" name="YM[]" id="m201410" value="10">10                </label>              </li><li>                <label for="m201411" class="selected">                  <input type="checkbox" req="201411" name="YM[]" id="m201411" value="11">11                </label>              </li>
+        </ul>
+        </div>        
+      </div><!-- time -->
+
+
+      <div class="space">
+        <div class="space-collapse">空間</div>
+        <div class="space-item">
+          <div class="setting-range">
+              <!-- 矩形範圍坐標
+              <br/>  -->
+              左上: <input type="text" id="ULX" placeholder="X" style="width: 60px;" maxlength="8"> , <input type="text" id="ULY" placeholder="Y" style="width: 50px;" maxlength="7">  
+              <br> 
+              右下: <input type="text" id="LRX" placeholder="X" style="width: 60px;" maxlength="8"> , <input type="text" id="LRY" placeholder="Y" style="width: 50px;" maxlength="7">
+              <br> 
+              <!-- <small>請輸入度小數點，<br/>例如：120.1806, 24.3227</small>  -->   
+              <button id="openMapLarge">框選範圍</button>
+          </div>     
+          <div id="Map_Small" class="map" style="height: 200px; position: relative; overflow: hidden; transform: translateZ(0px); background: rgb(127, 194, 218);"><div class="gm-style" style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; z-index: 0;"><div style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; z-index: 0; cursor: url(http://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8, default;"><div style="position: absolute; left: 0px; top: 0px; z-index: 1; width: 100%; transform-origin: 0px 0px 0px; transform: matrix(1, 0, 0, 1, 0, 0);"><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 100; width: 100%;"><div style="position: absolute; left: 0px; top: 0px; z-index: 0;"><div aria-hidden="true" style="position: absolute; left: 0px; top: 0px; z-index: 1;"><div style="width: 256px; height: 256px; transform: translateZ(0px); position: absolute; left: -81px; top: -107px;"></div><div style="width: 256px; height: 256px; transform: translateZ(0px); position: absolute; left: -81px; top: 149px;"></div><div style="width: 256px; height: 256px; transform: translateZ(0px); position: absolute; left: 175px; top: -107px;"></div><div style="width: 256px; height: 256px; transform: translateZ(0px); position: absolute; left: 175px; top: 149px;"></div></div></div></div><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 101; width: 100%;"><div style="position: absolute; left: 0px; top: 0px; z-index: 20;"><div aria-hidden="true" style="position: absolute; left: 0px; top: 0px; z-index: 1;"><div style="transform: translateZ(0px); position: absolute; left: -81px; top: -107px;"><img src="http://maps.gstatic.com/mapfiles/transparent.png" draggable="false" style="width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;"></div><div style="transform: translateZ(0px); position: absolute; left: -81px; top: 149px;"><img src="http://maps.gstatic.com/mapfiles/transparent.png" draggable="false" style="width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;"></div><div style="transform: translateZ(0px); position: absolute; left: 175px; top: -107px;"><img src="http://maps.gstatic.com/mapfiles/transparent.png" draggable="false" style="width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;"></div><div style="transform: translateZ(0px); position: absolute; left: 175px; top: 149px;"><img src="http://maps.gstatic.com/mapfiles/transparent.png" draggable="false" style="width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;"></div></div></div></div><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 102; width: 100%;"></div><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 103; width: 100%;"></div><div style="position: absolute; z-index: 0; left: 0px; top: 0px;"><div style="overflow: hidden;"></div></div><div style="position: absolute; left: 0px; top: 0px; z-index: 0;"><div aria-hidden="true" style="position: absolute; left: 0px; top: 0px; z-index: 1;"><div style="width: 256px; height: 256px; transform: translateZ(0px); position: absolute; left: -81px; top: -107px; opacity: 1; transition: opacity 200ms ease-out; -webkit-transition: opacity 200ms ease-out;"><img src="http://mt0.googleapis.com/vt?pb=!1m4!1m3!1i5!2i26!3i13!2m3!1e0!2sm!3i288000000!3m14!2szh-TW!3sUS!5e18!12m1!1e47!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjgxfHAudjpvZmYscy50OjgyfHAudjpvZmYscy50OjEzMTN8cC52Om9mZixzLnQ6MTMxNHxwLnY6b2ZmLHMudDoyfHAudjpvZmYscy50OjM3fHAudjpvZmYscy50OjMzfHAudjpvZmYscy50OjM0fHAudjpvZmYscy50OjM2fHAudjpvZmYscy50OjQwfHAudjpvZmYscy50OjM4fHAudjpvZmYscy50OjM1fHAudjpvZmYscy50OjM5fHAudjpvZmYscy50OjR8cC52Om9mZg!4e0" draggable="false" style="width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; transform: translateZ(0px) translateZ(0px);"></div><div style="width: 256px; height: 256px; transform: translateZ(0px); position: absolute; left: -81px; top: 149px; opacity: 1; transition: opacity 200ms ease-out; -webkit-transition: opacity 200ms ease-out;"><img src="http://mt0.googleapis.com/vt?pb=!1m4!1m3!1i5!2i26!3i14!2m3!1e0!2sm!3i288000000!3m14!2szh-TW!3sUS!5e18!12m1!1e47!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjgxfHAudjpvZmYscy50OjgyfHAudjpvZmYscy50OjEzMTN8cC52Om9mZixzLnQ6MTMxNHxwLnY6b2ZmLHMudDoyfHAudjpvZmYscy50OjM3fHAudjpvZmYscy50OjMzfHAudjpvZmYscy50OjM0fHAudjpvZmYscy50OjM2fHAudjpvZmYscy50OjQwfHAudjpvZmYscy50OjM4fHAudjpvZmYscy50OjM1fHAudjpvZmYscy50OjM5fHAudjpvZmYscy50OjR8cC52Om9mZg!4e0" draggable="false" style="width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; transform: translateZ(0px) translateZ(0px);"></div><div style="width: 256px; height: 256px; transform: translateZ(0px); position: absolute; left: 175px; top: -107px; opacity: 1; transition: opacity 200ms ease-out; -webkit-transition: opacity 200ms ease-out;"><img src="http://mt1.googleapis.com/vt?pb=!1m4!1m3!1i5!2i27!3i13!2m3!1e0!2sm!3i288000000!3m14!2szh-TW!3sUS!5e18!12m1!1e47!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjgxfHAudjpvZmYscy50OjgyfHAudjpvZmYscy50OjEzMTN8cC52Om9mZixzLnQ6MTMxNHxwLnY6b2ZmLHMudDoyfHAudjpvZmYscy50OjM3fHAudjpvZmYscy50OjMzfHAudjpvZmYscy50OjM0fHAudjpvZmYscy50OjM2fHAudjpvZmYscy50OjQwfHAudjpvZmYscy50OjM4fHAudjpvZmYscy50OjM1fHAudjpvZmYscy50OjM5fHAudjpvZmYscy50OjR8cC52Om9mZg!4e0" draggable="false" style="width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; transform: translateZ(0px) translateZ(0px);"></div><div style="width: 256px; height: 256px; transform: translateZ(0px); position: absolute; left: 175px; top: 149px; opacity: 1; transition: opacity 200ms ease-out; -webkit-transition: opacity 200ms ease-out;"><img src="http://mt1.googleapis.com/vt?pb=!1m4!1m3!1i5!2i27!3i14!2m3!1e0!2sm!3i288000000!3m14!2szh-TW!3sUS!5e18!12m1!1e47!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjgxfHAudjpvZmYscy50OjgyfHAudjpvZmYscy50OjEzMTN8cC52Om9mZixzLnQ6MTMxNHxwLnY6b2ZmLHMudDoyfHAudjpvZmYscy50OjM3fHAudjpvZmYscy50OjMzfHAudjpvZmYscy50OjM0fHAudjpvZmYscy50OjM2fHAudjpvZmYscy50OjQwfHAudjpvZmYscy50OjM4fHAudjpvZmYscy50OjM1fHAudjpvZmYscy50OjM5fHAudjpvZmYscy50OjR8cC52Om9mZg!4e0" draggable="false" style="width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; transform: translateZ(0px) translateZ(0px);"></div></div></div></div><div style="position: absolute; left: 0px; top: 0px; z-index: 2; width: 100%; height: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 3; width: 100%; transform-origin: 0px 0px 0px; transform: matrix(1, 0, 0, 1, 0, 0);"><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 104; width: 100%;"></div><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 105; width: 100%;"></div><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 106; width: 100%;"></div><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 107; width: 100%;"></div></div></div><div style="margin-left: 5px; margin-right: 5px; z-index: 1000000; position: absolute; left: 0px; bottom: 0px;"><a target="_blank" href="http://maps.google.com/maps?ll=23.917964,120.677505&amp;z=5&amp;t=m&amp;hl=zh-TW&amp;gl=US&amp;mapclient=apiv3" title="按一下即可查看「Google 地圖」上的這個區域" style="position: static; overflow: visible; float: none; display: inline;"><div style="width: 62px; height: 26px; cursor: pointer;"><img src="http://maps.gstatic.com/mapfiles/api-3/images/google_white2.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 62px; height: 26px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;"></div></a></div><div class="gmnoprint" style="z-index: 1000001; position: absolute; right: 60px; bottom: 0px; width: 60px;"><div draggable="false" class="gm-style-cc" style="-webkit-user-select: none;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="width: auto; height: 100%; margin-left: 1px; background-color: rgb(245, 245, 245);"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right;"><a style="color: rgb(68, 68, 68); text-decoration: none; cursor: pointer;">地圖資料</a><span style="display: none;">地圖資料©2015 AutoNavi, Google, SK planet, ZENRIN</span></div></div></div><div style="padding: 15px 21px; border: 1px solid rgb(171, 171, 171); font-family: Roboto, Arial, sans-serif; color: rgb(34, 34, 34); -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 16px; box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 16px; z-index: 10000002; display: none; width: 156px; height: 148px; position: absolute; left: 5px; top: 10px; background-color: white;"><div style="padding: 0px 0px 10px; font-size: 16px;">地圖資料</div><div style="font-size: 13px;">地圖資料©2015 AutoNavi, Google, SK planet, ZENRIN</div><div style="width: 13px; height: 13px; overflow: hidden; position: absolute; opacity: 0.7; right: 12px; top: 12px; z-index: 10000; cursor: pointer;"><img src="http://maps.gstatic.com/mapfiles/api-3/images/mapcnt3.png" draggable="false" style="position: absolute; left: -2px; top: -336px; width: 59px; height: 492px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;"></div></div><div class="gmnoscreen" style="position: absolute; right: 0px; bottom: 0px;"><div style="font-family: Roboto, Arial, sans-serif; font-size: 11px; color: rgb(68, 68, 68); direction: ltr; text-align: right; background-color: rgb(245, 245, 245);">地圖資料©2015 AutoNavi, Google, SK planet, ZENRIN</div></div><div class="gmnoprint gm-style-cc" draggable="false" style="z-index: 1000001; position: absolute; -webkit-user-select: none; right: 0px; bottom: 0px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="width: auto; height: 100%; margin-left: 1px; background-color: rgb(245, 245, 245);"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right;"><a href="http://www.google.com/intl/zh-TW_US/help/terms_maps.html" target="_blank" style="text-decoration: none; cursor: pointer; color: rgb(68, 68, 68);">使用條款</a></div></div><div draggable="false" class="gm-style-cc" style="-webkit-user-select: none; display: none; position: absolute; right: 0px; bottom: 0px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="width: auto; height: 100%; margin-left: 1px; background-color: rgb(245, 245, 245);"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right;"><a target="_new" title="向 Google 回報道路地圖或圖像錯誤" href="https://www.google.com/maps/@23.9179637,120.6775054,5z/data=!10m1!1e1!12b1?source=apiv3" style="font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); text-decoration: none; position: relative;">回報地圖錯誤</a></div></div></div></div>
+        </div><!-- space-item -->
+      </div><!-- space -->
+
+      <div class="btnBlock">
+        <button type="button" class="filter-query">篩選</button>
+      </div>
+
+    </div><!-- filter -->
+
+
+                            <div class="block-pager-cart">
+                                <div class="add-cart">
+                                    <input type="checkbox" name="CheckAll" id="CheckAll">
+                                    <label for="CheckAll">
+                                        全選
+                                    </label>
+                                    <button class="add">
+                                        加入購物車
+                                    </button>
+                                    <!--button class="add all">全選</button-->
+                                </div>
+                                <!--分頁Start-->
+                                <span id="split_page">
+                                    <div class="pagination">
+                                        <span class="total">
+                                            共
+                                            <strong>
+                                                55245
+                                            </strong>
+                                            筆
+                                        </span>
+                                        <span class="jump">
+                                            <input type="text" name="myjumppage_text" id="myjumppage_text">
+                                            / 1842
+                                            <button id="myjumppage_btn" onclick="myjumppage();return false;">
+                                                Go
+                                            </button>
+                                        </span>
+                                        <div class="num">
+                                            <a href="http://140.110.27.199/nspo_esok/query.php?&page=0" class="current"
+                                            req="0">
+                                                1
+                                            </a>
+                                            <a href="http://140.110.27.199/nspo_esok/query.php?&page=1" req="1">
+                                                2
+                                            </a>
+                                            <a href="http://140.110.27.199/nspo_esok/query.php?&page=2" req="2">
+                                                3
+                                            </a>
+                                            <a href="http://140.110.27.199/nspo_esok/query.php?&page=3" req="3">
+                                                4
+                                            </a>
+                                            <a href="http://140.110.27.199/nspo_esok/query.php?&page=4" req="4">
+                                                5
+                                            </a>
+                                            <a href="http://140.110.27.199/nspo_esok/query.php?&page=5" req="5">
+                                                6
+                                            </a>
+                                            ...
+                                            <a href="http://140.110.27.199/nspo_esok/query.php?&page=1841" req="1841">
+                                                1842
+                                            </a>
+                                            <a href="http://140.110.27.199/nspo_esok/query.php?&page=1" req="1" class="next">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </span>
+                            </div><!-- block-pager-cart -->
+
+                            <div class="list">
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G055_PAN_L2TWD97_20120128_015848_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="486763" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="486763" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G055_PAN_L2TWD97_20120128_015848" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G055_PAN_L2TWD97_20120128_015848"
+                                        value="486763" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:58:48
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            PAN, L2
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G055_PAN_L2TWD97_20120128_015848
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G055_PAN_L1A_20120128_015848_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="486762" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="486762" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G055_PAN_L1A_20120128_015848" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G055_PAN_L1A_20120128_015848"
+                                        value="486762" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:58:48
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            PAN, L1A
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G055_PAN_L1A_20120128_015848
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G055_MS_L1A_20120128_015849_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="491607" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="491607" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G055_MS_L1A_20120128_015849" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G055_MS_L1A_20120128_015849"
+                                        value="491607" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:58:49
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            MS, L1A
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G055_MS_L1A_20120128_015849
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G055_MS_L2TWD97_20120128_015849_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="581947" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="581947" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G055_MS_L2TWD97_20120128_015849" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G055_MS_L2TWD97_20120128_015849"
+                                        value="581947" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:58:49
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            MS, L2
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G055_MS_L2TWD97_20120128_015849
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G056_PAN_L2TWD97_20120128_015852_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="462117" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="462117" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G056_PAN_L2TWD97_20120128_015852" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G056_PAN_L2TWD97_20120128_015852"
+                                        value="462117" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:58:52
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            PAN, L2
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G056_PAN_L2TWD97_20120128_015852
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G056_PAN_L1A_20120128_015852_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="462106" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="462106" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G056_PAN_L1A_20120128_015852" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G056_PAN_L1A_20120128_015852"
+                                        value="462106" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:58:52
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            PAN, L1A
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G056_PAN_L1A_20120128_015852
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G056_MS_L2TWD97_20120128_015852_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="566124" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="566124" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G056_MS_L2TWD97_20120128_015852" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G056_MS_L2TWD97_20120128_015852"
+                                        value="566124" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:58:52
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            MS, L2
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G056_MS_L2TWD97_20120128_015852
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G056_MS_L1A_20120128_015852_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="486766" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="486766" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G056_MS_L1A_20120128_015852" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G056_MS_L1A_20120128_015852"
+                                        value="486766" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:58:52
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            MS, L1A
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G056_MS_L1A_20120128_015852
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G057_PAN_L2TWD97_20120128_015855_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="462111" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="462111" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G057_PAN_L2TWD97_20120128_015855" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G057_PAN_L2TWD97_20120128_015855"
+                                        value="462111" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:58:55
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            PAN, L2
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G057_PAN_L2TWD97_20120128_015855
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G057_PAN_L1A_20120128_015855_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="462098" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="462098" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G057_PAN_L1A_20120128_015855" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G057_PAN_L1A_20120128_015855"
+                                        value="462098" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:58:55
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            PAN, L1A
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G057_PAN_L1A_20120128_015855
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G057_MS_L1A_20120128_015856_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="491608" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="491608" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G057_MS_L1A_20120128_015856" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G057_MS_L1A_20120128_015856"
+                                        value="491608" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:58:56
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            MS, L1A
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G057_MS_L1A_20120128_015856
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G057_MS_L2TWD97_20120128_015856_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="566125" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="566125" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G057_MS_L2TWD97_20120128_015856" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G057_MS_L2TWD97_20120128_015856"
+                                        value="566125" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:58:56
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            MS, L2
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G057_MS_L2TWD97_20120128_015856
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G058_MS_L2TWD97_20120128_015859_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="566126" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="566126" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G058_MS_L2TWD97_20120128_015859" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G058_MS_L2TWD97_20120128_015859"
+                                        value="566126" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:58:59
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            MS, L2
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G058_MS_L2TWD97_20120128_015859
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G058_MS_L1A_20120128_015859_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="474928" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="474928" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G058_MS_L1A_20120128_015859" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G058_MS_L1A_20120128_015859"
+                                        value="474928" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:58:59
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            MS, L1A
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G058_MS_L1A_20120128_015859
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G058_PAN_L2TWD97_20120128_015859_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="462118" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="462118" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G058_PAN_L2TWD97_20120128_015859" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G058_PAN_L2TWD97_20120128_015859"
+                                        value="462118" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:58:59
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            PAN, L2
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G058_PAN_L2TWD97_20120128_015859
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G058_PAN_L1A_20120128_015859_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="462107" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="462107" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G058_PAN_L1A_20120128_015859" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G058_PAN_L1A_20120128_015859"
+                                        value="462107" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:58:59
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            PAN, L1A
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G058_PAN_L1A_20120128_015859
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G059_PAN_L2TWD97_20120128_015902_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="486768" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="486768" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G059_PAN_L2TWD97_20120128_015902" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G059_PAN_L2TWD97_20120128_015902"
+                                        value="486768" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:59:02
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            PAN, L2
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G059_PAN_L2TWD97_20120128_015902
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G059_PAN_L1A_20120128_015902_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="486767" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="486767" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G059_PAN_L1A_20120128_015902" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G059_PAN_L1A_20120128_015902"
+                                        value="486767" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:59:02
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            PAN, L1A
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G059_PAN_L1A_20120128_015902
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G059_MS_L1A_20120128_015903_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="474932" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="474932" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G059_MS_L1A_20120128_015903" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G059_MS_L1A_20120128_015903"
+                                        value="474932" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:59:03
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            MS, L1A
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G059_MS_L1A_20120128_015903
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G059_MS_L2TWD97_20120128_015903_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="581948" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="581948" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G059_MS_L2TWD97_20120128_015903" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G059_MS_L2TWD97_20120128_015903"
+                                        value="581948" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:59:03
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            MS, L2
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G059_MS_L2TWD97_20120128_015903
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G060_PAN_L2TWD97_20120128_015906_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="486770" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="486770" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G060_PAN_L2TWD97_20120128_015906" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G060_PAN_L2TWD97_20120128_015906"
+                                        value="486770" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:59:06
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            PAN, L2
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G060_PAN_L2TWD97_20120128_015906
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G060_MS_L1A_20120128_015906_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="474933" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="474933" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G060_MS_L1A_20120128_015906" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G060_MS_L1A_20120128_015906"
+                                        value="474933" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:59:06
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            MS, L1A
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G060_MS_L1A_20120128_015906
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G060_PAN_L1A_20120128_015906_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="486769" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="486769" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G060_PAN_L1A_20120128_015906" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G060_PAN_L1A_20120128_015906"
+                                        value="486769" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:59:06
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            PAN, L1A
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G060_PAN_L1A_20120128_015906
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G060_MS_L2TWD97_20120128_015906_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="577320" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="577320" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G060_MS_L2TWD97_20120128_015906" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G060_MS_L2TWD97_20120128_015906"
+                                        value="577320" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:59:06
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            MS, L2
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G060_MS_L2TWD97_20120128_015906
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G061_MS_L2TWD97_20120128_015909_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="577314" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="577314" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G061_MS_L2TWD97_20120128_015909" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G061_MS_L2TWD97_20120128_015909"
+                                        value="577314" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:59:09
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            MS, L2
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G061_MS_L2TWD97_20120128_015909
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G061_PAN_L1A_20120128_015909_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="486771" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="486771" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G061_PAN_L1A_20120128_015909" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G061_PAN_L1A_20120128_015909"
+                                        value="486771" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:59:09
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            PAN, L1A
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G061_PAN_L1A_20120128_015909
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G061_PAN_L2TWD97_20120128_015909_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="486754" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="486754" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G061_PAN_L2TWD97_20120128_015909" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G061_PAN_L2TWD97_20120128_015909"
+                                        value="486754" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:59:09
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            PAN, L2
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G061_PAN_L2TWD97_20120128_015909
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G061_MS_L1A_20120128_015909_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="474934" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="474934" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G061_MS_L1A_20120128_015909" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G061_MS_L1A_20120128_015909"
+                                        value="474934" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:59:09
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            MS, L1A
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G061_MS_L1A_20120128_015909
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G062_PAN_L2TWD97_20120128_015912_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="462119" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="462119" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G062_PAN_L2TWD97_20120128_015912" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G062_PAN_L2TWD97_20120128_015912"
+                                        value="462119" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:59:12
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            PAN, L2
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G062_PAN_L2TWD97_20120128_015912
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="list-item">
+                                    <div class="hover" style="cursor: pointer;">
+                                        <img src="data/FS2_G062_PAN_L1A_20120128_015912_cds.jpg"
+                                        alt="縮圖預覽" style="cursor: pointer;">
+                                        <div class="view" style="cursor: pointer;">
+                                            <a class="info" kind="info" req="462108" style="cursor: pointer;">
+                                                詳細資料
+                                            </a>
+                                            <a class="ge" kind="map" req="462108" style="cursor: pointer;">
+                                                地圖展示
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label for="FS2_G062_PAN_L1A_20120128_015912" style="cursor: pointer;">
+                                        <input type="checkbox" name="FS2DATA[]" id="FS2_G062_PAN_L1A_20120128_015912"
+                                        value="462108" style="cursor: pointer;">
+                                        <span class="date" style="cursor: pointer;">
+                                            2012-01-28 01:59:12
+                                        </span>
+                                        <span class="cate" style="cursor: pointer;">
+                                            PAN, L1A
+                                        </span>
+                                        <span class="file" style="cursor: pointer;">
+                                            FS2_G062_PAN_L1A_20120128_015912
+                                        </span>
+                                    </label>
+                                </div>
+                            </div><!-- list -->
+
+
+  </div><!-- wrapper -->
+  
+</div><!-- data-result -->
+
+
+<div id="fullMap" style=" display: none; z-index:150;position: fixed; top: 78px; left: 0; right: 0; ">  
+  <div id="Map_large" class="map" style="background: #7FC2DA;"></div>
+  <div class="tip">
+    <!--請框選範圍-->
+    <div class="map_control_class">
+      <input type="button" req="moveMAP" name="controlBTN[]" value="移動模式" class="query_map_AOI_btn">
+      <input type="button" req="selectAOI" name="controlBTN[]" value="框選範圍">
+    </div>
+    
+    <input type="checkbox" id="LargeMapENABLE_AOI" style="display:none;width:50px;height:50px;"> 
+    <button id="LargeMap_Done_BTN">完成</button>
+    <button id="LargeMap_Cancel_BTN" style="width:100px;">取消</button>
+  </div>
+
+</div><!-- fullMap -->
+
+
+
+</div>
+
+</div><!-- result -->
+
+
+</div><!-- main -->
+
+</body>
+</html>

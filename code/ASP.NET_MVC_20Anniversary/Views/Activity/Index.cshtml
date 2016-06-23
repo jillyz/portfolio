@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "活動時程";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section headerCSS {
+    <link href="@Url.Content("~/css/activity.css")" rel="stylesheet" />
+}
+
+@section headerScript {
+    
+}
+
+
+<div id="main" class="fade out" >
+
+<a href="#time" class="scrollTo">
+    <img id="pic" src="@Url.Content("~/images/activity/family_day_h.jpg")" />
+</a>
+
+<div id="time">
+<table border="1">
+  <tr>
+    <th>日期 </th>
+    <th>時間 </th>
+    <th>活動項目 </th>
+    <th>地點 </th>
+  </tr>
+  <tr>
+    <td rowspan="3">8月29日 (星期五)</td>
+    <td>09:00~16:00</td>
+    <td>2014海峽兩岸空間資訊技術交流會 </td>
+    <td>第四國際會議廳 (人言大樓B1F)</td>
+  </tr>
+  <tr>
+    <td>16:00~18:15</td>
+    <td>20周年感恩慶生會 </td>
+    <td>啟垣廳 (人言大樓B1F)</td>
+  </tr>
+  <tr>
+    <td>18:30~21:00</td>
+    <td>20周年感恩聯歡晚會 </td>
+    <td>育樂館 </td>
+  </tr>
+  <tr>
+    <td>8月30日 (星期六)</td>
+    <td>10:00~14:00</td>
+    <td>GIS.FCU Family Day</td>
+    <td>育樂館 </td>
+  </tr>
+</table>
+</div><!-- time -->
+
+
+</div><!-- #main -->
+
+
+@section bodyScript{
+    <script>
+
+        $(document).ready(imgUrl);
+        $(window).resize(imgUrl);
+
+        function imgUrl() {
+
+            // menu
+            $(".indicator-current").addClass("active5");
+
+            //scroll
+            $(".scrollTo").click(function () {
+                var toID = $(this).attr("href");
+                $('html, body').animate({
+                    scrollTop: $(toID).offset().top
+                }, 500);
+                return false;
+            });
+            
+            //---------------------------------------------------
+
+            var winH = $(window).height();
+            var winW = $(window).width();
+
+            //橫式
+            if (winW > winH) {
+                
+                if (winW <= 1280) {
+                    $("#pic").attr("src", "http://www.gis.tw/20/images/activity/family_day_h_m.jpg");
+                } else {
+                    $("#pic").attr("src", "http://www.gis.tw/20/images/activity/family_day_h.jpg");
+                }
+            }
+            //直式
+            else {
+                if (winW <= 600) {
+                    $("#pic").attr("src", "http://www.gis.tw/20/images/activity/family_day_v_m.jpg");
+                } else if (winW <= 400) {
+                    $("#pic").attr("src", "http://www.gis.tw/20/images/activity/family_day_v_s.jpg");
+                } else {
+                    $("#pic").attr("src", "http://www.gis.tw/20/images/activity/family_day_v.jpg");
+                }
+            }
+
+        }
+    </script>
+}

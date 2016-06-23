@@ -1,0 +1,167 @@
+/*
+    Colorbox Core Style:
+    The following CSS is consistent between example themes and should not be altered.
+*/
+#colorbox, #cboxOverlay, #cboxWrapper{position:absolute; top:0; left:0; z-index:9999; overflow:hidden;}
+#cboxWrapper {max-width:none;}
+#cboxOverlay{position:fixed; width:100%; height:100%;}
+#cboxMiddleLeft, #cboxBottomLeft{clear:left;}
+#cboxContent{position:relative;}
+#cboxLoadedContent{overflow:auto; -webkit-overflow-scrolling: touch;}
+#cboxTitle{margin:0;}
+#cboxLoadingOverlay, #cboxLoadingGraphic{position:absolute; top:0; left:0; width:100%; height:100%;}
+
+#cboxPrevious, #cboxNext, #cboxClose, #cboxSlideshow{cursor:pointer;}
+.cboxPhoto{float:left; margin:auto; border:0; display:block; max-width:none; -ms-interpolation-mode:bicubic;}
+.cboxIframe{width:100%; height:100%; display:block; border:0;}
+#colorbox, #cboxContent, #cboxLoadedContent{box-sizing:content-box; -moz-box-sizing:content-box; -webkit-box-sizing:content-box;}
+
+
+
+/* 
+    User Style:
+    Change the following styles to modify the appearance of Colorbox.  They are
+    ordered & tabbed in a way that represents the nesting of the generated HTML.
+*/
+#cboxOverlay.pic-box {background: /*#000*/ #feb947;}
+#cboxOverlay.topic-box {background: /*#069;*/ #feb947}
+
+#colorbox{outline:0; }	
+    #cboxContent{/*margin-top:20px;*/}
+    /*#cboxContent { padding: 45px; padding-top: 0; padding-bottom: 30px; }*/
+        .cboxIframe{ background:#fff;  }
+        #cboxError{padding:50px; border:1px solid #ccc;}
+        .pic-box  #cboxLoadedContent{border: 10px solid /*#F15A24*/ #eee;}
+        #cboxTitle{position:absolute; top:-20px; left:0; color:#ccc;}
+        
+        #cboxLoadingGraphic{ background: /*#F15A24*/ url(../images/colorbox/loading.gif) no-repeat center center;}
+
+        /* these elements are buttons, and may need to have additional styles reset to avoid unwanted base styles */
+        #cboxPrevious, #cboxNext, #cboxSlideshow, #cboxClose 
+        {
+        	border:0; padding:0; margin:0; overflow:visible; width:auto; background:none;  
+        	outline: none; /* for Firefox */ hlbr:expression(this.onFocus=this.blur()); /* for IE */ 
+        	}
+        
+        /* avoid outlines on :active (mouseclick), but preserve outlines on :focus (tabbed navigating) */
+        #cboxPrevious:active, #cboxNext:active, #cboxSlideshow:active, #cboxClose:active {outline:0;}      
+        
+        #cboxSlideshow{position:absolute; top:-20px; right:90px; color:#fff;}        
+        
+        
+        .pic-box #cboxClose
+        {
+        	position:absolute; bottom: 15px; left: 50%; display:block; 
+        	width: 60px; height: 30px; margin-left: -30px; 
+        	border-bottom-left-radius: 30px;border-bottom-right-radius: 30px; 
+        	background: /*#F15A24*/ #eee url(../images/colorbox/controls.png) no-repeat bottom center; text-indent:-9999px;}
+        .pic-box #cboxClose:hover{ background-color: #333; }
+        
+        
+        
+        /* .pic-box  ~~ cboxContent ============================================================*/ 
+        /* 420 , 480 , 510 */
+   
+        @media screen and (min-width: 421px ) , screen and (max-width: 480px ) {
+            .pic-box #cboxContent { padding: 20px; padding-top:0; padding-bottom: 30px; background:#F15A24; border-radius: 0; }
+        } 
+        @media screen and (min-width: 481px ) , screen and (max-width: 510px ) {
+            .pic-box #cboxContent { padding: 45px; padding-top:0; padding-bottom: 30px; background: #F15A24;border-radius: 0;  }
+        } 
+        @media screen and (min-width: 511px )  {
+            .pic-box #cboxContent { padding: 45px; /*padding-top: 30px; padding-bottom: 30px;*/ background: none; background: #F15A24; border-radius: 20px; }
+        }  
+        @media screen and (max-width: 420px )    
+        {
+            .pic-box #cboxContent { padding:0; padding-bottom: 74px /*30+44*/; background: #F15A24; border-radius: 0; }
+			
+        }        
+        
+        /* .pic-box ~~~ cboxCurrent ============================================================*/    
+             
+        @media screen and (min-width: /*421px*/ 511px ), screen and (max-width: 910px)
+        {            
+            .pic-box #cboxCurrent{ position:absolute; bottom: 50px; left: 55px; right: 55px; padding: 2px 5px; background: /*#F15A24*/ #999; color:#FFF;font-size: 70%;}
+        }   
+        @media screen and (min-width: 910px)
+        {     
+            .pic-box #cboxCurrent{position:absolute; bottom: 65px; left: auto; right: 25%; padding:0; background:none; color:#999; font-size: 70%;}
+            .topic-box #cboxCurrent { left: 80px; right: auto; bottom: 75px; }
+        }
+        @media screen and (max-width: /*420px*/ 510px )    
+        {
+            .pic-box #cboxCurrent{position:absolute; bottom: 54px/*10+44*/; left: 10px; right: auto; margin:0; padding:0; background: #F15A24; color:#FFF; font-size: 70%;}
+        }
+        
+                
+        /* .pic-box  ~~~ cboxPrevious , cboxNext , cboxClose ============================================================*/ 
+        
+        /*
+        @media screen and (min-width: 421px), screen and (max-width: 510px)
+        {            
+            #cboxPrevious
+			{
+			    display: block;
+        		position:absolute; top:50%; left: 15px; 
+        		width:30px; height:60px;  margin-top: -30px; 
+        		border-top-left-radius: 30px;border-bottom-left-radius: 30px; 
+        		background: #F15A24 url(../images/colorbox/controls2.png) no-repeat center left; text-indent:-9999px;}
+			#cboxPrevious:hover{background-color: #333; }
+			#cboxNext
+			{
+			    display: block;
+        		position:absolute; top:50%; right: 15px; 
+        		width:30px; height:60px; margin-top: -30px; 
+        		border-top-right-radius: 30px;border-bottom-right-radius: 30px; 
+        		background: #F15A24 url(../images/colorbox/controls2.png) no-repeat center right; text-indent:-9999px;}
+			#cboxNext:hover{background-color: #333; } 
+        }
+        */
+        
+        @media screen and (min-width: /*510px*/ 511px )
+        {     
+            .pic-box #cboxPrevious
+			{
+			    display: block;
+        		position:absolute; top:50%; left: 0; 
+        		width:45px; height:90px;  margin-top: -45px; 
+        		border-top-left-radius: 45px;border-bottom-left-radius: 45px; 
+        		background: /*#F15A24*/ #eee url(../images/colorbox/controls.png) no-repeat center left; text-indent:-9999px;}
+			.pic-box #cboxNext
+			{
+			    display: block;
+        		position:absolute; top:50%; right: 0; 
+        		width:45px; height:90px; margin-top: -45px; 
+        		border-top-right-radius: 45px;border-bottom-right-radius: 45px; 
+        		background: /*#F15A24*/ #eee url(../images/colorbox/controls.png) no-repeat center right; text-indent:-9999px;}
+        }          
+                
+        @media screen and (max-width: /*420px*/ 510px )    
+        {            
+            .pic-box #cboxClose {
+                position:absolute; bottom: 50px/*5+44*/; left: auto; right: 10px; display:block; 
+        	    width: 30px; height: 30px; margin-left: -30px; 
+        	    border-radius: 15px;
+        	    background: #F15A24 url(../images/colorbox/controls2.png) no-repeat center center; text-indent:-9999px;}
+        	
+            
+            .pic-box #cboxPrevious 
+			{
+			    display: block;
+        		position:absolute; top: auto; bottom:50px/*5+44*/;left: 50%; margin-left: -40px;
+        		width:30px; height:30px;
+        		border-radius:15px;
+        		background: #F15A24 url(../images/colorbox/controls2.png) no-repeat center left;text-indent:-9999px;}
+			.pic-box #cboxNext
+			{
+			    display: block;
+        		position:absolute; top: auto; bottom:50px/*5+44*/; left: 50%; margin-right: -40px;
+        		width:30px; height:30px; 
+        		border-radius:15px;
+        		background: #F15A24 url(../images/colorbox/controls2.png) no-repeat center right;text-indent:-9999px; }
+            
+        }
+        
+        /* hover */
+        .pic-box #cboxPrevious:hover{background-color: #333; }
+		.pic-box #cboxNext:hover{background-color: #333; }  

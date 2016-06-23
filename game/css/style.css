@@ -1,0 +1,524 @@
+body {
+  position: relative;
+	margin: 0;
+	padding: 0;
+	background-color: #fff;
+  font-family: "Hiragino Sans GB","华文细黑","STHeiti","微软雅黑","Microsoft YaHei",SimHei,"Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  text-align: center;
+  font-size: 16px;
+}
+a, img {
+  outline: none;
+}
+
+/*================================================================================*/
+
+#game {
+	position: relative;
+  margin: 0 auto;
+	width: 800px;
+	height: 600px;
+	background-image: url(../images/bg.jpg);
+	overflow: hidden;
+  text-align: left;
+}
+
+#game>.pic,
+#game>a {
+	position: absolute;
+	background-repeat: no-repeat;
+	background-position: center center;
+	overflow: hidden;
+	white-space: nowrap;
+	text-indent: 100%;	
+}
+
+/*================================================================================*/
+/*  LOADING                                                                        */
+/*================================================================================*/
+
+#loading {
+  position: relative;
+  z-index: 9999;
+  width: 800px;
+  height: 600px;
+  background-color: #fff; /* the same as Body's bg-color */
+}
+
+.loader {
+
+  font-size: 10px;
+  text-indent: -9999em;
+  border-top: 2em solid rgba(120, 120, 120, 0.2);
+  border-right: 2em solid rgba(120, 120, 120, 0.2);
+  border-bottom: 2em solid rgba(120, 120, 120, 0.2);
+  border-left: 2em solid #c36;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load .5s infinite linear;
+  animation: load .5s infinite linear;
+}
+.loader,
+.loader:after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -5em;
+  margin-top: -5em;
+  border-radius: 50%;
+  width: 10em;
+  height: 10em;
+}
+@-webkit-keyframes load {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+
+/*================================================================================*/
+/*	COVER                                                                         */
+/*================================================================================*/
+
+.boy {
+  z-index: 1;
+	top: 340px;
+	left: 270px;
+	width: 228px;
+	height: 227px;
+	background-image: url(../images/boy.png);
+	-webkit-transition: all .5s;
+	-o-transition: all .5s;
+	transition: all .5s;
+}
+.boy.bounce {	
+	-webkit-animation-name: bounce;
+	        animation-name: bounce;
+	-webkit-transform-origin: center bottom;
+	        transform-origin: center bottom;
+}
+.boy.bounce.infinite { 
+  -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+}
+
+.boy.shake {
+  -webkit-animation-name: shake;
+  animation-name: shake;
+}
+
+.boy.left {
+	left: 50px;
+}
+
+.how {
+	top: 260px;
+	left: 50px;
+	width: 212px;
+	height: 156px;
+	background-image: url(../images/text_how.png);	
+	-webkit-animation-name: bounceIn;
+	        animation-name: bounceIn;
+  	-webkit-animation-delay: .75s;
+         -o-animation-delay: .75s;
+            animation-delay: .75s;	
+}
+.screen {
+	top: 100px;
+	left: 280px;
+	width: 503px;
+	height: 359px;
+	background-image: url(../images/screen.png);	
+}
+.title {
+  z-index: 1;
+	top: 40px;
+	left: 250px;
+	width: 536px;
+	height: 328px;
+	background-image: url(../images/game_title_l.png);
+	-webkit-background-size: 100%;
+	background-size: 100%;
+	-webkit-transition: all .5s;
+	-o-transition: all .5s;
+	transition: all .5s;
+  	-webkit-animation-name: rubberBand;
+  			animation-name: rubberBand;
+  	-webkit-animation-delay: .5s;
+         -o-animation-delay: .5s;
+            animation-delay: .5s;	
+}
+.title.small {
+	top: 0px;
+	left: auto;
+	right: 0px;
+	width: 200px;
+	height: 122px;	
+}
+
+.play {
+	top: 460px;
+	left: 420px;
+  /*left: 780px;*/
+	width: 370px;
+	height: 138px;
+	background-image: url(../images/play.png);
+	-webkit-background-size: 100%;
+	background-size: 100%;
+	-webkit-transition: all .25s;
+	-o-transition: all .25s;
+	transition: all .25s;
+	-webkit-animation-name: slideInRight;
+            animation-name: slideInRight;
+}
+.play:hover {
+	left: 400px;
+	width: 420px;
+	-webkit-filter:hue-rotate(50deg);	
+  filter:hue-rotate(50deg); 
+}
+.play:active {
+	-webkit-filter:hue-rotate(50deg) saturate(0.1);
+  filter:hue-rotate(50deg) saturate(0.1);
+}
+
+
+/*================================================================================*/
+/*	MAIN                                                                        */
+/*================================================================================*/
+
+#main {
+	display: none;
+}
+
+.card, 
+.card li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.card  {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	width: 500px;
+	overflow: hidden;
+}
+
+.card>li {
+	display: inline-block;
+	margin-right: 20px;
+	margin-bottom: 20px;
+}
+
+.card>li>a {
+	display: block;
+  /*position: relative;*/
+  width: 142px;
+  height: 116px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-indent: 100%;
+}
+.card>li>a:hover {
+  background-position: 0 100%;
+}
+.card>li>a[data-pass=false] {
+  background: url(../images/card_check.png) 0 0 no-repeat;
+  cursor: pointer; 
+}
+.card>li>a[data-pass=false]:hover {
+  background-position: 0 100%;
+}
+.card>li>a[data-pass=true] {
+  background: url(../images/card_pass.png) 0 0 no-repeat;
+  cursor: default ; 
+}
+.card>li>a[style*=cursor]:hover {
+  background-position: 0 0;
+}
+
+
+
+/*------------------------------*/
+
+[class ^= line] {
+  position: absolute;
+  z-index: -1;
+  display: block;  
+  border-radius: 1em; 
+}
+
+[class ^= line-h] , 
+[class ^= line-v] ,
+.line {
+  background-color: red;
+  opacity: .5; 
+  -webkit-transition: all 1s;
+  -o-transition: all 1s;
+  transition: all 1s;
+}
+
+[class ^= line-h] {
+  width: 0;
+  height: 1em;
+}
+[class ^= line-h].show {
+  width: 500px;
+  z-index: 9999;
+}
+[class ^= line-v]  {
+  width: 1em;
+  height: 0;
+}
+[class ^= line-v].show  {
+  height: 430px;
+  z-index: 9999;
+}
+
+.line-h-1 {
+  top: 235px;
+  left: 275px;
+}
+.line-h-2 {
+  top: 370px;
+  left: 275px;
+}
+.line-h-3 {
+  top: 505px;
+  left: 275px;
+}
+
+.line-v-1 {
+  top: 160px;
+  left: 350px;
+}
+.line-v-2 {
+  top: 160px;
+  left: 510px;
+}
+.line-v-3 {
+  top: 160px;
+  left: 670px;
+}
+
+[class ^= line-diagonal] {
+  position: absolute;
+  top: 370px;
+  right: -35px;
+  z-index: 9999;  
+  width: 630px;
+  height: 0;
+}
+
+[class ^= line-diagonal].show {
+  height: 1em;
+}
+
+.line {
+  display: block;  
+  border-radius: 1em;
+  height: 1em;
+  width: 0; 
+}
+
+[class ^= line-diagonal].show > .line {
+  height: 1em;
+  width: 630px;
+  z-index: 9999;
+}
+
+.line-diagonal-1 {
+  -webkit-transform-origin: 50%;
+  transform-origin: 50%;
+  -webkit-transform: rotate(38deg);
+  transform:rotate(38deg);
+}
+.line-diagonal-2 {
+  -webkit-transform-origin: 50%;
+  transform-origin: 50%;
+  -webkit-transform: rotate(-38deg);
+  transform:rotate(-38deg);
+}
+
+/*-------------*/
+
+.mask /* #box */ {
+  display: none;
+  position: relative;
+  width: 800px;
+  height: 600px;
+  /*background-color: rgba(153,204,102,.85);*/
+  /*background-color: rgba(255,255,255,.65);*/
+}
+
+.box {
+	position: absolute;
+/*
+	left: 178px;
+	top: 70px;
+	width: 444px;
+	height: 404px;
+	background: url(../images/bg_question.png) no-repeat;
+  */
+  left: 272px;
+  top: 155px;
+  width: 487px;
+  height: 410px;
+  background: url(../images/box.png) 0 0 no-repeat;
+}
+
+.question {
+  margin: 4em;
+  margin-left: 5em;
+}
+
+.q {
+  margin: 0;
+  padding: 0;
+  font-size: 1.2em;
+  line-height: 1.75;
+  font-weight: bold;
+  text-shadow: 2px 2px 2px #FF254A, 2px -2px 2px #FF254A, -2px -2px 2px #FF254A, -2px 2px 2px #FF254A;
+  color: #fff;
+  letter-spacing: .1em;
+}
+
+.q-item /*ol*/ {
+  margin: 0;
+  margin-top: 1.5em;
+  padding: 0;
+  list-style: none;
+  /*list-style-position: inside;*/
+  color: #FF254A;
+}
+
+.item {
+  display: block;
+  margin-top: 1em;
+  padding: .25em 1em;
+  background-color: #fff;
+  color: #FF254A;
+  text-decoration: none;
+  font-size: 1em;
+  font-weight: bold;  
+  letter-spacing: .1em;
+  border: 5px solid transparent;
+  border-radius: 1em;
+  -webkit-transition: all .2s;
+  -o-transition: all .2s;
+  transition: all .2s;  
+}
+.item.wrong,
+.item.wrong:hover {
+  border-color: transparent;
+  background-color: #ccc;
+  color: #999;
+  opacity: .5;
+}
+.item:hover {
+  border-color: #f66;
+}
+
+.item:active {
+  background-color: #ff9;
+}
+.item[data-selected=true] {
+  cursor: not-allowed;
+}
+
+.item.exit {
+  position: absolute;
+  left: 50%;
+  bottom: -.5em;
+  margin-left: -3.5em;
+  width: 6em;
+  text-align: center;
+  background-color: #54792b;
+  color: #fff;
+  border: 6px solid #699439 ;
+}
+.item.exit:hover {
+  border-color: #fff;
+  background-color: #699439;
+}
+
+.q , .item {
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */   
+}
+
+/*-------------------*/
+
+.msg {
+  display: none;
+  position: absolute;
+  top: 100px;
+  left: 20px;
+  width: 227px;
+  height: 248px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-indent: 100%;
+}
+.msg.pass {
+  background-image: url(../images/msg_pass.png);
+}
+
+.msg.wrong {
+  background-image: url(../images/msg_wrong.png);
+}
+.msg.win {
+  background-image: url(../images/msg_win.png);
+}
+.msg.good {
+  background-image: url(../images/msg_good.png);
+}
+.msg.rule {
+  background-image: url(../images/msg_rule.png);
+}
+
+
+/*-------------------*/
+
+#playAgain {  
+  display: none;
+  position: absolute;
+  top: 475px;
+  left: 10px;
+  z-index: 2;
+  width: 280px;
+  height: 109px;
+  background: url(../images/play_again.png) 0 0 no-repeat;
+}
+#playAgain:hover {
+  -webkit-filter:hue-rotate(50deg); 
+  filter:hue-rotate(50deg); 
+}
+#playAgain:active {
+  -webkit-filter:hue-rotate(50deg) saturate(0.1);
+  filter:hue-rotate(50deg) saturate(0.1);
+}
+
+

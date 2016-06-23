@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>detail</title>
+  <link href="css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="css/style.css" rel="stylesheet" type="text/css">
+  <link href="css/query.css" rel="stylesheet" type="text/css"><!-- 這支檔案是重點 -->
+
+<style>
+  .f2_image_info_bg{
+    background-color:  #181d2d;
+    color:white;
+    padding:10px;
+  }
+  .f2_image_info_bg .detail-view img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .f2_image_info_bg .detail-view , .f2_image_info_bg .add-cart {
+    margin-top: 10px;
+  }
+
+  .f2_image_info_bg .add-cart button {
+    margin: 0;
+    padding: 5px;
+    width: 100%;
+    border: 0;
+    background: #933;
+    color: #fff;
+    border-radius: 3px;
+  }
+  .f2_image_info_bg .add-cart button:hover {
+    background: #c33;
+  }
+  .f2_image_info_bg .add-cart button:active {
+    -webkit-box-shadow: inset 0 2px 2px #933;
+    box-shadow: inset 0 2px 2px #933;
+  }
+  .f2_image_info_bg .break {
+    width: 200px;
+    word-wrap: break-word;
+    word-break: break-all;
+  }
+
+</style>
+
+
+</head>
+<body>
+  
+<div class="f2_image_info_bg">
+  <table class="table-view">
+    <tr>
+      <th width="50%">影像</th>
+      <th width="50%">關係圖</th>
+    </tr>
+    <tr>
+      <td><img width="150" src="data/FS2_G062_PAN_L1A_20120128_015912_cds.jpg" alt="<?=__('縮圖預覽');?>"></td>
+      <td><img width="150" src="data/G001.gif"></td>
+    </tr>
+  </table>
+  
+  <table class="detail-view">
+    <tr>
+      <th valign="top">拍攝日期</th>
+      <td>
+        2012-01-28
+      </td>
+    </tr>
+    <tr>
+      <th valign="top">產品類別</th>
+      <td>
+        MultiSoectrum, L1A
+      </td>
+    </tr>
+    <tr>
+      <th valign="top">拍攝角度</th>
+      <td>
+        Along Track -2.64789
+        <br />
+        Cross Track 19.1101
+      </td>
+    </tr>   
+    <tr>
+      <th valign="top">雲覆量</th>
+      <td>10%</td>
+    </tr>
+    <tr>
+      <th>檔案名稱</th>
+      <td class="break">
+        FS2_G055_PAN_L2TWD97_20120128_015848
+      </td>
+    </tr>
+  </table>
+  
+  <div class="add-cart single_add" req="<?=$ra[0]['id'];?>">
+    <button>加入</button>
+  </div> 
+</div>
+</body>
+</html>

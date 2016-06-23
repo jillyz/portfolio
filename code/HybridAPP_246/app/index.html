@@ -1,0 +1,230 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>FEMA APP</title>
+<meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1, maximum-scale=1, user-scalable=0" />
+
+<!-- <script type="text/javascript" src="inc/js2/cordova.js"></script> -->
+<script type="text/javascript" src="inc/js2/jquery-2.1.1.min.js"></script>
+
+
+<!--PHP函式庫-->
+<script type="text/javascript" src="inc/js2/php.js"></script>
+<!--jquery myBox函式庫-->
+<script type="text/javascript" src="inc/js2/mybox-0.2.min.js"></script>
+
+<!--jquery myBox函式庫-->
+<script type="text/javascript" src="inc/js2/jquery.corner.js"></script>
+
+
+<!--Memory -->
+<script type="text/javascript" src="inc/js2/memory.js"></script>
+
+
+<!--未分類函式庫-->
+<script type="text/javascript" src="inc/js2/include.js"></script>
+
+<!--載入index.css-->
+<link rel="stylesheet" href="css/reset.css" />
+<link rel="stylesheet" href="css/main.css" />
+<link rel="stylesheet" href="css/index.css" />
+
+<!--拿來讀 config.js -->
+<script type="text/javascript" src="inc/js2/config.js"></script>
+
+<!--加速click功能 -->
+<script type="text/javascript" src="inc/js2/fastclick.js"></script>			
+
+<!-- 解析網址列的工具 -->
+<script type="text/javascript" src="inc/js2/jquery.jqURL.js"></script>	
+
+<!-- Native Plugin -->
+<script type="text/javascript" src="inc/native_plugin_js/filePlugin.js"></script>	
+
+<script language="javascript">
+
+function Load() {
+	
+	//document.addEventListener("online", onOnLine, false);
+	//document.addEventListener("offline", onOffLine, false);
+	 var UA = strtoupper(navigator.userAgent);
+	 //onDeviceReady();
+	 if(is_string_like(UA,'%ANDROID%') || is_string_like(UA,'%IPHONE%') || is_string_like(UA,'%MOBILE%') )
+	 {
+	   document.addEventListener("deviceready", onDeviceReady, false);   
+	 }
+	 else
+	 {
+	   onDeviceReady();
+	 }  
+}
+
+function CheckResponseStatus()
+{
+	//var CenterInfo = {"Title":{"Event":null,"Date":null},"Content":[],"Message":"目前無應變措施報告"};
+	//var CenterInfo = {"Title":{"Event":"0714豪雨","Date":"2014/07/19 19:54"},"Content":["一、水土保持局2014/07/14 11:54二級開設土石流災害緊急應變小組。","二、通報緊急聯絡人次, 語音0人次，簡訊49人次，電話0人次 ，合計49人次。","三、發布9條土石流紅色警戒：分布於1縣市2鄉鎮市3村里。","四、目前未發布土石流黃色警戒","五、危險區重機械整備152台，(一級搶通 0 台、二級進駐 0 台、二級鄰近0台、三級整備 152 台 )。","六、目前無通知地方政府通聯測試紀錄。","七、目前水土保持局無土石流災害應變人次，目前無施工中之工地。","八、目前無災情概況。"],"Message":null};
+  	 var url = "http://fema.swcb.gov.tw/MobileWebService/Data.ashx?op=getDisasterInfo";	 
+	 $.ajax({
+		  url: url,
+		  type: "POST",
+		  dataType: "json",
+		  success: function(json) {			  	
+				if (json.Title.Event != undefined)
+					$("#response").html(json.Title.Event +"-應變小組開設中").show();
+				else
+					//$("#response").html("應變小組尚未開設!");	
+					$("#response").hide();
+		  },
+		  
+		  error: function() {
+		    //alert('無法連線...');
+		  }
+		});    
+}
+
+function onOnLine(){
+	//config.js
+    var URL = sprintf("%s",window['webservice_check_online']);    
+    $.ajax({
+        url: URL,
+        type: "GET",        
+        async: true,
+        success: function(html){  
+          window['g']['online_status']=true;
+        },
+        error: function(){
+        	alert('無法連線...');
+        }
+    });  
+}
+function onOffLine(){
+	alert("網路不通，請確認可以連線吧...");
+	location.reload();
+}
+window['index_bg']="";
+function onDeviceReady() {
+	$(document).ready(function(){			
+		//檢查應變小組狀態
+		CheckResponseStatus();
+
+		
+		
+		// APP UI - start ========================================================================				
+		var winW = $(window).width();
+		var winH = $(window).height();
+		$(".launch-page, .launch-page .logo").height(winH).width(winW);
+		var ah = ( winH  / 3 ) - 40 ;		
+		$(".menu a").height(ah);
+			
+		//如果網址有 ?mode=need_loading ，載入 首頁進版圖片
+		//alert($.jqURL.get('mode'));
+		/*if($.jqURL.get('mode')=='need_loading')
+		{			
+			$(".launch-page").show();
+			//關掉
+			setTimeout(function(){
+				$(".launch-page").fadeOut("fast");
+			},2000);
+		}*/
+		// APP UI - end ========================================================================
+
+
+
+		//此二行可以讓螢幕的速度加速
+	    //$(document).bind("mobileinit", function () { $.mobile.defaultPageTransition = 'none'; });
+		setTimeout(function(){
+			//0.8秒後再下雨
+			//filePlugin.get_file_from_asset_to_base64_data("images/launch.jpg").done(function(result){
+				//window['index_bg']=result;			
+				$.getScript("inc/js2/rain.js",function(){
+					$("#canvas").css({
+						'height':$(window).height()
+					});
+					$(".main-page").css({
+						'height':$(window).height()
+					});
+				//});
+			});
+		},800);
+	    FastClick.attach(document.body);
+	    //取得螢幕大小
+		window['wh']=getWindowSize();			
+			
+		//fix Miss a drag as we are waiting for WebCore's response for touch down.
+		//重新定義按下回上頁鍵
+		
+		document.removeEventListener("backbutton", function(e) {
+		}, false);
+		document.addEventListener("backbutton", function(e) {
+			//e.preventDefault();
+			//if (confirm("你確定要離開嗎??") == true) {
+				navigator.app.exitApp();
+				return true;
+			//} else {
+			//	return false;
+			//}
+		}, true);		
+		//程式碼從這結束-----------------------------------------End
+		//alert(print_r(device,true));
+		/*
+		$("a[href]").click(function(){
+			$(".go-loading-wait").show();
+			alert("a");
+		});	
+		*/
+
+	});	
+}
+</script>
+</head>
+<body onLoad="Load();">
+
+<div class="index-bbg"></div>
+
+<canvas id="canvas" style="position : absolute; top : 0px; left : 0px;z-index:0;"></canvas>
+
+
+<div data-role="page" class="main-page" style="position: relative; z-index:2; background: none;">
+
+	<div role="main" class="main">
+		<div class="top">
+			<a class="setting">
+				<!-- 設定 -->
+			</a>
+			<a id="response" class="response">
+				應變小組開設狀態讀取中...
+			</a>
+		</div>
+		<div class="menu">
+			<a href="map.html" class="map">
+				<span>地圖</span>
+			</a>
+			<a href="inform.html"  class="report">
+				<span>雨量報報</span>
+			</a>			
+
+			<a href="rainfall.html" class="rainfall">
+				<span>雨量</span>
+			</a>
+			<a href="weather.html" class="weather">
+				<span>氣象圖</span>
+			</a>
+			<a href="alert.html" class="alert">
+				<span>警戒</span>
+			</a>
+			<a href="observation.html" class="ccd">
+				<span>觀測站</span>
+			</a>
+
+		</div>
+		
+	</div>	
+	
+	
+</div> 
+
+<div class="go-loading-wait"></div>	
+<input type="button" value="logout" onClick="setMemory('FEMA_RAIN_PAPER_USER_PHONE','');setMemory('FEMA_RAIN_PAPER_USER_PHONE_ALREADY_REGISTER','');alert('ok');" style="position:fixed;z-index:5;left:0px;top:0px;width:50px;height:50px;display:none;">
+</body>
+</html>		

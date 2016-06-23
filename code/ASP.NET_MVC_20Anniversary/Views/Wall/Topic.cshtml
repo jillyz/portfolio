@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "主題 -";
+    Layout = "~/Views/Shared/_PopUp.cshtml";
+    var m = Model as Anniversary.Models.WallObject;
+}
+
+
+@section headerCSS {
+<link href="@Url.Content("~/css/topic.css")" rel="stylesheet" />
+<link href="@Url.Content("~/css/animate.css")" rel="stylesheet" />
+}
+
+@section headerScript {
+
+}
+
+    <div class="topic-wrap" style="overflow: hidden;">
+        <div class="topic-title">
+            @m.TOPIC 
+            <section id="stop-motion-animation"><div></div></section>
+        </div>
+        <div class="item-wrap">
+            @foreach (var img in m.Imgs)
+            {
+            <div class="item">
+                <div><img src="@Url.Content(img.L_URL)" alt="照片" /></div>
+                <span>@img.IMG_MEMO</span>
+            </div>
+            }
+        </div><!-- item-wrap -->
+    </div><!-- topic-wrap -->
+
+@section bodyScript {
+<script src="http://tympanus.net/Tutorials/DraggableImageBoxesGrid/js/jquery.easing.1.3.js"></script>   
+}  
+

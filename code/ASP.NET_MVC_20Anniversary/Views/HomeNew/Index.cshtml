@@ -1,0 +1,159 @@
+﻿@using System.Web.Optimization;
+@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section headerCSS {
+    <link href="@Url.Content("~/css/animate.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/css/photo-wall.css")" rel="stylesheet" />
+
+    <style>
+        ::-webkit-scrollbar {
+            width: 0;
+        }
+        .tip
+        {
+            display: none;
+            position: fixed;
+            z-index: 6;
+            bottom: 4em;
+            left: 50%;
+            width: 16em;
+            margin-left: -9em;
+            padding: 10px 1em;
+            background: #ff9;
+	        -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+	        box-shadow:  0 0 10px rgba(0, 0, 0, .5);
+            border-radius: 5px;
+            cursor: default;
+        }
+    </style>
+}
+
+@section headerScript {
+
+}
+
+<div id="main" class="fade out" >
+
+    <div id="home">
+        <div class="people-arranged-in-20"></div>
+        <div class="mask"></div>
+        <div class="radiation"></div>
+        
+        <div class="pos grey">
+            <div class="line"></div>
+        </div>
+
+        <div class="logo-slogan-wrap">
+            <div class="slogan">
+                <h2>
+                    Across 
+                    <span class="roll">
+                        20<sup>th</sup>               
+                    </span> 
+                    Across 
+                    Dream
+                </h2>
+            </div>
+            <div class="logo-20"><span></span></div>
+        </div>
+
+        <div class="pos" style="z-index: 3;">
+            <a class="scrollTo" href="#msg_strat">scroll down</a>
+        </div>
+
+    </div><!--home-->
+
+
+    
+    <div id="HomeVideo" style="display: none;">        
+        <div id="msg_strat"><h2>照片牆</h2></div>
+        <iframe id="videoPlay" src="" frameborder="0" allowfullscreen></iframe>
+    </div><!-- #HomeVideo -->
+
+    <div class="tip" style="display: none;">
+        建議您雙擊影片，以全螢幕模式觀看
+    </div>
+
+</div>
+
+
+@section bodyScript{
+
+    <script>
+
+        $(window).resize(
+            function () {
+
+                var w = $(window).width() + 20;
+                var h = $(window).height() + 10;
+                if (h > w) {
+                    var hv = h;
+                } else {
+                    var hv = (w / 16) * 9;
+                    if (hv < h) {
+                        var hv = h;
+                    }
+                }
+
+                $("#home, #home .people-arranged-in-20, #home .mask").height(h);
+                $("iframe").width(w).height(hv);
+            }
+        );
+
+        $(document).ready(function () {
+
+            var w = $(window).width() + 20;
+            var h = $(window).height() + 10;
+            if (h > w) {
+                var hv = h;
+            } else {
+                var hv = (w / 16) * 9;
+                if (hv < h) {
+                    var hv = h;
+                }
+            }
+
+            $("html,body").css({ 'overflow': 'hidden' });            
+            $("#home, #home .people-arranged-in-20, #home .mask").height(h);
+            $("iframe").width(w).height(hv);
+
+            $(".scrollTo").click(function () {
+
+                $("#HomeVideo, .tip").show();
+
+                $("iframe").attr("src", "//www.youtube.com/embed/FtqcLoPw5IU?rel=0&showinfo=0&controls=0&autoplay=1&wmode=opaque"); // &wmode=opaque 是為了修正IE之下的 z-index 問題
+
+                var toID = $(this).attr("href");
+                $('html, body').animate({
+                    scrollTop: $(toID).offset().top
+                }, 1000);
+                $("#header").css({'position':'fixed','z-index': '99999'});
+                
+                setInterval(function () {
+                    $(".tip").show().css({'bottom': (h-120) +'px' });
+                    $("#home").hide();
+                    $("html,body").css({ 'background': '#000' });
+
+                    setInterval(function () {
+                        $(".tip").fadeOut();
+                    }, 10000);
+
+                    $(".tip").click(function () {
+                        $(this).css({'opacity':'0'});
+                    });
+
+                }, 1000);
+
+                return false;
+            });
+
+
+
+        });       
+
+
+    </script>
+}

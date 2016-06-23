@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "留言 -";
+    Layout = "~/Views/Shared/_PopUp.cshtml";
+    var m = Model as Anniversary.Models.WallObject;
+}
+
+@section headerCSS {
+<link href="@Url.Content("~/css/message.css")" rel="stylesheet" />
+}
+
+@section headerScript {
+
+}
+
+    <div id="wrap" class="card">
+        <div class="shadow"></div> 
+        <div id="pic">
+            @foreach(var img in m.Imgs){
+            <img src="@Url.Content(img.L_URL)" alt="照片" />                 
+            }
+        </div>
+
+        <div id="message"><div class="line">
+            <div class="watermark"></div>  
+            <span> @Html.Raw(Html.Encode(m.CONTENT).Replace("\n", "<br/>" ))</span>
+
+            <br /><br />@*to ricky: br請保留*@
+            <div class="sign-name">@m.SIGNATURE</div>                 
+        </div></div><!-- #message -->
+    </div><!-- wrap -->
+
+@section bodyScript {
+    <script src="//malsup.github.io/jquery.cycle.all.js"></script>
+    <script>
+      $(document).ready(function () {
+          if ($(window).width() > 400) {
+              $('#pic').cycle({
+                  timeout: 2500,
+                  speed: 1000
+              });
+          }
+      });
+    </script>
+}  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

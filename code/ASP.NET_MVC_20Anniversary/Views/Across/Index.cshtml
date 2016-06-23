@@ -1,0 +1,144 @@
+﻿@{
+    ViewBag.Title = "一路走來 -";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section headerCSS {    
+    <link href="@Url.Content("~/css/across.css")" rel="stylesheet" />
+
+}
+
+@section headerScript {   
+
+}
+
+<div id="main" class="fade out">
+    
+    <div class="speech clearfix">
+
+        <h2>一路走來</h2>
+                                 
+            <p>記憶中才走過第一個十年～中心於2005年舉辦歡慶十周年，</p>
+
+            <h3>回想第二個十年</h3>
+            <p>
+                我們在
+                
+@*                <strong>防災監測</strong>
+                、
+                <strong>智慧城市</strong>
+                、
+                <strong>運輸管理</strong>
+                、
+                <strong>無人載具</strong>
+                、
+                <strong>雲端技術</strong>
+                、
+                <strong>資源管理</strong>
+                、
+                <strong>行動管理</strong>
+                、
+                <strong>空間資訊標準</strong>
+                、
+                <strong>開放資料及巨量資料</strong>
+                、
+                <strong>推廣教育</strong>*@
+
+                <em>
+                   防災監測、智慧城市、運輸管理、無人載具、雲端技術、資源管理、行動管理、空間資訊標準、開放資料及巨量資料、推廣教育
+                </em>
+
+                等各方面掌握重要專業技術與豐富經驗。
+            </p>
+
+            <h3>近年來</h3>
+            <p>
+                更不斷朝<strong>海峽兩岸四地</strong>及<strong>國際化</strong>努力，積極參與
+                @*OGC、GSDI、GEO、AFITA*@
+                <a href="http://www.opengeospatial.org" target="_blank" 
+                    title="Open Geospatial Consortium - 開放地理空間協會，起源於1994年，是一個國際化的、自願協商的標準化組織。在OGC，490個多個來自世界各地的商業組織、政府機構、非盈利組織和研究性機構在尋求共識的過程中合作，致力於發展和執行地理資訊的開放式標準，規範地理空間的內容、服務，方便地理資訊系統的資料處理及資料共享。">
+                    OGC</a>  
+                、
+                <a href="http://www.gsdi.org" target="_blank" 
+                    title="GLOBAL SPATIAL DATA INFRASTRUCTURE ASSOCIATION - 全球空間資料基礎建設協會">
+                    GSDI</a>
+                、            
+                <a href="http://www.earthobservations.org" target="_blank" 
+                    title="Group on Earth Observations - 地球觀測組織，成立於2005年2月，是地球觀測領域最大和最權威的政府間國際組織。其目標是製定和實施全球地球綜合觀測系統（GEOSS）十年執行計劃，建立一個綜合、協調和可持續的全球地球綜合觀測系統，更好地認識地球系統，為決策提供從初始觀測資料到專業應用產品的資訊服務。">
+                    GEO</a>  
+                、
+                <a href="http://www.afita.org" target="_blank" 
+                    title="Asian Federation for Information Technology in Agriculture - 亞洲農業資訊科技聯盟，於1998年1月24日在日本和歌山市成立。 提供國家和國際間的組織及協會在農業、食品和環境資訊技術的研究及應用合作之基礎。">
+                    AFITA</a>     
+                等國際組織，並與<strong>日、韓、美、中</strong>等相關單位發展多項合作計畫。
+                <br />
+                中心將在現有厚實基礎上不斷提升研發能量，持續往國際舞台邁進。
+                欣逢二十周年慶，中心自年初即展開一系列活動，
+                並邀請兩岸及國際GIS相關之學者專家來台交流，開拓國際合作契機。
+            </p>
+
+            <h3>GIS中心二十歲了</h3>
+            <p>
+                就像剛踏入大學的年輕人，充滿<strong>熱情與活力</strong>，更有<strong>無限的可能性</strong>。
+                中心由一群深富<strong>創造力</strong>的同仁組成，發展至今已有多位校內外支援教師、<strong>160名</strong>全職同仁之組織規模。
+                感謝大家無私的貢獻所知所學，甚至從學生時代就加入中心這個大家庭，在中心展開事業與人生的扉頁。
+            </p>
+            <img src="@Url.Content("~/images/Across/hokkaido.jpg")" alt="GIS.FCU 20週年, 北海道之旅" style="width: 100%;" />
+
+            <h3>由衷感謝</h3>
+            <p>
+                各級師長、各界長官對中心之支持與愛護。
+                全體GIS中心的夥伴們共同編輯了這一份如數家珍的紀錄，雖然人事物不斷更迭變化，但從不曾忘記這些胼手胝足地共同打拼的<strong>美好印記</strong>。
+                目前這些綿薄的成就，希望能與大家分享，如同與親朋好友分享小孩<strong>成長的喜悅</strong>。
+            </p>
+
+            <h3>未來</h3>
+            <p>
+                我們將<strong>秉持初衷</strong>，致力於<strong>空間資訊系統的教學及研究</strong>，更將積極擴大參與<strong>社會服務</strong>，
+                從空間資訊連結各項公益平台，<em>希望下一個世代的空間資訊因為我們的努力而有嶄新的面貌。</em>
+            </p>
+
+
+    </div>
+
+    <div class="signature">
+        <p>逢甲大學地理資訊系統研究中心<br /><br />主任 周天穎
+        </p>
+        <img src="@Url.Content("~/images/Across/jimmy-chou.png")" alt="照片" />
+    </div>
+
+</div><!-- #main -->
+
+
+@section bodyScript {
+
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script><!-- JQ ToolTip -->
+
+	<script type="text/javascript">
+  
+
+	    $(function () {
+
+	        $(".indicator-current").addClass("active3");
+
+	        /* toolTip */
+	        $(a).tooltip({
+	            position: {
+	                my: "left center-20",
+	                at: "left+20 center+20",
+	                using: function (position, feedback) {
+	                    $(this).css(position);
+	                    $("<div>")
+                          .addClass("arrow")
+                          .addClass(feedback.vertical)
+                          .addClass(feedback.horizontal)
+                          .appendTo(this);
+	                }
+	            }
+	        });
+	    });        
+	</script>
+
+
+}  
+

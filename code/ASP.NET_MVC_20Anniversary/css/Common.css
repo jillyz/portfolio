@@ -1,0 +1,540 @@
+﻿/*for Font Family*/
+@import url('http://fonts.googleapis.com/css?family=Carrois+Gothic+SC');
+
+/* =====================================================
+	Reset
+===================================================*/
+
+html,body{margin:0;padding:0;}
+h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,cite,code,del,dfn,em,img,q,s,samp,small,strike,strong,sub,sup,tt,var,dd,dl,dt,li,ol,ul,fieldset,form,label,legend,button,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;font-weight:normal;font-style:normal;font-size:100%;line-height:1;font-family:inherit;}
+table{border-collapse:collapse;border-spacing:0;}
+ol,ul{list-style:none;}
+q:before,q:after,blockquote:before,blockquote:after{content:"";}
+html{overflow-y:scroll;font-size:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}
+a { text-decoration: none; outline: none; /* for Firefox */ hlbr:expression(this.onFocus=this.blur()); /* for IE */ }
+a:focus{outline:thin dotted;}
+a:hover,a:active{outline:0;}
+article,aside,details,figcaption,figure,footer,header,hgroup,nav,section{display:block;}
+audio,canvas,video{display:inline-block;*display:inline;*zoom:1;}
+audio:not([controls]){display:none;}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline;}
+sup{top:-0.5em;}
+sub{bottom:-0.25em;}
+img{border:0;-ms-interpolation-mode:bicubic;}
+button,input,select,textarea{font-size:100%;margin:0;vertical-align:baseline;*vertical-align:middle;}
+button,input{line-height:normal;*overflow:visible;}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0;}
+button,input[type="button"],input[type="reset"],input[type="submit"]{cursor:pointer;-webkit-appearance:button;}
+input[type="search"]{-webkit-appearance:textfield;-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box;}
+input[type="search"]::-webkit-search-decoration{-webkit-appearance:none;}
+textarea{overflow:auto;vertical-align:top;}
+
+/* =====================================================
+	Common
+===================================================*/
+
+html, body
+{
+	font-family: 微軟正黑體, Sans-Serif;
+}
+
+/* for loading -----------------start*/
+.fade {
+  transition: all 1000ms 0 linear 500ms;
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+  opacity: 1;
+}
+
+.fade.out {
+  opacity: 0;
+}
+
+.content-wrapper
+{
+    overflow: hidden;
+}
+
+/*-----------------end*/
+
+
+#header
+{
+	position: absolute;
+	position: fixed;
+	top:0;
+	z-index: 1;
+	width: 100%;
+	overflow: hidden;
+
+	/* Box Shadow */
+	-moz-box-shadow: 0 3px 3px 0 rgba(100,100,100,0.3) ;
+	-webkit-box-shadow: 0 3px 3px 0 rgba(100,100,100,0.3) ;
+	box-shadow: 0 3px 3px 0 rgba(100,100,100,0.3) ;
+	background: #F4F4F4;	/* Gradient Background */	/* IE10 Consumer Preview */ 
+	background-image: -ms-linear-gradient(top, #FFFFFF 0%, #E6E6E6 100%);	/* Mozilla Firefox */ 
+	background-image: -moz-linear-gradient(top, #FFFFFF 0%, #E6E6E6 100%);	/* Opera */ 
+	background-image: -o-linear-gradient(top, #FFFFFF 0%, #E6E6E6 100%);	/* Webkit (Safari/Chrome 10) */ 
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(1, #E6E6E6));	/* Webkit (Chrome 11+) */ 
+	background-image: -webkit-linear-gradient(top, #FFFFFF 0%, #E6E6E6 100%);	/* W3C Markup, IE10 Release Preview */ 
+	background-image: linear-gradient(to bottom, #FFFFFF 0%, #E6E6E6 100%);
+}
+
+/*#header * { line-height: 40px; }*/
+
+#header #title h1 { padding: 0; line-height: 40px; }
+
+#title a { padding: 0 0.5em 0 0.5em; font-family: 'Carrois Gothic SC', sans-serif;  color: #666; font-size: 120%; }
+
+/* ==========================================================================	
+	Responsive Nav - Responsive Menu		
+========================================================================== */
+
+/*! responsive-nav.js 1.0.32 by @viljamis */
+
+.nav-collapse ul {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: block;
+  list-style: none;
+}
+
+.nav-collapse li {
+  width: 100%;
+  display: block;
+}
+
+.js .nav-collapse {
+  clip: rect(0 0 0 0);
+  max-height: 0;
+  position: absolute;
+  display: block;
+  overflow: hidden;
+  zoom: 1;
+}
+
+.nav-collapse.opened {
+  max-height: 9999px;
+}
+
+.disable-pointer-events {
+  pointer-events: none !important;
+}
+
+.nav-toggle {
+	width: 60px;
+	height: 40px;
+	background-image: url(../images/site/menu.png);
+	background-position: 50% 0;
+	background-repeat: no-repeat;
+	box-sizing: border-box;
+	overflow: hidden;
+	white-space: nowrap;
+	text-indent: 200%;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+
+@media screen and (min-width: 769px) {
+  .js .nav-collapse {
+    position: relative;
+  }
+  .js .nav-collapse.closed {
+    max-height: none;
+  }
+  .nav-toggle {
+    display: none;
+  }
+}
+
+/* my menu style ------*/
+
+.menu li a { 
+	font-size: 0.9375em;
+	color: #666; 
+}
+
+.nav-toggle span {
+	font: 1rem "微軟正黑體", Arial, san-serif;
+	vertical-align: middle;
+}
+
+@media screen and (min-width: 769px) {
+	#title , .menu { 
+		float: left; 
+	}
+	.menu li { 
+		float: left; 
+		width: auto; 
+		overflow:hidden; 
+		padding-top: 6px;
+		padding-bottom: 5px;
+		padding-left: 1.5em;
+		padding-right: 1.5em;
+		border-left: 1px solid #ccc; 
+		border-right: 1px solid #fff;
+	}
+
+	.menu li a em
+	{
+		display: block;
+		padding:0;
+		margin:0;
+		line-height:1;
+		font-size: 0.725em;
+		text-align: center;
+		color: #999;
+	}
+
+    .menu li a:hover  {
+        color: #c30;
+	}
+
+	.gis
+	{
+		position: fixed;
+		top: 0;
+		right: 10px;
+		height: 40px;
+		width: 120px;
+		background: url(../images/site/gis.png) 50% 0 no-repeat;
+		white-space: nowrap;
+		text-indent: 100%;
+		overflow: hidden;
+	}
+
+		.gis:hover
+		{
+			background-position: 50% 100%;
+		}
+
+}
+
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+	.gis
+	{
+		position: fixed;
+		top: 7px;
+		right: 10px;
+		height: 30px;
+		width: 80px;
+		background: url(../images/site/gis.png) 50% 0 no-repeat;
+		background-size: 80px;
+		white-space: nowrap;
+		text-indent: 100%;
+		overflow: hidden;
+	}
+		.gis:hover
+		{
+			background-position: 50% -27px;
+		}
+}
+
+@media screen and (max-width: 768px) {
+	.menu {
+		border-top: 1px solid #ccc;
+	}
+	.menu li { 
+		border-bottom: 1px solid #555; 
+		border-top: 1px solid #777;
+	}
+	.menu li a { 
+		display: block;
+		padding: 0 1em; 
+		line-height: 40px;
+		background-color: #666;
+		color: #f4f4f4;
+		border-left: 10px solid #555;
+	}
+	.menu li a em
+	{
+		margin-left: 1em;
+		font-size: 0.875em;
+		color: #ccc;
+	}
+
+	.menu li a:active{
+		background-color: #444;
+	}
+	.nav-toggle  {
+		position: absolute;
+		top: 0px;
+		right: 0px;
+        padding: 0 20px;
+		font-size: 1.5em;
+		color: #666;
+	}
+	.nav-toggle:hover {
+		color: #999;
+	}
+	.nav-toggle:active {
+		color: #ccc;
+        background-color: rgba(124,124,124,0.5);
+	}
+
+	.home, .home a {
+		display: block;
+	}
+}
+
+/* NAV indicator */
+
+.indicator-current {
+	position:absolute;
+	top: 0;
+	left: 0;
+	margin-left: 0;
+	width: 84px;
+	height: 4px;
+	background: /*#c39449*/ #999 ;
+}
+
+.indicator-current.active1 {
+	left: 85px;
+	width: 94px;
+}
+
+.indicator-current.active2 {
+	left: 179px;
+	width: 112px;
+}
+.indicator-current.active3 {
+	left: 291px;
+	width: 120px;
+}
+.indicator-current.active4 {
+	left: 411px;
+	width: 142px;
+}
+.indicator-current.active5 {
+	left: 551px;
+	width: 110px;
+}
+
+@media screen and (max-width: 767px )    
+{
+	.indicator-current
+	{
+		display: none;
+	}
+}
+
+
+/* ======================================================================
+	控制 祝賀影片的選單 選項顯隱 (PC/Mobile)
+==================================================================	*/
+
+@media screen and (min-width: 1025px) {
+	.menu .pc
+	{
+		display: inline-block;
+	}
+	.menu .mobile
+	{
+		display: none;
+	}
+}
+
+@media screen and (max-width: 1024px) {
+	.menu .pc
+	{
+		display: none;
+	}
+	.menu .mobile
+	{
+		display: block;
+	}
+}
+
+
+/* ======================================================================
+	NProgress ( Loading 效果 )
+==================================================================	*/
+
+/* Make clicks pass-through */
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: #29d;
+
+  position: fixed;
+  z-index: 1031;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 2px;
+}
+
+/* Fancy blur effect */
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px #29d, 0 0 5px #29d;
+  opacity: 1.0;
+
+  -webkit-transform: rotate(3deg) translate(0px, -4px);
+      -ms-transform: rotate(3deg) translate(0px, -4px);
+          transform: rotate(3deg) translate(0px, -4px);
+}
+
+
+/* ===================================================================
+	SPINNER 
+==============================================================*/
+
+/*---- ( Page Loading Animation with "GIS Man"  )------*/
+
+#nprogress .spinner {
+  display: block;
+  /*position: fixed;*/
+  z-index: 1031;
+  top:50%;
+  left: 50%;
+  margin-top: -60px;
+  margin-left: -90px;
+  width: 180px;
+  height: 180px;
+  background: url(../images/site/loading_gisman_walk.png?201406181633) ;
+  -webkit-animation: GISManWalk 0.2s steps(2,end) infinite;
+          animation: GISManWalk 0.2s steps(2,end) infinite;
+}
+
+@-webkit-keyframes GISManWalk {
+  from  { background-position:  0 0; }
+  to {  background-position: -360px 0; }
+}
+@keyframes GISManWalk {
+  from  { background-position:  0 0; }
+  to {  background-position: -360px 0; }
+}
+
+
+#nprogress .spinner-icon {
+  
+  width: 180px;
+  height: 180px;
+  box-sizing: border-box;
+
+  border: solid 2px transparent;
+  border-top-color: /*#29d*/ #FFF;
+  border-left-color: /*#29d*/ #FFF;
+  border-radius: 50%;
+
+  -webkit-animation: nprogress-spinner 400ms linear infinite;
+          animation: nprogress-spinner 400ms linear infinite;
+
+}
+@-webkit-keyframes nprogress-spinner {
+  0%   { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes nprogress-spinner {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+/*---- spinner --------*/
+
+div.spinner
+{
+	position: absolute;
+}
+
+#ie9 div.spinner {
+	display: none;
+}
+
+#top-hat-notif {
+    position: fixed;
+    top: 40px;
+    left: 0;
+    right: 0;
+    background: #a80000;
+    text-align: center;
+    z-index: 2;
+    color: #eee;
+}
+#top-hat-notif a {
+    color: #FF6;
+}
+
+/* ===============================================
+	TOOLTIP style 
+===============================================-*/
+
+.ui-tooltip {
+	padding: 8px;
+	position: absolute;
+	z-index: 9999;
+	-webkit-box-shadow: 0 0 0 #aaa;
+	box-shadow: 0 0 0 #aaa;
+}
+body .ui-tooltip {
+	border-width: 2px;
+
+}
+
+.ui-tooltip ,
+body .ui-tooltip {
+	max-width: 500px;
+	background: #000;
+	background: rgba(0,0,0,0.6);
+	color: #fff;
+	font-size: 0.75em;
+}
+
+/* ===============================================
+	Fix
+===============================================-*/
+
+.clearfix:before,
+.clearfix:after {
+  content: ".";    
+  display: block;    
+  height: 0;    
+  overflow: hidden;	
+}
+.clearfix:after {clear: both;}
+.clearfix {zoom: 1;} /* IE < 8 */
+
+
+/* ==================================================
+    Custom SCroll
+===========================================*/
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 50px;
+}
+
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment {
+    display: none;
+}
+
+::-webkit-scrollbar-track-piece {
+background-color: /*#e9b994*/ rgba(255,255,255,1) ;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+background-color: /*#b65913*/ #333;
+} 
+
+
+

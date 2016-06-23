@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+
+  <!--載入css-->
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/rainfall-report.css" />
+
+  <!--<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>-->
+  <script type="text/javascript" src="inc/js/jquery-1.8.3.min.js"></script>
+
+  <!-- bxSlider CSS file -->
+  <link href="bxslider/jquery.bxslider.css" rel="stylesheet" />
+  <!-- bxSlider Javascript file -->
+  <script src="bxslider/jquery.bxslider.min.js"></script>
+
+
+  <!-- Export JS  -->
+  <script>
+    $(document).ready(function () {
+
+      $('.bxslider').bxSlider({
+        infiniteLoop: false,
+        hideControlOnEnd: true
+      });
+
+      $(".scrollTo").click(function () {
+          var toID = $(this).attr("href");
+          $('html, body').animate({
+              scrollTop: $(toID).offset().top
+          }, 500);
+          return false;
+      });
+
+      //$(".panel").height($(window).height()/*- $("h3").height()-16*/ );
+      $(".panel").height($(window).height() );
+
+    });
+  </script>
+
+  <title>流程說明</title>
+</head>
+
+<body gk-app id="how">
+  <!-- Page: home  -->
+  <!--<div id="home" data-role="page">-->
+  <div data-role="page" class="main-page">
+
+  <!--
+  <div data-role="header" class="header">
+    <div class="action left"><a href="index.htm" class="btn back js-back">返回</a><strong>流程說明</strong></div>
+
+  </div>--><!-- header-->
+
+
+    <div role="main" class="main" style="padding-top: 0;">
+
+      <div id="p1" class="panel">
+        <a href="#p1" class="scrollTo">
+          <h3>A.回報時機</h3>
+          <p>了解防災人回報流程</p>
+        </a>
+        <div data-role="detail" id="station-info" class="detail-view step">
+        <ul>
+          <li>1. 架設完畢即回傳 0</li>
+          <li>2. 累積雨量每超過 50 即回傳</li>
+          <li>3. 撤除時回傳</li>
+          <li>● 跨天不需要將雨量筒內雨量倒掉</li>
+        </ul>
+        </div>
+      </div>
+
+      <div id="p2"  class="panel">
+        <a href="#p2" class="scrollTo">
+          <h3>B.雨量特性與強度</h3>
+          <p>中央氣象局所訂定的雨量分級標準</p>
+        </a>
+        <img src="images/report/strength.png">
+      </div>
+
+      <div id="p3"  class="panel">
+        <a href="#p3" class="scrollTo">
+          <h3>C.雨量筒架設方式</h3>
+          <p>了解防災人員是如何快速架設雨量筒</p>
+        </a>
+        <ul class="bxslider proccess">
+       		<li>
+       			<img src="images/report/install-02.png">
+       			<strong class="step">1</strong>
+       			<span>拉出腳架<br>調整測量所需要的高度。</span>
+       		</li>
+       		<li>
+       			<img src="images/report/install-03.png">
+       			<strong class="step">2</strong>
+       			<span>轉入雨量筒<br>將雨量筒轉入雲台螺絲固定。</span>
+       		</li>
+       		<li>
+       			<img src="images/report/install-04.png">
+       			<strong class="step">3</strong>
+       			<span>定平氣泡<br>調整水平儀的氣泡定於中心位置。</span>
+       		</li>
+       		<li>
+       			<img src="images/report/install-05.png">
+       			<strong class="step">4</strong>
+       			<span>吊掛重物<br>增加腳架重心，使雨量筒更為穩定。</span>
+       		</li>
+       		<li>
+       			<img src="images/report/install-06.png" class="tepy-img">
+            <strong class="step">5</strong>
+       		</li>
+        </ul>
+      </div>
+
+      <div id="p4"  class="panel">
+        <a href="#p4" class="scrollTo">
+          <h3>D.雨量筒架設時機</h3>
+          <p>讓你知道雨量筒應該要在什麼時機發揮它的功用</p>
+        </a>
+        <ul class="bxslider proccess">
+       		<li>
+       			<img src="images/report/time-01.png">
+       			<strong class="step">1</strong>
+            		<span>雨量筒架設時機<br>收到水保局架設雨量筒簡訊或降雨時主動架設。</span>
+       		</li>
+       		<li>
+       			<img src="images/report/time-02.png">
+       			<strong class="step">2</strong>
+       		</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</body>
+
+</html>

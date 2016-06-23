@@ -1,0 +1,158 @@
+html,body{
+	overflow: hidden;
+	overflow-y: hidden;
+	width: 100%;
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+	font-family: "微軟正黑體", san-serif;	
+	/*
+	background: -moz-linear-gradient(top,  #06798c 0%, #73870a 100%); 
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#06798c), color-stop(100%,#73870a));
+	background: -webkit-linear-gradient(top,  #06798c 0%,#73870a 100%);
+	background: -o-linear-gradient(top,  #06798c 0%,#73870a 100%); 
+	background: -ms-linear-gradient(top,  #06798c 0%,#73870a 100%); 
+	background: linear-gradient(to bottom,  #06798c 0%,#73870a 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#06798c', endColorstr='#73870a',GradientType=0 ); 
+	*/
+	background: #06798c url(../images/launch.jpg) 0 0 no-repeat;
+	-webkit-background-size: cover;
+	background-size: cover;	
+}
+
+canvas {
+	opacity: 0.4;
+}
+
+.index-bbg {
+	position : fixed; 
+	top : 0px; 
+	left : 0px;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+	background: url(../images/index.png) 0 0 no-repeat;
+	-webkit-background-size: 100% 100%;
+	background-size: 100% 100%;
+}
+
+.launch-page {
+	position: fixed;
+	z-index: 10;
+	color: #fff;
+	background: #097c8e url(../images/launch.jpg) 50% 50% no-repeat;
+}
+
+.launch-page .logo 
+{
+	position: fixed;
+	background: url(../images/246logo.png) 50% 50% no-repeat;
+	-webkit-background-size: 80%;
+	background-size: 80%;
+}
+
+.launch-page span {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 4em;
+	text-align: center;
+	font-weight: bold;
+}
+
+.setting {
+	display: block;
+	position: fixed;
+	top: 0.5em;
+	right: 0.5em;
+	width: 3em; /* header size */
+	height: 3em; /* header size */
+	background: url(../images/ic-setting.png) 50% 50% no-repeat;
+	-webkit-background-size: 1.8em;
+	background-size: 1.8em;
+	text-indent: -9999px;
+}
+a.response {
+	display: none;
+	position: fixed;
+	top: 0.5em;
+	left: 0.5em;
+	line-height: 3;
+	background: url(../images/ic-response.png) 1em 50% no-repeat ;
+	-webkit-background-size: auto 1em;
+	background-size: auto 1em;
+	color: #fff;
+	text-indent: 2.5em;
+	font-weight: bold;
+}
+
+.top a:active {
+	opacity: 0.4;
+}
+
+.menu {
+	position: fixed;
+	left: 1.5em;
+	right: 1.5em;
+	margin: 0 auto;
+	table-layout: fixed;
+}
+.menu a {
+	position: relative;
+	display: block;
+	float: left;
+	width: 48.5%;	
+	margin-top: 3%;
+/*	padding-top: 32%;
+	padding-bottom: 8%;	*/
+	text-decoration: none;
+	text-align: center;
+	color: #fff;
+	background-color: rgba(0,0,0,0.4);
+	-webkit-background-size: 40%;
+	background-size: 40%;	
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.menu a span {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 70%;
+	display: block;
+	text-align: center;
+}
+
+
+.menu a:nth-child(odd) {
+	margin-right: 3%;
+}
+.menu a:active {
+	/*background-color: rgba(0,0,124,0.3);*/
+	background-color: rgba(0,0,0,0.25);
+}
+.map {
+	background: url(../images/ic-menu-map.png) 50% 37% no-repeat;
+}
+.rainfall {
+	background: url(../images/ic-menu-rainfall.png) 50% 37% no-repeat;
+}
+.weather {
+	background: url(../images/ic-menu-weather.png) 50% 37% no-repeat;
+}
+.alert {
+	background: url(../images/ic-menu-alert.png) 50% 37% no-repeat;
+}
+.ccd {
+	background: url(../images/ic-menu-observation.png) 50% 37% no-repeat;
+}
+.report {
+	background: url(../images/ic-menu-report.png) 50% 37% no-repeat;
+}
+
+.main-page{	
+	overflow:hidden;
+}
+

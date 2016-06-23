@@ -1,0 +1,489 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>雨量報報 - 土石流防災資訊</title>
+<meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1, maximum-scale=1, user-scalable=0" />
+
+<!--載入css-->
+
+<link rel="stylesheet" href="css/reset.css" />
+<link rel="stylesheet" href="css/main.css" />
+<link rel="stylesheet" href="css/rainfall-report.css" />
+
+<!-- <script type="text/javascript" src="inc/js2/cordova.js"></script> -->
+
+
+<!-- jquery -->
+<script type="text/javascript" src="inc/js2/jquery-2.1.1.min.js"></script>
+
+<!--PHP函式庫-->
+<script type="text/javascript" src="inc/js2/php.js"></script>
+<!--jquery myBox函式庫-->
+<script type="text/javascript" src="inc/js2/mybox-0.2.min.js"></script>
+
+<!--jquery myBox函式庫-->
+<script type="text/javascript" src="inc/js2/jquery.corner.js"></script>
+
+
+<!--Memory -->
+<script type="text/javascript" src="inc/js2/memory.js"></script>
+
+
+<!--未分類函式庫-->
+<script type="text/javascript" src="inc/js2/include.js"></script>
+
+<!--拿來讀 config.js -->
+<script type="text/javascript" src="inc/js2/config.js"></script>
+
+<!--加速click功能 -->
+<!--<script type="text/javascript" src="inc/js2/fastclick.js"></script>-->
+
+<!--APP UI -->
+<script type="text/javascript" src="inc/js2/app-ui.js"></script>
+	
+<!--此專案的設定檔 -->
+<script type="text/javascript" src="js/config.js"></script>
+
+<!--Native的部分-->
+<script type="text/javascript" src="inc/native_plugin_js/filePlugin.js"></script>
+<script type="text/javascript" src="inc/native_plugin_js/PushNotification.js"></script>
+
+<script language="javascript">
+var pushNotification;
+function Load() {
+	//document.addEventListener("online", onOnLine, false);
+	//document.addEventListener("offline", onOffLine, false);
+
+	 var UA = strtoupper(navigator.userAgent);
+	 //onDeviceReady();
+	 if(is_string_like(UA,'%ANDROID%') || is_string_like(UA,'%IPHONE%') || is_string_like(UA,'%MOBILE%') )
+	 {
+	  document.addEventListener("deviceready", onDeviceReady, false);
+	  document.addEventListener("offline", onOffLine, false);
+	 }
+	 else
+	 {
+	  onDeviceReady();
+	 }
+
+}
+function tokenHandler (result) {
+    // Your iOS push server needs to know the token before it can push to this device
+    // here is where you might want to send it the token for later use.
+    //alert('device token = ' + result);
+	var id = result;
+	id = str_replace("<","",id);
+	id = str_replace(">","",id);
+	id = str_replace(" ","",id);
+	id = trim(id);
+	//註冊 Token
+	var WebServiceUrl = "http://bdr.swcb.gov.tw/PushAppMessage/SaveToken.ashx?";
+	WebServiceUrl+="device=IOS";
+	WebServiceUrl+="&id="+id;
+	WebServiceUrl+="&phone="+getMemory("FEMA_RAIN_PAPER_USER_PHONE_ALREADY_REGISTER_PHONE_NUMBER");
+	WebServiceUrl+="&";
+	alert(WebServiceUrl);
+	myAjax(WebServiceUrl,"");
+}
+
+function errorHandler (error) {
+	alert('error = ' + error);
+
+}
+// handle APNS notifications for iOS
+function onNotificationAPN(e) {
+	if (e.alert) {
+		$("#app-status-ul").append('<li>push-notification: ' + e.alert + '</li>');
+		// showing an alert also requires the org.apache.cordova.dialogs plugin
+		navigator.notification.alert(e.alert);
+	}
+	if (e.sound) {
+		// playing a sound also requires the org.apache.cordova.media plugin
+		var snd = new Media(e.sound);
+		snd.play();
+	}
+	if (e.badge) {
+		pushNotification.setApplicationIconBadgeNumber(successHandler, e.badge);
+	}
+}
+function onDeviceReady() {
+	$(document).ready(function(){							
+		
+	    //$(document).bind("mobileinit", function () { $.mobile.defaultPageTransition = 'none'; });
+	    //FastClick.attach(document.body);
+
+	    //取得螢幕大小
+		window['wh']=getWindowSize();		
+
+		//重新定義按下回上頁鍵
+		document.removeEventListener("backbutton", function(e) {
+		}, false);
+		document.addEventListener("backbutton", function(e) {
+			if($(".out-page").size()!=0)
+			{
+				if($(".out-page").is(":visible") ) {
+					$(".js-back").trigger('click');
+					dialogOff();
+				}
+				else
+				{
+					location.href="index.htm";
+					return true;
+				}
+			}
+			else
+			{
+				location.href="index.htm";
+				return true;
+			}
+		}, true);
+
+		// 程式碼從這結束-----------------------------------------End
+
+
+		// APP UI - start ========================================================================		
+		appUI();
+
+		//取得註冊碼
+		$(".js-register").click(function(){
+			
+			var USER_NAME = trim($("#USER_NAME").val());
+			var USER_PHONE = trim($("#USER_PHONE").val());
+			USER_PHONE=str_replace("-","",USER_PHONE);
+			var message="";
+			if(USER_NAME=="")
+			{
+				message+="請填寫姓名...\n";
+			}
+			if(USER_PHONE=="")
+			{
+				message+="請填寫手機號碼...\n";
+			}
+			else 
+			{
+				if(strlen(USER_PHONE)!=10)			
+				{
+					message+="手機號碼錯誤...\n";
+				}
+				else if(isNaN(USER_PHONE))
+				{
+					message+="手機號碼錯誤...\n";
+				}
+				else if(substr(USER_PHONE,0,2)!='09'){
+					message+="手機號碼錯誤...\n";
+				}
+			}
+			if(message!="")
+			{
+				//alert(message);
+				smallComment(message,true);
+				return false;
+			}
+			dialogOn("註冊中，將以簡訊發送驗證碼",function(){
+				$("#register").hide();
+				var URL = window['FEMA_RAIN_PAPER']['WEBSERVICE_REGISTER'];
+				window['FEMA_RAIN_PAPER']['USER_PHONE']=USER_PHONE;
+				$.ajax({
+					url: URL,
+					async:true,
+					dataType:'xml',
+					crossDomain:true,
+					data:{Name:USER_NAME,Cellphone:USER_PHONE},
+					success:function(data){
+						var tf = $(data).find("boolean").text();
+						if(tf=='true')
+						{
+							// 先在本機紀錄已經有註冊過的狀態
+							window['FEMA_RAIN_PAPER']['FEMA_RAIN_PAPER_USER_PHONE_ALREADY_REGISTER'] = "1";
+							setMemory("FEMA_RAIN_PAPER_USER_PHONE_ALREADY_REGISTER",window['FEMA_RAIN_PAPER']['FEMA_RAIN_PAPER_USER_PHONE_ALREADY_REGISTER']);
+							setMemory("FEMA_RAIN_PAPER_USER_PHONE_ALREADY_REGISTER_PHONE_NUMBER",window['FEMA_RAIN_PAPER']['USER_PHONE']);
+						
+							//發送簡訊註冊碼							
+							var tmp = myAjax(window['FEMA_RAIN_PAPER']['WEBSERVICE_RESEND'],"Cellphone="+USER_PHONE);
+							//$("#register, #others, #others-panel").hide();	
+							$("#register").hide();						
+							dialogOff();
+							setTimeout(function(){								
+								$("#login").fadeIn();
+								setTimeout(function(){
+									smallComment("稍後您將收到簡訊及驗證碼",true);
+								},500);	
+								$("#login .pos-bottom").hide().delay(2500).fadeIn(200);
+							},500);							
+						}
+						else
+						{
+							//alert('註冊失敗...');							
+							smallComment("註冊失敗！",true);
+							dialogOff();
+						}
+					},
+					error:function(){
+						//alert('錯誤：請確認網路狀況後再重新註冊。');
+						dialogOff();	
+						$("#register").delay(1500).fadeIn(200);
+						smallComment("錯誤：請確認網路狀況，再重新註冊",true);
+					}					
+				});
+			});
+
+			return false;
+		});
+
+		//重送驗證碼
+		$(".js-resend-pw").click(function(){
+			$(".resend").css({'visible':'hidden','opacity':'0'}).delay(2000).animate({'visible':'visible','opacity':'1'},200);
+			var tmp = myAjax(window['FEMA_RAIN_PAPER']['WEBSERVICE_RESEND'],"Cellphone="+window['FEMA_RAIN_PAPER']['USER_PHONE']);
+			smallComment("已重新發送驗證碼...",true);
+			return false;
+		});
+
+		//我已有註冊碼
+
+		$(".js-go-login").click(function(){
+			window['FEMA_RAIN_PAPER']['USER_PHONE'] = getMemory("FEMA_RAIN_PAPER_USER_PHONE_ALREADY_REGISTER_PHONE_NUMBER");
+			// alert(window['FEMA_RAIN_PAPER']['USER_PHONE']);
+			$("#register, #others, #others-panel").hide();	
+			$("#login").fadeIn();
+			
+		});
+
+
+		//登入驗證
+		$(".js-login").click(function(){
+			var USER_CODE = trim($("#USER_CODE").val());			
+			var message="";
+			if(USER_CODE=="")
+			{
+				message+="請輸入收到簡訊的驗證碼\n";
+			}
+			else
+			{
+				if(strlen(USER_CODE)!=4)
+				{
+					message+="驗證碼應為一組「４碼數字」\n";
+				}
+				else	if(isNaN(USER_CODE))
+				{
+					message+="驗證碼應為一組「４碼數字」\n";
+				}
+			}
+			if(message!="")
+			{
+				//alert(message);
+				$("#login .pos-bottom").hide().delay(1500).fadeIn(200);
+				smallComment(message,true);
+				return false;
+			}
+			/*
+			alert(window['FEMA_RAIN_PAPER']['WEBSERVICE_VIERFY']);
+			alert(window['FEMA_RAIN_PAPER']['USER_PHONE']);
+			alert(USER_CODE);
+			*/
+			dialogOn("登入驗證中...",function(){
+				$("#login").hide();
+				var URL = window['FEMA_RAIN_PAPER']['WEBSERVICE_VIERFY'];
+				try{
+				$.ajax({
+					url: URL,
+					async:true,
+					dataType:'xml',
+					crossDomain:true,
+					data:{Cellphone:window['FEMA_RAIN_PAPER']['USER_PHONE'],Code:USER_CODE},
+					success:function(data){
+						var tf = strtoupper($(data).find("boolean").text());
+						if(tf=='TRUE')
+						{
+							//驗證成功，跳至拍照頁
+							//手機綁定手機號碼
+							setMemory("FEMA_RAIN_PAPER_USER_PHONE",window['FEMA_RAIN_PAPER']['USER_PHONE']);
+							
+							//取得google、ios驗證
+								
+								//如果是ios 採用 ios 的 register
+								if(getDeviceKind()=="IOS")
+								{
+					               pushNotification = window.plugins.pushNotification;
+					   alert(print_r(pushNotification,true));
+						           pushNotification.register(
+												 tokenHandler,
+												 errorHandler,
+												 {
+												 "badge":"true",
+												 "sound":"true",
+												 "alert":"true",
+												 "ecb":"onNotificationAPN"
+												 });
+								}
+					            else{
+							       filePlugin.register_device_id(window['FEMA_RAIN_PAPER']['USER_PHONE']).done(function(result){
+								        //alert(result);
+							        	/*
+							        	//這段改成在native裡實現...Orz
+							        	var device = getDeviceKind();
+							        	alert("device="+device);
+							        	alert("id="+result);
+							        	alert("phone="+window['FEMA_RAIN_PAPER']['USER_PHONE']);
+						        		var URL="http://bdr.swcb.gov.tw/PushAppMessage/SaveToken.ashx?device="+device+"&id="+result+"&phone="+window['FEMA_RAIN_PAPER']['USER_PHONE'];
+							        	myAjax(URL,"");*/
+							        	//myAjax("http://3wa.tw/ajax/api.php?mode=log_server_insert","kind=wtf&message="+urlencode(URL));
+
+								
+							         	location.href="inform.htm";
+						        		dialogOff();
+						        	}).fail(function(result){
+						    	    	alert("Error:"+print_r(result,true));
+						    	    	location.href="index.htm";
+						    	    	dialogOff();
+							        });
+					        }
+							setTimeout(function(){
+								//go to inform whatever success registered id or failure
+								location.href="inform.htm";
+								dialogOff();
+							},30000);
+							
+							// location.href="inform.htm";
+						}
+						else
+						{
+							//alert('驗證失敗...');
+							dialogOff();
+							$("#login").delay(1000).fadeIn(200);
+							smallComment("驗證失敗，請重新輸入驗證碼",true);							
+						}
+					},
+					error:function(){
+						//alert('錯誤：請確認網路狀況後再重新註冊。');
+						dialogOff();
+						$("#login").delay(1000).fadeIn(200);
+						smallComment("錯誤：請確認網路狀況，再重新登入",true);
+					}					
+				});
+				}
+				catch(e){
+					alert(e);
+				}
+			});			
+			return false;
+		});
+		
+		dialogOn("驗證檢查中...",function(){
+			if(getMemory("FEMA_RAIN_PAPER_USER_PHONE")!="" && getMemory("FEMA_RAIN_PAPER_USER_PHONE")!=null)
+			{				
+				location.href="inform.htm";				
+			}
+			else if(getMemory("FEMA_RAIN_PAPER_USER_PHONE_ALREADY_REGISTER") != "" && getMemory("FEMA_RAIN_PAPER_USER_PHONE_ALREADY_REGISTER") != null && getMemory("FEMA_RAIN_PAPER_USER_PHONE_ALREADY_REGISTER_PHONE_NUMBER") != "")
+			{
+				//window['FEMA_RAIN_PAPER']['USER_PHONE'] = getMemory("FEMA_RAIN_PAPER_USER_PHONE_ALREADY_REGISTER_PHONE_NUMBER");
+				//$("#login").delay(500).fadeIn();
+				$("#register").delay(500).fadeIn();
+				$("#posAlready").css("display","");
+				dialogOff();	
+				
+				
+			}		
+			else
+			{
+				dialogOff();
+				//$("#register, #others").delay(500).fadeIn();
+				$("#register").delay(500).fadeIn();				
+			}
+		});
+
+
+	});
+	
+	function setAlreadyRegister(){
+		window['FEMA_RAIN_PAPER']['USER_PHONE'] = getMemory("FEMA_RAIN_PAPER_USER_PHONE_ALREADY_REGISTER_PHONE_NUMBER");
+		$("#login").delay(500).fadeIn();
+	}
+}
+</script>
+
+</head>
+<body id="rainfall-login" onLoad="Load();">
+
+<!-- Main Page ========================================================= -->
+
+<div data-role="page" class="main-page">
+
+	<div class="bg"></div>
+
+	<div data-role="header" class="header">
+		<div class="action left"><a href="index.html" class="btn menu js-menu">選單</a></div>
+		<!-- <div class="action right"><a req="others" id="others" class="btn more js-open-action-panel" style="display:none;"></a></div> -->
+	</div><!-- header-->	
+	<form name="formRegister" method="post" action="">
+	<div id="register" role="main" class="main" style="display:none;">
+		
+		<div class="fill-form">
+			<strong>使用者註冊</strong>
+			<p>				
+				<input type="text" id="USER_NAME" name="USER_NAME" class="name" placeholder="姓名" />		
+			</p>
+			<p>				
+				<input type="tel" id="USER_PHONE" name="USER_PHONE" class="phone" placeholder="手機號碼" pattern="[0-9]{10}" maxlength="10" />			
+			</p>
+		</div>
+		<div>
+			<input type="submit" value="註冊" class="js-register" />
+		</div>
+			
+		<div id="posAlready" class="pos-bottom" style="display: none ;">
+			<em>或</em>
+			<p>
+				<input type="button" value="已註冊過" class="js-go-login"  />
+			</p>
+		</div>
+		
+	</div><!-- main-->
+	</form>
+
+	<form name="formLogin" method="post" action="">
+	<div id="login" role="main" class="main">
+		
+		<div class="fill-form">
+			<strong>驗證登入</strong>
+			<p>				
+				<input type="tel" id="USER_CODE" name="USER_CODE" class="pw" placeholder="簡訊驗證碼" maxlength="4" />			
+			</p>
+		</div>
+		<div>
+			<input id="loginSubmit" type="submit" value="登入" class="js-login" />
+		</div>
+
+		<div class="pos-bottom">
+			<em>沒有收到驗證碼？</em>
+			<p>
+				<input type="submit" value="重送驗證碼" class="resend js-resend-pw" />
+			</p>
+		</div>
+	</div><!-- main-->
+	</form>	
+
+
+</div><!-- Main Page ========================================================= -->
+
+
+
+
+<!-- Out Page 登入 =============================================================== -->
+<form name="form1" method="post" action="">
+<div data-role="page" class="out-page" id="page-process-info" >
+	<div data-role="header" class="header">
+		<div class="action left"><a class="btn back js-back">選單</a><strong>雨量報報</strong></div>
+	</div><!-- header-->
+
+	<div role="main" class="main">		
+		<div id="iframeProcessDiv" class="iframe-loading-wrapper">
+			<iframe id='iframeProcess' frameborder='0' scrolling='yes'></iframe>
+		</div>		
+	</div><!-- main-->	
+</div><!-- Out Page 登入 ========================================================= -->
+</form>
+
+<div class="go-loading-wait"></div>
+</body>
+</html>		

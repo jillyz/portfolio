@@ -1,0 +1,21 @@
+﻿
+    @import url(http://fonts.googleapis.com/css?family=Rock+Salt);
+    .sign-name 
+    {
+    	text-align: left;
+    }
+   
+	body { margin:0; padding:0 ;overflow: hidden; }
+
+		.card { width: 800px; height: 400px;  position: relative; overflow:hidden; }
+		.card #pic , .card #message { width: 400px; height: 400px; position: absolute; top: 0; background: #fff; }
+		.card #pic { left: 0; }
+		.card #pic img { width: auto; height: auto; }
+		.card #message { left: 400px; }    
+		.card .shadow { display: block; position: absolute; position: fixed; z-index: 999; top: 0; left: 0; width: 800px; height: 100%; min-height: 400px; background: url(../images/message/shaslow.png) repeat-y; }
+		.card .watermark { display: block; position: absolute; bottom: 10px; right: 20px; margin: 10px 0 10px 15px; width: 100px; height: 118px; background: #fff url(../images/message/watermark.png) no-repeat; }
+
+
+    #message .line { margin: 30px 30px; padding: 0 5px; line-height: 200%; white-space: normal; font-family: 微軟正黑體, Verdana, Arial, Sans-Serif; background: #ffc url(../images/message/line.png); }
+	
+

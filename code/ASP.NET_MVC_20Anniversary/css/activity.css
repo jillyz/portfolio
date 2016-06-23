@@ -1,0 +1,64 @@
+﻿body {  
+    background: #ef9769; 
+}
+#main
+{
+    padding-top: 40px;
+    overflow: hidden;
+    background: #fdf1c7;
+}
+
+	#main a
+	{
+		display: block;
+	}
+
+    #main img
+    {
+        width: 100%;
+    }
+
+
+
+table, th, td
+{
+    border-collapse: collapse;
+    border: 3px solid #fff;
+	color: #22531c;
+}
+
+table
+{
+    width: 100%;
+}
+th, td
+{
+    padding: 0.3em;
+    line-height: 1.5;
+}
+
+th
+{
+    background: #d9d569;
+}
+
+@media screen and (min-width: 1025px )
+{
+	#time
+	{          
+		margin: 3em;
+		padding: 3em;
+	}
+	table
+	{
+		font-size: 2em;
+	}
+}
+
+@media screen and (max-width: 1024px )
+{
+	table
+	{
+		font-size: 1em;
+	}
+}

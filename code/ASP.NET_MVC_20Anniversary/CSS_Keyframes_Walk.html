@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CSS Keyframes</title>
+	<style>
+		body {
+			background: #360;
+			color: #fff;
+		}
+		.spinner {
+		  display: block;
+		  position: fixed;
+		  z-index: 1031;
+		  top:50%;
+		  left: 50%;
+		  margin-top: -90px;
+		  margin-left: -90px;
+		  width: 180px;
+		  height: 180px;
+		  text-align: center;
+		  background: url(images/site/loading_gisman_walk.png?201406181633) ;
+		  -webkit-animation: GISManWalk 0.2s steps(2,end) infinite;
+		          animation: GISManWalk 0.2s steps(2,end) infinite;
+		}
+
+		.spinner:after {
+			content: "Loading";
+			display: block;
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 20px;
+			text-align: center;
+		}
+
+		@-webkit-keyframes GISManWalk {
+		  from  { background-position:  0 0; }
+		  to {  background-position: -360px 0; }
+		}
+		@keyframes GISManWalk {
+		  from  { background-position:  0 0; }
+		  to {  background-position: -360px 0; }
+		}
+	</style>
+</head>
+<body>
+	<div class="spinner"></div>
+</body>
+</html>

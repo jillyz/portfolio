@@ -1,0 +1,52 @@
+﻿    body { font-family: 微軟正黑體, Verdana, Arial, Sans-Serif; text-align: center; }
+    .topic-wrap { margin: 0 auto; padding: 0; width: auto; height: 100%; }
+    .topic-title { white-space:normal; padding: 20px; color: #845913; font-size: 150%; line-height: 150%; text-align: left; }
+    .item { text-align: left; background: #000; }
+	.item div { overflow:hidden; }
+    .item span { display: block; padding: 5px; background: #000; color: #fff; font-size: 80%; text-align: center; }
+    .item img { margin:0; }
+
+
+	@media screen and (min-width: 401px)
+	{
+		html, body { overflow: hidden; }
+		.topic-title
+		{
+			position: absolute;
+			position: fixed;
+			width: 160px;
+		}
+		.item-wrap {  margin-left: 190px; }
+		.item
+		{
+			float: left;  width: /*295px*/ 300px; height: 230px; border-left: 5px  solid #eee; 
+		}
+			.item div
+			{
+				max-height: 200px;
+			}
+			.item span {  width: /*285px*/ 290px; }
+			.item img
+			{
+				min-width: /*295px*/ 300px; 
+			}
+	}
+
+	@media screen and (max-width: 400px)
+	{
+		.item-wrap	{ margin-bottom: 20px; }
+		.item
+		{
+			width: 100%;  max-height: 300px;
+		}
+			.item div
+			{
+				max-height: 267px;
+			}
+			.item span { width: 100%; }
+			.item img
+			{
+				width: 100%;
+			}
+	}
+

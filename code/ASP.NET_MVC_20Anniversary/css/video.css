@@ -1,0 +1,233 @@
+﻿
+html, body {
+	overflow: hidden;
+	overflow-x: auto;
+}
+
+body
+{	
+    background-color: #523354;
+}
+
+a {
+	outline: none;
+}
+
+#videoFrame
+{
+     position: absolute;
+     top: 40px;
+     left:0;
+     right:0;
+}
+
+#mapMenu
+{
+	margin: 0 auto;
+	position: relative;
+    background: #523354 url(../images/video/map.png) 50% 50px no-repeat;
+    background-size: 100% auto;
+}
+
+#xy
+{
+    position: fixed; 
+    right: 10px;
+    bottom: 10px;
+    color: #ff3;
+}
+#ppos {
+    position: fixed; 
+    right: 10px;
+    bottom: 40px;
+    color: #3ff;	
+}
+
+.pos
+{
+    position: absolute;
+    cursor: pointer;  
+}
+
+
+/*整塊. 滑鼠移上樣式*/
+.pos:hover span, .pos:hover ul {
+	background: #310F35;
+}
+.pos:hover span:before {
+	border-bottom: 8px solid #900;
+}
+.pos:hover span {
+	background: #900;
+}
+
+.pos:before
+{
+	position: relative;
+	content: "";
+	display: block;
+    width: 10px;
+    height: 10px;
+    background: #000;
+    border: 3px solid #ccc;
+    border-radius: 50%;
+  	-webkit-transition: all 0.1s;
+  	-o-transition: all 0.1s;
+    transition: all 0.1s;       
+}
+
+.pos:hover:before
+{
+	top: -3px;
+	left: -3px;
+    width: 16px;
+    height: 16px;	
+    background: #900;
+    border: 3px solid #fff;
+}
+
+.pos span:before {
+	position: absolute;
+	top: -8px;
+	left: 2em;
+	content: "";
+	display: block;
+	width: 0;
+	height: 0;
+	border-bottom: 8px solid #310F35;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+}
+
+.pos span {
+	position: relative;
+	display: inline-block;
+	width: 3em;
+	margin-top: 10px;
+	margin-left: -2em;
+	padding: 5px 1em;	
+	background: #310F35;
+	border-radius: 3px;
+	color: #fff;
+	text-align: center;
+	font-size: 0.75em;
+}
+
+
+.pos ul , .pos li, .pos a {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	border: 0;	
+}
+
+.pos ul {
+	margin-left: -1.5em;
+	background: #310F35;
+	color: #fff;
+	overflow: hidden;
+	-webkit-box-shadow: 3px 3px 3px #310F35;
+	box-shadow: 3px 3px 3px #310F35;
+}
+
+.pos li a {
+	display: block;
+	padding: 10px 1.5em 10px 1.5em;
+	border-top: 1px dotted #666;
+	color: #aaa;
+	font-size: 0.75em;
+	line-height: 1.5;
+	text-align: left;
+}
+.pos li a:last-child {
+	border-bottom: 1px dotted #666;	
+}
+
+.pos li a em {
+	display: block;
+	margin-top: 5px;
+	text-align: left;
+	font-size: 1rem;
+	color: #fff;
+}
+
+.pos li a:hover  {
+	background: #600;
+}
+
+.pos li a:active  {
+	background: #300;
+}
+
+/*--------------------------*/
+
+.play-all {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0.5em;
+}
+
+.play-one {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 6em;
+}
+
+.play-all a, .play-one a { 
+	display: block;
+	width: 14em;
+	margin: 20px auto;
+	padding: 0.5em;
+	font-size: 2em;
+	color: #fff;
+	background: rgba(82,51,84,0.95);
+	border: 2px solid #fff;
+	border-radius: 10px;
+	text-align: center;
+}
+
+.play-one {
+	text-align: center;
+}
+
+.play-one a {
+	display: inline-block;
+}
+
+.play-one a+a {
+	margin-left: 0.5em;
+}
+
+.play-all a {
+	width: 30em;
+}
+
+.play-all a:hover, 
+.play-one a:hover {
+	background: #310F35;
+}
+
+.play-all a:active, 
+.play-one a:active {
+	background: #F15A24;
+}
+
+/* animate ----------------*/
+
+.play-all, .play-one {
+	display: none;
+}
+
+/* fix colorbox --------------------------*/
+.topic-box #cboxCurrent {
+	bottom: 15px;
+	color: #fff;
+}
+
+.pic-box #cboxClose, .pic-box #cboxClose, .pic-box #cboxClose {
+	background-color: #000;
+}
+
+

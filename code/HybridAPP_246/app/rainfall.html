@@ -1,0 +1,540 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>雨量 - 土石流防災資訊</title>
+<!-- <meta name="viewport" content="width=device-width; initial-scale=1.0;minimum-scale=1.0; maximum-scale=1.0; user-scalable=no;"/> -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--載入css-->
+<link rel="stylesheet" href="css/reset.css" />
+<link rel="stylesheet" href="css/main.css?1" />
+<link rel="stylesheet" href="css/text.css" />
+
+
+<!-- <script type="text/javascript" src="inc/js/cordova.js"></script> -->
+
+<!-- jquery -->
+<script type="text/javascript" src="inc/js/jquery-1.8.3.min.js"></script>
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="//code.goliath5.com/jquery.easing.js"></script>  
+
+<!--PHP函式庫-->
+<script type="text/javascript" src="inc/js/php.js"></script>
+<!--jquery myBox函式庫-->
+<script type="text/javascript" src="inc/js/mybox-0.2.min.js"></script>
+
+<!--jquery myBox函式庫-->
+<script type="text/javascript" src="inc/js/jquery.corner.js"></script>
+
+
+<!--Memory -->
+<script type="text/javascript" src="inc/js/memory.js"></script>
+
+
+<!--未分類函式庫-->
+<script type="text/javascript" src="inc/js/include.js"></script>
+
+<!--拿來讀 config.js -->
+<script type="text/javascript" src="inc/js/config.js"></script>
+
+<!--加速click功能 -->
+<script type="text/javascript" src="inc/js/fastclick.js"></script>
+
+<!--APP UI -->
+<script type="text/javascript" src="inc/js/app-ui.js"></script>
+			
+<script language="javascript">
+
+function Load() {
+	//document.addEventListener("online", onOnLine, false);
+	//document.addEventListener("offline", onOffLine, false);
+
+	 var UA = strtoupper(navigator.userAgent);
+	 onDeviceReady();
+	 /*if(is_string_like(UA,'%ANDROID%') || is_string_like(UA,'%IPHONE%') || is_string_like(UA,'%MOBILE%') )
+	 {
+	  document.addEventListener("deviceready", onDeviceReady, false);   
+	 }
+	 else
+	 {
+	  onDeviceReady();
+	 }*/
+
+}
+
+function onDeviceReady() {
+	$(document).ready(function(){							
+		
+	    $(document).bind("mobileinit", function () { $.mobile.defaultPageTransition = 'none'; });
+	    FastClick.attach(document.body);
+	    //取得螢幕大小
+		window['wh']=getWindowSize();		
+
+		//重新定義按下回上頁鍵
+		/*
+		document.removeEventListener("backbutton", function(e) {
+		}, false);
+		document.addEventListener("backbutton", function(e) {
+			//e.preventDefault();
+			if (confirm("你確定要離開【地圖版】嗎??") == true) {
+				location.href="index.htm";
+				return true;
+			} else {
+				return false;
+			}
+		}, true);
+		*/
+		// 程式碼從這結束-----------------------------------------End
+
+
+		// APP UI - start ========================================================================		
+		appUI();
+		
+		
+		var winW = $(window).width();
+		var winH = $(window).height();
+		var headerH = $(".header").height();
+		var thRegionW = winW - $("tbody .order").width() - $("tbody .station").width() - $("tbody .rainfall").width();
+		$("thead, thead tr").width(winW);
+		$("thead .region").width(thRegionW);
+		
+		$("#zone-panel ul").css({'max-height': ( winH - headerH - 30 ) });
+
+		/* 次選單 */
+		$("#zone-panel a").click(function(){
+			var txtZone = $(this).text();
+			$("#zone").text(txtZone);
+			//alert();
+		});
+		$("#time-panel a").click(function(){
+			var txtTime = $(this).text();
+			$("#time").text(txtTime);
+		});
+
+		/* 檢視檢視資訊 雨量站 */
+		$(".js-next").click(function(){
+			$(".out-page").hide();				
+			if ( winW < 600 ) {
+				$("#page-rainfall-info, #page-rainfall-info .header").show().animate({'left':0});
+			} else {
+				$("#page-rainfall-info, #page-rainfall-info .header").css({'left':0}).fadeIn();					
+			}
+
+
+			/*setTimeout(function(){
+			  $(".main-page").css({'left' : "-" + winW });
+			},1000);*/
+
+			/* 雨量組體圖 --------------------------*/	
+			// var iframeRainChartH = winH - headerH - $("#page-rainfall-info .detail-view").height() - 25 ;
+			// var iframeRainChartH = winW ;
+			if ( winW < 600 ) {
+				// 顯示detail-view前兩行資訊之高度	
+				var iframeH = winH  - 130 ;
+			} else {
+				// 平板以上, 全部一次顯示
+				var iframeH = winH  - $("#station-info ul").height() - headerH  - 20;				
+			}		
+			$("#iframeRainChart").attr({
+				'src':'http://fema.swcb.gov.tw/DataInfo/Rainfall/RainChartForAndroid.aspx?id=776&height=' + iframeH +'&width=' + winW ,
+				'width' : winW,
+				'height' : iframeH,
+				'frameborder': 0
+			})
+			$(".iframe-loading-wrapper").width(winW).height(iframeH);
+			
+
+		});	
+
+	});	
+}
+</script>
+
+</head>
+<body onLoad="Load();">
+
+<!-- Main Page ========================================================= -->
+<div data-role="page" class="main-page">
+	<div data-role="header" class="header">
+		<div class="action left"><a href="index.html" class="btn menu js-menu">選單</a><!-- <strong>雨量</strong> --></div>
+		<div class="action right">
+			<ul>
+				<li><a req="zone" id="zone" class="select js-open-action-panel" style="width: 6em;">全台</a></li><!-- 
+				 --><li><a req="time" id="time" class="select js-open-action-panel" style="width: 3.5em;">10分鐘</a></li>
+			</ul>
+		</div>
+	</div><!-- header-->
+
+	<div role="main" class="main">
+		<div data-role="detail" class="detail-view do-active">
+			<!-- table>tr*20>td.order{$}+td.region{XX縣XX鄉}+td.station{豐丘}+td.rainfall{10.0} -->
+			<!-- table>tr.js-next*20>td.order{$}+td.region{XX縣XX鄉}+td.station{豐丘}+td.rainfall{10.0} -->
+
+			<table>
+				<thead>
+				<tr>
+					<th class="order"></th>
+					<th class="region">地區</th>
+					<th class="station">雨量站</th>
+					<th class="rainfall">mm</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr class="thead">
+					<th class="order">&nbsp;</th>
+					<th class="region">&nbsp;</th>
+					<th class="station">&nbsp;</th>
+					<th class="rainfall">&nbsp;</th>
+				</tr>
+				<tr class="js-next">
+					<td class="order">1</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘豐丘</td>
+					<td class="rainfall">1000.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">2</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘豐</td>
+					<td class="rainfall">100.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">3</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">4</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">5</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">6</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">7</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">8</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">9</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">10</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">11</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">12</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">13</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">14</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">15</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">16</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">17</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">18</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">19</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">20</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">21</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">22</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">23</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">24</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">25</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">26</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">27</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">28</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">29</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">30</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">30</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">31</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">32</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">33</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">34</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				<tr class="js-next">
+					<td class="order">35</td>
+					<td class="region">XX縣XX鄉</td>
+					<td class="station">豐丘</td>
+					<td class="rainfall">10.0</td>
+				</tr>
+				</tbody>
+			</table>
+
+		</div>
+
+	</div><!-- main-->
+
+
+	<div data-role="panel" id="zone-panel" class="action-panel only-text" style="right: 5em;">
+		<span class="indicator n2" style="right: 0.5em;"></span>
+		<ul>
+				<li><a>全台</a></li><!--
+				--><li><a>縣市1</a></li><!--
+				--><li><a>縣市2</a></li><!--
+				--><li><a>縣市3</a></li><!--
+				--><li><a>縣市4</a></li><!--
+				--><li><a>縣市5</a></li><!--
+				--><li><a>縣市6</a></li><!--
+				--><li><a>縣市7</a></li><!--
+				--><li><a>縣市8</a></li><!--
+				--><li><a>縣市9</a></li><!--
+				--><li><a>縣市10</a></li><!--
+				--><li><a>縣市11</a></li><!--
+				--><li><a>縣市12</a></li><!--
+				--><li><a>縣市13</a></li><!--
+				--><li><a>縣市14</a></li><!--
+				--><li><a>縣市15</a></li><!--
+				--><li><a>縣市16</a></li><!--
+				--><li><a>縣市17</a></li><!--
+				--><li><a>臺北分局轄區</a></li><!--
+				--><li><a>臺中分局轄區</a></li><!--
+				--><li><a>南投分局轄區</a></li><!--
+				--><li><a>臺南分局轄區</a></li><!--
+				--><li><a>臺東分局轄區</a></li><!--
+				--><li><a>花蓮分局轄區</a></li>
+		</ul>		
+	</div><!-- panel -->
+	
+	<div data-role="panel" id="time-panel" class="action-panel only-text" style="right: -0.3em;">
+		<span class="indicator n1" style="right: 0;"></span>
+		<ul>
+				<li><a>10分鐘</a></li><!--
+				--><li><a>1小時</a></li><!--
+				--><li><a>3小時</a></li><!--
+				--><li><a>6小時</a></li><!--
+				--><li><a>12小時</a></li><!--
+				--><li><a>24小時</a></li><!--
+				--><li><a>本日</a></li>
+		</ul>		
+	</div><!-- panel -->
+	
+	
+	
+	<div class="footer hide">
+		<div class="action left">
+			<ul>
+				<li><a href="index.htm" class="">雨量</a></li><!-- 
+				 --><li><a href="weather.htm" class="">氣象圖</a></li><!-- 
+				 --><li><a href="alert.htm" class="">警戒</a></li><!-- 
+				 --><li><a href="observatory.htm" class="">觀測站</a></li>
+			</ul>
+		</div>
+	</div><!-- footer -->
+
+</div><!-- Main Page ========================================================= -->
+
+
+
+<!-- Out Page 雨量站 =============================================================== -->
+<div data-role="page" class="out-page" id="page-rainfall-info" >
+	<div data-role="header" class="header">
+		<div class="action left"><a class="btn back js-back">選單</a><strong>中竹林 雨量站</strong></div>
+	</div><!-- header-->
+
+	<div role="main" class="main">
+		<!-- <iframe id="iframeRainChart" src="http://fema.swcb.gov.tw/DataInfo/Rainfall/RainChartForAndroid.aspx?id=774&height=480&width=480" width="480" height="480" frameborder="0"></iframe> -->
+
+		<div class="iframe-loading-wrapper">
+			<iframe id="iframeRainChart" frameborder="0"></iframe>
+		</div>
+		
+
+		<div data-role="detail" id="station-info" class="detail-view">
+			
+			<ul>
+				
+				<li>
+					<label>雨量站</label>
+					<span>中竹林</span>
+				</li>
+				
+				 
+				<li>					
+					<label>地區</label>
+					<span>台中市太平區</span>
+				</li>
+				</a>				<li>
+					<label>10分鐘雨量</label>
+					<span>0.0 mm</span>
+				</li>
+				<li>
+					<label>一小時雨量</label>
+					<span>0.0 mm</span>
+				</li>
+				<li>
+					<label>三小時雨量</label>
+					<span>0.0 mm</span>
+				</li>
+				<li>
+					<label>六小時雨量</label>
+					<span>0.0 mm</span>
+				</li>
+				<li>
+					<label>12小時雨量</label>
+					<span>0.0 mm</span>
+				</li>
+				<li>
+					<label>24小時雨量</label>
+					<span>0.0 mm</span>
+				</li>
+				<li>
+					<label>本日雨量</label>
+					<span>0.0 mm</span>
+				</li>
+			</ul>
+
+		</div>
+
+	</div><!-- main-->
+
+</div><!-- Out Page 雨量站  ========================================================= -->
+
+
+</body>
+</html>		

@@ -1,0 +1,130 @@
+﻿@using System.Web.Optimization;
+<!DOCTYPE html>
+<!--[if IE 6]>
+<html id="ie6" dir="ltr" lang="zh-TW">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" dir="ltr" lang="zh-TW">
+<![endif]-->
+<!--[if IE 8]>
+<html id="ie8" dir="ltr" lang="zh-TW">
+<![endif]-->
+<!--[if IE 9]>
+<html id="ie9" dir="ltr" lang="zh-TW">
+<![endif]-->
+<!--[if !(IE 6) | !(IE 7) | !(IE 8) | !(IE 9)   ]><!-->
+<html dir="ltr" lang="zh-tw">
+<!--<![endif]-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name='description' content='「逢甲大學地理資訊系統研究中心」20週年活動網站，收集了一路走來的點點滴滴' />
+    <meta name='keywords' content='GIS,逢甲,20週年,里程碑,回憶' />
+    <meta property="og:title" content="GIS.FCU‧歡慶20"/>
+    <meta property="og:description" content="「逢甲大學地理資訊系統研究中心」20週年活動網站，收集了一路走來的點點滴滴">
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="http://www.gis.tw/20"/>
+    <meta property="og:image" content="http://www.gis.tw/20/images/icon.png"/>
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link href="http://www.gis.tw/20/images/icon.png" rel="apple-touch-icon" />
+
+
+    <title>@ViewBag.Title GIS.FCU‧歡慶20</title>
+
+    <link rel="stylesheet" href="http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" media="all" />
+    @Styles.Render("~/css/shared_css")    
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">   
+
+    @RenderSection("headerCSS", false)
+
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script>        window.jQuery || document.write('<script src="@Url.Content("~/js/jquery-1.10.2.min.js")"><\/script>')</script>
+    @RenderSection("headerScript", false)
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+@*    
+    說明：用到的 Plugins :
+
+    1. NProgress ( Loading bar and circle  )
+            JS  - in "common.js"
+            CSS - in "common.css"
+
+    2. Responsive Nav ( Responsive Navigation Plugin )
+            JS  - in "common.js"
+            CSS - in "common.css"
+*@
+
+  </head>
+  <body>         
+      <div id="header">
+        
+        <div id="title">
+            <h1>
+                <a href="@Url.Action("Index", "HomeNew")">
+                    GIS.FCU 20th Anniversary
+                </a>
+            </h1>
+        </div>
+      
+        <nav class="nav-collapse menu indicator-animation"><!-- "nav-collapse" for Responsive -->
+            <ul>
+                <li><a href="@Url.Action("Index", "HomeNew")">首頁 <em>Home</em></a></li>
+                <li class="home"><a href="@Url.Action("Index", "Wall")">照片牆 <em>Photos</em></a></li>
+                <li><a href="@Url.Action("Index", "Milestone")">里程碑 <em>Milestones</em></a></li>
+                <li><a href="@Url.Action("Index", "Across")">一路走來 <em>Introduction</em></a></li>
+                <li class="pc"><a href="@Url.Action("Index", "Video")">全球夥伴祝賀 <em>Congratulations</em></a></li>
+                <li class="mobile"><a href="@Url.Action("Mobile", "Video")">全球夥伴祝賀 <em>Congratulations</em></a></li>
+                <li><a href="@Url.Action("Index", "Activity")">活動時程 <em>Events</em></a></li>
+                <li style="border:0;"><a class="gis" href="http://www.gis.tw/" target="_blank" title="GIS.FCU｜逢甲大學地理資訊系統研究中心">GIS.FCU｜逢甲大學地理資訊系統研究中心</a></li>
+                <div class="indicator-current"></div>
+            </ul>         
+        </nav>
+
+        
+
+    </div>
+
+    <!--[if lte IE 8]>
+    <div id="top-hat-notif">
+        本站不支援 IE8 瀏覽器，建議您使用 <a href="http://www.google.com/chromeframe?hl=zh-TW&amp;prefersystemlevel=true" target="_blank">Google Chrome 內嵌瀏覽框</a>
+    </div>
+    <![endif]-->
+
+    <div class="content-wrapper">
+    <div class="content">
+    @RenderBody()
+    </div>
+    </div>
+
+    @Scripts.Render("~/js/post_body_lib") 
+ 
+
+    <script>
+
+        /*--- Responsive Nav -----------------------------*/
+        var navigation = responsiveNav(".nav-collapse");
+
+        /*--- NProgress ---------------------*/
+        $('body').show();
+        NProgress.start();        setTimeout(function () { NProgress.done(); $('.fade').removeClass('out'); $(".spinner").hide(); }, 300);
+        setTimeout(function () { NProgress.done(); $(".spinner").hide(); },300);
+
+        // icon font 
+        $(".nav-toggle a").addClass("fa fa-fw");
+    </script>     
+        
+
+    @RenderSection("bodyScript", false)
+
+</body>
+</html>

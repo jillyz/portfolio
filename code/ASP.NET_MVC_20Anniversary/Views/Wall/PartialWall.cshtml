@@ -1,0 +1,14 @@
+﻿@model List<Anniversary.Models.WallObject>
+@if (Model != null){
+    var objs = Model;
+    foreach(var o in objs){
+    <li>
+        @if (!string.IsNullOrEmpty(o.TOPIC)) {
+        <a class="topic" href="@Url.Action("Topic", "Wall", new { id = o.TOPIC_ID})"><span class="cate2">@o.TOPIC</span></a>
+        } else {                            
+        <a class="pic" href="@Url.Action("Message", "Wall", new { id = o.MSG_ID})"><img data-src="@o.S_URL" alt="照片" /><div class="shadow"></div></a>
+        }    
+    </li>    
+    }
+}
+

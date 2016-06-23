@@ -1,0 +1,463 @@
+
+/* 預載圖片 -------------------------- */
+/*
+body#weather .header:before {
+	width: 0;
+	height:0;
+	content: "";
+	background: 
+		url(../../images/pic_thu_01.jpg), 
+		url(../../images/pic_thu_02.jpg), 
+		url(../../images/pic_thu_03.jpg), 
+		url(../../images/pic_thu_04.jpg), 
+		url(../../images/pic_thu_05.jpg), 
+		url(../../images/pic_thu_06.jpg),
+		url(../../images/pic_thu_07.jpg);
+}
+*/
+
+/*======================================
+	雨量
+====================================*/
+
+.detail-view  table {
+	border-collapse: collapse;
+	/*table-layout: fixed;*/
+	border: 0;
+	margin-top: -1px;
+}
+.detail-view  thead {
+	position: fixed;
+	display: block;
+	width: 100%;
+	left: 0;
+	right: 0;
+	top: 3rem;
+}
+
+.detail-view  th, .detail-view  td {
+	text-align: center;
+}
+
+#observation .detail-view  td,
+#rainfall .detail-view  td  {
+	border-right: 1px solid #fff;
+}
+
+.detail-view  th {
+	/*background: #cdf;
+	color: #369;*/
+	background: #5A8BA0;
+	color: #CEDCE0;
+}
+.detail-view  tr:nth-child(odd) {
+	background: /*#eaeaea*/ #F4F4F4;
+}
+
+.order {
+	text-align: right;
+	width: 2rem;
+}
+
+.region {
+	min-width: 7rem;
+	/*background: #acd;*/
+}
+
+.station {
+	min-width: 4rem;
+}
+.rainfall {
+	width: 4rem;
+	color:  blue;
+	/*background: #cdf;*/
+}
+
+/*======================================
+	氣象圖
+====================================*/
+
+#satellite-panel li a {
+	background: 0.5em 50% no-repeat;
+	-webkit-background-size: 2em;
+	background-size: 2em;
+}
+
+#satellite-panel li:nth-child(1) a {
+	background-image: url(../images/pic_thu_01.jpg);
+}
+#satellite-panel li:nth-child(2) a {
+	background-image: url(../images/pic_thu_02.jpg);
+}
+#satellite-panel li:nth-child(3) a {
+	background-image: url(../images/pic_thu_03.jpg);
+}
+#satellite-panel li:nth-child(4) a {
+	background-image: url(../images/pic_thu_04.jpg);
+}
+#satellite-panel li:nth-child(5) a {
+	background-image: url(../images/pic_thu_05.jpg);
+}
+#satellite-panel li:nth-child(6) a {
+	background-image: url(../images/pic_thu_06.jpg);
+}
+#satellite-panel li:nth-child(7) a {
+	background-image: url(../images/pic_thu_07.jpg);
+}
+
+/*======================================
+	觀測站
+====================================*/
+
+/*body*/#observation .detail-view .station {
+	width: 33%;
+}
+/*body*/#observation .detail-view .region {
+	width: 67%;
+	min-width: 11em;
+}
+
+/*body*/#observation .iframe-loading-wrapper {
+	background: #2B2B2B url(../images/loading-black.gif) 50% 50% no-repeat;
+}
+
+/*body*/#observation .iframe-loading-wrapper iframe {
+	background: transparent;
+}
+
+/*body*/#observation .indicator { display: none; }
+
+/*------------*/
+
+.play/*<a>*/ {
+	background-image: url(../images/ic-play.png);
+	-webkit-background-size: 1.6em;
+	background-size: 1.6em;
+}
+
+.pause/*<a>*/ {
+	background-image: url(../images/ic-pause.png);
+	-webkit-background-size: 1.6em;
+	background-size: 1.6em;
+}
+.stop/*<a>*/ {
+	background-image: url(../images/ic-stop.png);
+}
+
+.close/*<a>*/ {
+	background-image: url(../images/ic-close.png);
+}
+
+.play-all/*<a>*/ {
+	display: block;
+	width: 100%;
+	padding: 0;	
+	line-height: 3em;
+	background: #384949 url(../images/ic-arrow-up.png) 0.7em 50% no-repeat;
+	color: #fff;
+	text-align: center;
+	-webkit-background-size: 2em;
+	background-size: 2em;
+}
+.play-all:active/*<a>*/ {
+	background-color: #5A8BA0;
+}
+
+.ccd-name {
+	/*
+	height: 3em;
+	line-height: 3em;
+	*/
+	text-align: center;
+	/*border: 1px solid #666;
+	border-width: 1px 0;*/
+	background: #384949;
+	color: #fff;
+	line-height: 2;
+}
+#page-observation-info .ccd-name.arrow-down:before {	
+	content: "";
+	display: inline-block;
+	margin-right: 0.5em;
+	height: 1em;
+	width: 1em;
+}
+#page-observation-info .ccd-name.arrow-down:after {	
+	position: relative;
+	top: 0.25em;
+	content: "";
+	display: inline-block;
+	margin-left: 0.5em;
+	height: 1em;
+	width: 1em;
+	background: url(../images/ic-arrow-down.png) 50% 100% no-repeat;
+	-webkit-background-size: 1em;
+	background-size: 1em;
+}
+
+.ccd-num {
+	position: absolute;
+	top: 3em;
+	left: 0;
+	right: 0;	
+	margin-top: -2px;
+	padding: 0.05em;
+	height: 2em;
+	line-height: 2em;
+	text-align: left;
+	/*
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;	
+	*/
+}
+
+.ccd-num:active {
+	background: rgba(255,255,255,0.2);
+}
+
+.ccd-num span {
+	display: inline-block;
+	width: 3px;
+	height: 3px;	
+	background: #999;
+	border: 1px solid #384949;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 50%;	
+}
+.ccd-num span+span {
+	margin-left: 0.35em;
+}
+
+.ccd-num span.active {
+	border: 1px solid #fff;
+	background: #fff;
+}
+
+
+/*==================================
+	警戒
+===============================*/
+
+/* layout */
+
+.tab {
+	position: relative;
+	height: 2rem;
+	line-height: 2rem;
+	background: #384949;
+}
+
+.tab a {
+	position: relative;
+	display: inline-block;
+	margin-right: 1rem;
+	padding-left: 1rem;
+	color: #8DA0A3;
+	text-align: center;
+	font-size: 0.75em;
+	/*background: #333;*/
+}
+
+/*.tab a:not(.current):before {
+	content: "\00AB";
+}*/
+
+.tab a:active {
+	color: #ff3;
+}
+
+.tab a.current {
+	color: #fff;
+}
+.tab a.current:after {
+	position: absolute;
+	left: 50%;
+	margin-left: -3px; 
+	bottom: 0;
+	content: "";
+	border-bottom: 6px solid #999;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+}
+
+.list-wrapper {
+	position: relative;	
+}
+
+/*body*/#alert .detail-view {
+	overflow: auto;	
+	position: absolute;
+	top: 0;
+}
+
+/*body*/#alert .main-page .main  {
+	margin-top: 3em;
+	padding-top: 0;
+	background: #2B2B2B;
+}
+
+/*------------------*/
+
+/*body*/#alert .detail-view td {
+	padding: 0.2em 1em;
+	border-bottom: 1px solid #3d3d3d;
+	color: #fff;
+	background: #2B2B2B;
+} 
+
+/*body*/#alert td {
+	line-height: 2em;
+	min-height: 2em;
+}
+
+/*body*/#alert td.alert-red {
+width: 35%;
+background: #721010;
+}
+
+/*body*/#alert td.alert-yellow {
+width: 35%;
+background: #7F7600;
+}
+
+
+/*body*/#alert td.alert-red:before ,
+/*body*/#alert td.alert-yellow:before   {
+	content: "";
+	display: inline-block;
+	float: left;
+	width: 1.7em;
+	height: 1.7em;
+	background: 50% 50% no-repeat;
+	-webkit-background-size: 100%;
+	background-size: 100%;
+	vertical-align: middle;
+}
+
+/*body*/#alert td.alert-red:before  {
+	background-image: url(../images/ic-alert-red.png);
+}
+/*body*/#alert td.alert-yellow:before  {
+	background-image: url(../images/ic-alert-yellow.png) ;
+}
+
+
+#alert .detail-view:not(#list4) tr:active td   {
+background: #505b5d;
+}
+#alert .detail-view:not(#list4) tr:active td.alert-red {
+	background: #615457;
+}
+#alert .detail-view:not(#list4) tr:active td.alert-yellow {
+	background: #646d53;
+}
+
+
+
+/* 警戒 基準值及雨量站那一層 -----------------------------------*/
+
+/*body*/#alert td.status-none,
+/*body*/#alert td.status-red,
+/*body*/#alert td.status-yellow {
+	width: 2em;
+	min-height: 3em;
+	padding: 0.5em ;
+}
+
+/*body*/#alert .status-none:before {
+	content: "";
+	display: block;
+	width: 2em;
+	height: 2em;
+	background: url(../images/ic-status-none.png) 50% 50% no-repeat;
+	-webkit-background-size: 100%;
+		background-size: 100%;	
+}
+/*body*/#alert .status-red:before {
+	content: "";
+	display: block;
+	width: 2em;
+	height: 2em;
+	background: url(../images/ic-status-red.png) 50% 50% no-repeat;
+	-webkit-background-size: 100%;
+		background-size: 100%;
+}
+/*body*/#alert .status-yellow:before {
+	content: "";
+	display: block;
+	width: 2em;
+	height: 2em;
+	background: url(../images/ic-status-yellow.png) 50% 50% no-repeat;
+	-webkit-background-size: 100%;
+		background-size: 100%;		
+}
+
+/*body*/#alert td.stream {
+	width: 6em;
+	padding: 0;
+	line-height: 150%;
+	text-align: left;
+	color: #ccc;
+}
+/*body*/#alert td.station {
+	min-width: 8em;
+	padding: 0.3125em;;
+	text-align: right;
+}
+
+/*body*/#alert .detail-view button {
+	height: 3em;
+	width: 5em;
+	padding: 0 0.4em;
+	float: left;
+	background: #333;
+	color: #fff;
+	border: 1px solid #444;
+	border-radius: 3px;
+}
+/*body*/#alert .detail-view button~button {
+	margin-left: 3px; 
+}
+/*body*/#alert .detail-view button:active {
+	background: #384949;
+	border: 1px solid #999;
+}
+
+
+/*==================================
+	應變措施
+===============================*/
+
+body#response .header {
+	background: #000;	
+	border-bottom: 1px solid #333;
+}
+
+body#response .header strong {
+	color: #999;
+}
+
+body#response .main-page {
+	font-size: 1.2em;
+	background: #000;
+}
+
+body#response p {
+	margin: 0;
+	padding: 1em;
+	background: #000;
+	color: #fff;
+	line-height: 1.5;
+}
+
+body#response p+p {
+	border-top: 1px solid #333;
+}
+
+body#response p em {
+	display: block;
+	font-size: 0.625em ;
+	font-style: normal; ;
+}
+

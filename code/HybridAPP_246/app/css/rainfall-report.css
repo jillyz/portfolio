@@ -1,0 +1,458 @@
+﻿
+/*======================================
+	註冊登入
+====================================*/
+
+#rainfall-login {
+	background: #B6F0FF;
+	color: #fff;
+}
+
+.bg {
+	position: absolute;
+	z-index: -1;
+	display: block;
+	height: 100%;
+	width: 100%;
+	background: url(../images/launch.jpg) 0 0 no-repeat;
+	-webkit-background-size: 100% 100%;
+	background-size: 100% 100%;
+	opacity: 0.75;
+}
+
+#rainfall-login .header {
+	background: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+#rainfall-login [data-role=page] {
+	background: none;
+	color: #fff;
+}
+
+/*#rainfall-login p, #rainfall-login div {
+	padding: 5px 5px;
+	text-align: center;
+}*/
+
+#rainfall-login .main {
+	margin-top: 7em;
+}
+
+#register , #login {
+	margin: 0 3em;	
+	padding: 10px; /*留空間讓按鈕顯示完整的陰影*/
+}
+
+/*body*/#rainfall-login form input {	
+	display: block;
+	width: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+#rainfall-login form input[type=submit],
+#rainfall-login form input[type=button] {
+	padding: 0;
+	line-height: 2.5em;
+	background: #384949;
+	color: #fff;
+	border: 0;
+	font-size: 1.2em;
+	outline: none;
+	-webkit-box-shadow: 0 0 10px #333;
+	box-shadow: 0 0 10px #333;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+
+#rainfall-login form input[type=submit].resend {
+	font-size: 1em;
+	background: #559168;
+	line-height: 2em;
+}
+
+#rainfall-login form input[type=submit]:active,
+#rainfall-login form input[type=button]:active,
+#rainfall-login form input[type=submit].resend:active {
+	background: #8EADAD;
+}
+
+#login { 
+	display: none; 
+}
+
+
+.pos-bottom {
+	position: absolute;
+	left: 3em;
+	right: 3em;
+	bottom: 3em;
+	padding: 0 5px;
+}
+
+#rainfall-login strong, #rainfall-login em {
+	display: table;
+	width: 100%;
+	text-align: center;
+	font-style: normal;
+	font-weight: normal;
+}
+
+#rainfall-login strong:before, #rainfall-login strong:after {
+	display: table-cell;
+	content: " ";
+	width: 25%;
+	position: relative;
+	top: -0.5em;
+	border-bottom: 3px solid #fff;
+}
+
+#rainfall-login em:before, #rainfall-login em:after {
+	display: table-cell;
+	content: " ";
+	width: 18%;
+	position: relative;
+	top: -0.5em;
+	border-bottom: 1px solid #fff;
+}
+
+.more/*<a>*/ {
+	background-image: url(../images/ic-more.png);
+}
+
+/*======================================
+	文字框
+====================================*/
+
+input[type=text] , input[type=number], input[type=tel]  , textarea {
+	padding: 0.5em;
+	background: #fff;
+	border: 0;
+	/*border: 1px solid #ccc;*/
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	font-size: 1.2em;
+	outline: none;
+	-webkit-box-shadow: 0 0 5px #333;
+	box-shadow: 0 0 5px #333;	
+}
+
+input.name, input.phone, input.pw {
+	padding-left: 2em;
+	background: #fff url(../images/ic-user.png) 0.4em 50% no-repeat;
+	-webkit-background-size: 1.5em;
+	background-size: 1.5em;
+}
+
+input.name {
+	background-image: url(../images/ic-user.png);
+}
+input.phone {
+	background-image: url(../images/ic-phone.png);
+}
+input.pw {
+	background-image: url(../images/ic-lock.png);
+}
+
+textarea {
+	width: 90%;
+}
+
+
+/*======================================
+	回報雨量
+====================================*/
+
+
+body#rainfall-inform .footer {
+	position: absolute;
+}
+body#rainfall-inform .footer.absolute {
+	position: initial;
+	position: absolute;
+}
+
+body#rainfall-inform .main-page {
+	/*background: #f7eaab;*/
+	overflow: hidden;
+}
+/*
+.fill-form  p {
+	padding-bottom: 0.3em;
+}*/
+
+body#rainfall-inform .fill-form p {
+	margin: 1em;
+}
+
+.send/*<a>*/ {
+	background-image: url(../images/ic-send.png);
+	-webkit-background-size: 1.8em;
+	background-size: 1.8em;
+}
+.history/*<a>*/ {
+	background-image: url(../images/ic-history.png);
+}
+.process/*<a>*/ {	
+	background-image: url(../images/ic-process.png);
+}
+
+.btn.btn-text.process,
+.btn.btn-text.history {
+	padding-left: 3em;
+}
+
+input.rainfall-mm {
+	width: 60%;
+	font-weight: bold;
+	color: blue;
+}
+input::-webkit-input-placeholder /*, textarea::-webkit-input-placeholder*/
+{
+	font-weight: normal;
+}
+
+.btn[disabled] {
+	opacity: 0.2;
+}
+.btn[disabled]:active {
+	opacity: 0.2;
+	background-color: transparent;
+}
+
+.take-photo  {
+	position: relative;
+	border-top: 3px solid #fff;
+	height: 800px;
+	background: /*#c5bb8a*/ url(../images/ic-camera.png) 50% 50% no-repeat;
+}
+.take-photo:active {
+	background-color: #b4d0dc;	
+}
+
+.has-photo {
+	-webkit-background-size: cover;
+	background-size: cover;
+}
+
+.re-take-photo {
+	display: none;
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 10;
+	/*padding: 1em;*/
+	width: 4em;
+	height: 4em;
+	/*
+	border: 1px solid #999;
+	border-width: 0 0 1px 1px;
+	*/
+	background: rgba(0,0,0,0.75) url(../images/ic-camera.png) 50% 50% no-repeat;
+	-webkit-background-size: 80%;
+	background-size: 80%;
+	color: #fff;
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.re-take-photo:active {
+	background-color: rgba(204,153,0,0.75);
+	opacity: 1;
+}
+
+/* 確定傳送 -------------*/
+
+#check_div_outer{
+	display: none;
+	margin: 0 auto;
+	padding: 0;
+	width: auto;
+	text-align: center;	
+}
+#check_div {
+	width: 240px;
+	margin: 0 auto;
+	border: 1px solid #2E5054;
+	border-radius: 5px;
+	background: #2E5054;
+	color: #fff;
+	text-align: left;	
+	overflow: hidden;
+	-webkit-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+		-moz-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+		box-shadow: 0 0 5px rgba(0,0,0,0.5);	
+}
+
+#check_div span {
+	display: inline-block;
+	padding: 1em;	
+}
+
+.btn-block input {
+	display: inline-block;
+	border: 0;
+	width: 120px;
+	padding: 1em 0;
+	background: #333;
+	color: #fff;
+	font-size: 1rem;
+}
+.btn-block input+input {
+	/*margin-left: -1px;*/
+	border-left: 1px solid #2E5054;
+	font-size: 1rem;
+}
+
+.btn-block input:active {
+	background: #666;
+}
+
+/* ==== 回報歷程=============== */
+
+#page-history-info table {
+	/*table-layout: fixed; */
+	font-size: 0.9em;
+}
+#page-history-info th, #page-history-info td {
+	padding: 0.5em;
+}
+#page-history-info .time , #page-history-info .rainfall {
+	white-space: nowrap;
+}
+#page-history-info .description {
+	color: #666;
+	font-size: 0.8em;
+}
+#page-history-info .rainfall {
+	color: blue;
+}
+#page-history-info .header {
+	border-bottom: 1px solid #ddd;
+}
+
+.detail-view  th, .detail-view  td {
+	border-bottom: 1px solid #ddd;
+}
+.detail-view  tr:nth-child(even) {
+	background: #F4F4F4;
+}
+
+/*==============================
+	流程說明
+==============================*/
+
+#how h3 , #how h3+p  {
+	margin: 0;
+	padding: 0;	
+	background: #666;
+	color: #fff;	
+	text-align: center;	
+}
+
+#how h3 {
+	padding: 0.5em;
+	font-size: 1em;
+}
+#how h3+p {
+	padding: 0.5em 1em;
+	font-size: 0.725em;
+	border-top: 1px dotted #999;
+	color: #ccc;	
+}
+
+#how h3+h3 {
+	margin-top: 2em;
+}
+
+#how img {
+	width: 90%;
+}
+
+#p4 img {
+	width: 90%;
+}
+
+.bx-prev, .bx-next {
+	opacity: 0.3;
+}
+#how .bx-wrapper .bx-pager.bx-default-pager a{
+	background: #ccc;
+}
+
+#how .bx-wrapper .bx-pager.bx-default-pager a:hover, 
+#how .bx-wrapper .bx-pager.bx-default-pager a.active {
+	background: #3366cc;
+}
+
+
+.detail-view.step ul {
+	margin: 0;
+	border-radius: 0;
+}
+
+.detail-view.step li {
+	padding: 0.5em 1em;
+	text-align: left;
+	/*
+	background: #333;
+	color: #fff;
+	border-bottom: 1px solid #555;
+	*/
+}
+
+.proccess li {
+	position: relative;
+	text-align: center;
+	line-height: 1;
+}
+.proccess li strong {
+	position: absolute;
+	top: 0;
+	display: block;
+	margin: 10px;
+	width: 2em;
+	height: 2em;
+	line-height: 2em;
+	font-size: 2em;
+	background: #666;
+	color: #fff;
+	border-radius: 50%;
+}
+
+.scrollTo {
+	display: block;
+	overflow: hidden;
+}
+
+/*------------*/
+
+.hasPrev {
+	background-image: url(../images/ic-prev.png);
+}
+
+.hasNext{
+	background-image: url(../images/ic-next.png);
+}
+
+.hasPrev.noPrev,
+.hasNext.noNext {
+	opacity: 0.2;
+}
+
+.hasPrev.noPrev:active,
+.hasNext.noNext:active {
+	background: none;
+}
+
+
+
+
+

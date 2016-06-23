@@ -1,0 +1,942 @@
+@charset "utf-8";
+
+
+html,body {
+/*	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;*/
+}
+
+body {
+	background: #181D2D;
+	color: #E6E6E6;
+	font-family: "Tahoma Lihei Pro", "Lucida Grande", "儷黑 Pro", "蘋果儷中黑","微軟正黑體","新細明體";
+}
+
+html {
+	overflow-y: scroll;
+}
+
+a {
+	color: #fff;
+}
+
+a:hover {
+	cursor: pointer;
+}
+
+table , th, td {
+	border-collapse: collapse;
+}
+
+img, input, button {
+	outline: none;
+	vertical-align: middle;
+}
+
+ul, ol, li  {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+
+/*=========================================================
+	主版面 & 通用
+==================================*/
+
+/*---------------------------------
+	header
+---------------------------------*/
+
+
+.header {
+	position: relative;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 10;
+	height: 72px;
+	background: #181D2D;
+	border-bottom: 6px solid #7FC3DB /*#999*/;
+}
+
+.wrapper {
+	width: 1100px;
+	margin: 0 auto;
+}
+
+
+/* 定位 ------------*/
+
+.header .left {
+	position: absolute;
+	top:0;
+	left: 0;
+}
+
+.header .right {
+	position: absolute;
+	top:0;
+	right: 0;
+}
+
+.header .right ul ,.header .right ul+a , .header .right .user-panel {
+	float: left;
+}
+
+/* 導覽選單 ------------*/
+
+.title {
+	display: block;
+	float: left;
+	width: 250px;
+	height: 72px;
+	background: url(../images/title.png) 50% 50% no-repeat;
+	border-right: 1px solid #4B5E66;
+}
+
+
+.header ul, .header li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.header li {
+	float: left;
+}
+.header li a {
+	display: block;
+	height: 72px;
+	padding: 0 1.2em;
+	line-height: 72px;
+	border-right: 1px solid #2E3547;
+}
+
+.header li.active {
+	position: relative;
+}
+
+.header li.active:after {
+	display: inline-block;
+	position: absolute;
+	left: 50%;
+	bottom: 6px; /* = .header li.active a 的 border-bottom 粗 */
+	margin-left: -12px;
+	content: "";
+	border-bottom: 12px solid #E6E6E6;
+	border-left: 12px solid transparent;
+	border-right: 12px solid transparent;
+}
+
+.header li.active>a {
+	border-bottom: 6px solid #E6E6E6;
+	background-color: #404960;
+}
+
+.home,
+.tool,
+.qa,
+.feedback,
+.admin
+{
+	width: 2em;
+	background: 50% 50% no-repeat;
+	-webkit-background-size: 32px;
+	background-size: 32px;
+}
+
+.home {
+	background-image: url(../images/home.png);
+}
+.tool {
+	background-image: url(../images/tool.png);
+}
+.qa {
+	background-image: url(../images/qa.png);
+}
+.feedback {
+	background-image: url(../images/feedback.png);
+}
+.admin {
+	background-image: url(../images/admin.png);
+}
+
+/* user-panel ------*/
+
+.user {
+	width: auto;
+	text-indent: 1.5em;
+	background: url(../images/user.png) 1em 50% no-repeat;
+}
+
+.cart {
+	/*margin-left: 30px;*/
+	padding: 5px 10px 5px 2.5em;
+	margin-left: 5px;
+	/*padding: 5px 10px;*/
+	border-radius: 5px;
+	background: #933 url(../images/cart.png) 0 50% no-repeat;
+}
+
+
+/* --------------------
+	sub-menu 
+ --------------------*/
+
+.has-sub {
+	position: relative;
+}
+
+li.has-sub:hover {
+	background: #2E3547;
+}
+
+li.has-sub:hover iframe,
+li.has-sub:hover .sub-menu {
+	display: block;
+}
+
+li.has-sub iframe {
+	display: none;
+}
+
+.sub-menu {
+	position: absolute;
+	display: none;
+	background: #2E3547;
+}
+
+.sub-menu ul {
+	overflow: hidden;
+	border: 1px solid #7fc3db;
+	border-top: 6px solid #307289;
+}
+
+.sub-menu li {
+	display: block;
+	width: 100%;
+}
+
+.header .sub-menu li a {
+	display: block;
+	height: auto;
+	line-height: 40px;	
+	white-space: nowrap;
+}
+
+.header .sub-menu li a:hover {
+	background: #404960;
+}
+
+/*fix ---------------*/
+
+.header li.active.has-sub:hover>a {
+	border-bottom: 6px solid #307289;
+}
+
+.header li.active.has-sub:hover:after {
+	border-bottom: 12px solid #307289;
+	border-left: 12px solid transparent;
+	border-right: 12px solid transparent;
+}
+
+.header li.active.has-sub:hover .sub-menu ul {
+	border-top: 0;
+}
+/*
+.header .sub-menu li.active a {
+	border-bottom: 0; 
+}
+*/
+
+/*-----------------------------------*/
+
+#trans-lang {
+	display: block;
+	margin: 23px 20px;
+	padding: 0.2em 0.5em;
+	height: 20px;
+	line-height: 20px;
+	border: 1px solid #666;
+	/*background: #333;*/
+	color: #BBB;
+	font-size: 0.875em;
+}
+
+#trans-lang:hover {
+	border-color: #ccc;
+	/*background: #666;*/
+	color: #fff;	
+}
+
+/*----------------------------------*/
+
+.main {
+	padding-top: 16px; /*header height*/
+}
+
+
+/*----------------------------------*/
+
+.footer {
+	/*padding: 20px 0; */
+	border-top: 1px solid #333;
+	font-size: 0.875em;
+	line-height: 1.5;
+	background: #181D2D;
+	color: #ccc;
+}
+
+.footer .wrapper:before {
+	content: "";
+	display: block;
+	width: 232px;
+	height: 26px;
+	float: left;	margin-top: 5px;
+	margin-right: 50px;
+	background: url(../images/logo_NSPO.png) 50% 50%no-repeat;
+}
+
+.footer .wrapper p {
+	margin: 20px 0;
+	margin-left: 270px;
+	padding-left: 20px;
+	border-left: 1px solid #333;
+}
+
+#total-visitor {
+	margin-left: 10px;
+	padding: 0 10px;
+	padding-left: 24px;
+	background: #307289 url(../images/statistics.png) 5px 50% no-repeat;
+	color: #fff;
+	border-radius: 1px;
+	font-size: 0.75em;
+	cursor: help;
+	-webkit-box-shadow: 0 0 5px #282828;
+	box-shadow: 0 0 5px #282828;
+}
+
+.data-provider {
+	position: relative;
+	z-index: 1;	
+	float: right;
+	margin-left: 2em;
+}
+
+.data-provider h2,
+.home-body .data-provider h2 {
+	font-size: 1em;
+}
+.data-provider h2 {
+	border: 1px solid #666;
+	display: inline-block;
+	padding: 0.2em;
+	padding-left: 1em;
+	cursor: pointer; ;
+}
+.data-provider h2:after {
+	content: "";
+	display: inline-block;
+	margin-left: 0.5em;
+	border-bottom: 6px solid #666;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	vertical-align: middle;
+}
+
+.data-provider ul {
+	position: absolute;
+	display: none;
+	bottom: 2.5em;
+	right: 0;
+	width: 15em;
+	border: 1px solid #666;
+	background: #181D2D;
+}
+
+.data-provider li+li {
+	border-top: 1px solid #666;
+}
+.data-provider li a {
+	display: block;
+	padding: 0.5em;
+}
+.data-provider li a:hover {
+	background: #121212;
+}
+.data-provider li span {
+	display: block;
+	font-size: 0.75em;
+	color: #666;
+}
+
+/*--------------------------------------*/
+
+.nav-left {
+	position: relative;
+	float: left;
+	width: 220px;
+	margin: 30px auto;
+	padding: 30px;	
+	padding-top: 0;
+}
+
+
+.nav-left>ul {
+	position: fixed;
+	width: 220px;
+	background: #111;
+	border-radius: 5px;
+	border-top: 10px solid #bab195;
+	border-bottom: 10px solid #bab195;
+}
+
+.nav-left>ul>li>a {
+	display: block;
+	padding: 10px 1em;
+	border-top: 1px dotted #666;
+	border-bottom: 1px dotted #666;
+}
+
+.nav-left>ul>li>a:hover {
+	background: #333;
+}
+.nav-left>ul>li>a.active {
+	background: #6c4947;
+}
+
+.nav-left>ul>li+li {
+	margin-top: -1px;
+}
+
+.content-right {
+	margin-left: 240px;
+	padding: 30px;
+	padding-top: 0;
+}
+
+
+/*===============================================
+	通用
+----------------------------------*/
+
+.is-icon /*用在主選單*/ {
+	text-indent: 200%;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.header li a.is-icon {
+	padding: 0 1em;
+}
+
+/*----------------------------------
+ 	<a>按鈕: hover & active  
+ ---------------------------------*/
+
+.header a:hover ,
+.f2-collection a:hover ,
+.f3-daily a:hover ,
+.page-func a:hover ,
+.task a:hover
+{
+	background-color: #2E3547;
+}
+.header a:active ,
+.f2-collection a:active ,
+.f3-daily a:active ,
+.page-func a:active ,
+.task a:active
+{
+	background-color: #404960;
+}
+
+
+/*----------------------------------
+ 	填表 fill-form 
+ ---------------------------------*/
+
+.form-wrapper {
+	display: block;
+	margin: 30px 0;
+	padding: 30px;
+	max-width: 700px;
+	border-radius: 5px;
+	background: #fff;
+}
+
+.form-wrapper p {
+	padding: 0.5em;
+	padding-left: 0;
+	font-size: 1.5em;	
+	font-weight: bold;
+	border-bottom: 6px solid #b19a7b;
+	color: #6c4947;
+}
+
+.fill-form , .fill-form th, .fill-form td {
+	border: 1px dotted #ccc;
+	border-width: 1px 0;
+}
+
+.fill-form {
+	width: 100%;
+	border: 0;
+}
+
+
+.fill-form th, .fill-form td  {
+	padding: 0.5em 1em;
+}
+
+.fill-form th {
+	color: #858b9c;
+	vertical-align: top;
+	text-align: right;
+	white-space: nowrap;
+}
+.fill-form td  {
+	color: #181d2d;
+}
+.fill-form .no-border td {
+	border-bottom-width: 0;
+
+}
+
+
+.fill-form input[type=text], 
+.fill-form input[type=password],
+.fill-form input[type=file],
+.fill-form textarea {
+	padding: 0.2em 0.5em;	
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	/*background: #404960;
+	color: #fff;*/	
+	background-color: #eee;
+	color: #333;
+}
+
+.fill-form .date {
+	width: 7em;
+	text-indent: 20px;
+	background: url(../images/calendar.png) 5px 50% no-repeat;
+}
+
+.fill-form tr:last-child td,
+.fill-form tr:last-child th {
+	border-bottom: 0;
+}
+
+.fill-form small {
+	display: inline-block;
+	max-width: 220px;
+	margin-left: 10px;
+	padding-left: 10px;
+	border-left: 1px solid #ddd;
+	color: #999;
+	vertical-align: middle;
+}
+
+.fill-form .iagree {
+	font-size: 0.875em;
+	color: #c30;
+}
+
+.fill-form a {
+	color: #900;
+}
+
+.fill-form a:hover {
+	color: #933;
+	border-bottom: 1px dashed #963;
+}
+
+.btnBlock {
+	margin-top: 2em ;
+	/*text-align: center;*/
+}
+
+.btn ,
+.btnBlock input[type=submit] , 
+.btnBlock input[type=button] {
+	width: 10em;
+	padding: 0.5em 1em;
+	border: 0;
+	border-radius: 2px;
+	background: #6c4947;
+	color: #fff;
+	outline: none;
+	font-weight: bold;
+	-webkit-transition: all .25s ease;
+	   -moz-transition: all .25s ease;
+	    -ms-transition: all .25s ease;
+	     -o-transition: all .25s ease;
+	        transition: all .25s ease;
+}
+
+.btn:hover,
+.btnBlock input[type=submit]:hover ,
+.btnBlock input[type=button]:hover {
+	/*background: #933;*/
+	-webkit-box-shadow: 0 2px 5px #666;
+	box-shadow: 0 2px 5px #666;
+}
+
+.btn:active,
+.btnBlock input[type=submit]:active ,
+.btnBlock input[type=button]:active {
+	-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, .5);
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, .5);
+	
+}
+
+/*驗證碼--------------------*/
+
+#gd-check {
+	position: relative;
+}
+
+.gd-check-success,
+.gd-check-error {
+	position:  absolute;
+	left: 105px;
+	top: 12px;
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+}
+
+.gd-check-success {
+	background: url(../images/check-success.png) 50% 50% no-repeat;
+}
+.gd-check-error {
+	background: url(../images/check-error.png) 50% 50% no-repeat;
+}
+
+/*------------------*/
+
+select,
+input[type=text],
+input[type=password],
+textarea {
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	background: #eee;
+	color: #000;
+}
+
+
+
+/*------------------------------
+	表格清單樣式 table-view
+-------------------------------*/
+
+.table-view {
+	width: 100%;
+}
+
+.table-view , .table-view th, .table-view td {
+	border-collapse: collapse;
+	border: 1px solid #333;
+	border-width: 1px 0;
+}
+.table-view th, .table-view td {
+	padding: 5px;
+	text-align: center;
+}
+.table-view th {
+	background: #333947;
+	color: #ccc;
+	font-size: 0.8125em;
+}
+
+.table-view tr:nth-child(odd) td {
+	background: #232C42;
+}
+.table-view tr:nth-child(even) td {
+	background: #404960;
+}
+
+.table-view tr:hover td {
+	background: #3890A5;
+}
+
+.table-view tr.selected td {
+	background: /*#ff9*/ #933 ;
+	/*color: #000;*/
+}
+
+
+/*---------------------------------
+	詳細資料 detail-view
+----------------------------------*/
+
+.detail-view , 
+.detail-view th, 
+.detail-view td {
+	
+}
+
+.detail-view {
+	width: 100%;
+}
+
+.detail-view th, 
+.detail-view td {
+	padding: 5px 10px;
+	border-bottom: 1px dotted #666;
+}
+
+.detail-view th {
+	color: #7FC2DA;
+	text-align: right;
+}
+
+.detail-view td {
+	color: #fff;
+}
+
+
+/*---------------------------------
+	頁面導覽功能列 page-nav
+----------------------------------*/
+
+.page-nav {
+	height: 70px;
+	line-height: 70px;
+	overflow: hidden;
+}
+
+.page-nav h2 {
+	padding: 0 1em;
+}
+
+.page-nav ul,
+.page-nav li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.page-nav .back ,
+.page-nav h2 , 
+.page-nav ul  {
+	float: left;
+
+}
+
+.page-nav li {
+	float: left;
+	margin-left: -1px;
+	text-align: center;
+}
+
+.page-nav a {
+	display: block;
+	width: 36px;
+	height: 36px;	
+	margin: 18px 0;
+	border: 1px solid #666;	
+	background: 50% 50% no-repeat;
+	cursor: pointer;
+}
+
+.page-nav a.back {	
+	float: right;
+	margin: 18px;
+	background-image: url(../images/back.png);
+}
+
+.page-nav a.close {	
+	float: right;
+	margin: 18px;	
+	background-image: url(../images/close.png);
+}
+.page-nav .grid a {	
+	background-image: url(../images/grid.png);
+}
+.page-nav .map a {	
+	background-image: url(../images/map.png);
+}
+
+.page-nav a:hover {
+	background-color: #333;
+}
+
+.page-nav a:active ,
+.page-nav a.active {
+	background-color: #555;
+}
+
+
+/*------------------------------
+	分頁樣式 pagination
+------------------------------*/
+
+.pagination, 
+.pagination span /*total*/ ,
+.pagination .num ,
+.pagination .num a , 
+.pagination .num .current {
+	display: inline-block;
+	height: 28px;
+	line-height: 28px;
+	vertical-align: middle;
+}
+.pagination span ,
+.num a {
+	padding: 0 8px;
+	border: 1px solid #333;
+	font-size: 0.8125em;
+}
+
+.pagination .num {
+	margin-top: -3px; /*fix*/
+}
+
+.pagination .num .first,
+.pagination .num .last,
+.pagination .num .prev,
+.pagination .num .next {
+	width: 26px;
+	padding: 0;
+	background: 50% 50% no-repeat;
+}
+.pagination .num .prev {
+	background-image: url(../images/arrow-left.png);	
+}
+.pagination .num .next {
+	background-image: url(../images/arrow-right.png);	
+}
+.pagination .num .first {
+	background-image: url(../images/arrow2-left.png);	
+}
+.pagination .num .last {
+	background-image: url(../images/arrow2-right.png);	
+}
+
+.pagination .num .current {
+	background-color: #3890A5;
+}
+
+.pagination .num a:hover {
+	background-color: #333;
+}
+
+.pagination .jump input ,
+.pagination .jump button ,
+.pagination .jump select {
+	margin-top: -3px;
+	padding: 0;
+	height: 20px;
+	line-height: 20px;
+	border: 0;
+	background: #222;
+	color: #fff;
+}
+
+.pagination .jump input[type=text],
+.pagination .jump button  {
+	outline: none;
+	width: 40px;
+	text-align: center;
+	background: #333;
+}
+
+.pagination .jump button  {
+	display: none;
+}
+
+
+/*---------------------
+	排序
+---------------------*/
+
+.order {
+padding: 20px 0;
+font-size: 0.8125em;
+/*background: url(images/order.png) 0 50% no-repeat;*/
+text-align: right;
+}
+
+.order.fixed {
+position: fixed; 
+top: 76px; 
+left:0; 
+right: 0; 
+z-index: 1;	
+padding-right: 20px;	
+background: #181D2D;
+border-bottom: 1px solid #404960;
+}
+
+.order a {
+display: inline-block;
+margin-left: -1px;
+padding: 3px 10px;
+padding-right: 20px;
+border: 1px solid #ccc;
+color: #999;
+}
+
+.order a.ascending {
+background: url(../images/order-ascending.png) 96% 50% no-repeat;
+} 
+.order a.descending {
+background: url(../images/order-descending.png) 96% 50% no-repeat;
+} 
+.order a.ascending ,
+.order a.descending {    
+color: #933;
+font-weight: bold;
+background-color: #eee;
+} 
+
+
+/*------------------*/
+
+.note {
+	margin-bottom: 10px;
+	padding: 10px;
+	background:  #ffc;
+	color: #c33;
+}
+
+/*=========================================================
+	修正 or 覆蓋
+==================================*/
+
+/*---------------------------------
+	clearfix
+---------------------------------*/
+
+.clearfix:before,
+.clearfix:after {
+  display:table;
+  line-height:0;
+  content:"";
+}
+.clearfix:after {
+  clear:both;
+}
+.clearfix {
+  *zoom: 1;
+}
+
+/*-------------------------
+	jQuery UI
+-----------------------*/
+
+.ui-datepicker-header * ,
+.ui-datepicker-calendar * {
+	/*font-size: 0.725em;*/
+}
+
+.ui-datepicker td span, .ui-datepicker td a {
+	padding: 0;
+}

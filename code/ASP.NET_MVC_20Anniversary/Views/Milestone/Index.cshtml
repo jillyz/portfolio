@@ -1,0 +1,296 @@
+﻿@{
+    ViewBag.Title = "里程碑 -";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section headerCSS {
+    <link href="@Url.Content("~/css/milestone.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/css/jquery.fullPage.css")" rel="stylesheet" />
+}
+
+@section headerScript {
+
+}
+<div id="main" class="fade out" >
+    
+    <h2>里程碑</h2>
+    
+    <div id="fullpage">
+         <div class="section year-1991" id="section0">
+            <div class="slide">
+                <div>
+                    <h3>1991 <small>成立研究小組</small></h3>
+                    <p>管理學院（建設學院前身）土地管理學系籌設地理資訊系統（GIS）研究小組，<br />並於紀念館211室設小組研究室。</p>
+                </div>
+            </div>
+        </div>
+        <div class="section year-1992" id="section1">
+            <div class="slide">
+                <div>
+                    <h3>1992 <small>開啟專案之路</small></h3>
+                    <p>承接台灣省政府「台灣省地理資訊系統整體規劃及推動策略之研究」，開啟專案之路。</p>
+                </div>
+            </div>
+        </div>
+        <div class="section year-1995" id="section2">
+            <div class="slide">
+                <div>
+                    <h3>1995 <small>正式核准成立GIS中心</small></h3>
+                    <p>
+                        教育部正式核准成立「逢甲大學管理學院地理資訊系統研究中心」。制訂中心組織管理規章。
+
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="section  year-1996" id="section3">
+            <div class="slide">
+                <div>
+                    <h3>1996 <small>開啟研發之路</small></h3>
+                    <p>取得第一張專利-「載具導航追蹤顯示系統」，開始發展GPS電子地圖與無人載具研發。</p>
+                </div>
+            </div>
+        </div>
+        <div class="section year-1997" id="section4">
+            <div class="slide">
+                <div>
+                    <h3>1997 <small>出版專書/奠定車隊監控管理之基石</small></h3>
+                    <p>出版第一本專書「透視ArcView3.X」，迄今已出版16本GIS相關專書。</p>
+                    <p>進行「車輛導航及車隊派遣系統」全國規模最大之產學合作研發計畫，奠定車隊監控管理之基石。 </p>
+                </div>
+            </div>
+        </div>
+        <div class="section year-1999" id="section5">
+            <div class="slide">
+                <div>
+                    <h3>1999 <small>通過ISO認證/積極投入監測管理及災害防救</small></h3>
+                    <p>通過ISO認證，為國內第一家通過ISO 9001國際品保認證之地理資訊系統研究中心。</p>
+                    <p>發生九二一大地震，協助政府救災重建工作，積極投入監測管理及災害防救技術研發。</p>
+                </div>
+            </div>
+        </div>
+        <div class="section year-2001" id="section6">
+            <div class="slide">
+                <div>
+                    <h3>2001 <small>工程管考整合性資訊服務</small></h3>
+                    <p>桃芝颱風過後，致力於工程管考系統研發，提供整合性資訊服務系統。</p>
+                </div>
+            </div>
+        </div>
+        <div class="section year-2002" id="section7">
+            <div class="slide">
+                <div>
+                    <h3>2002 <small>首場GIS教育營隊活動</small></h3>
+                    <p>舉辦「尋找魔戒夏令營」，開啟GIS教育營隊活動先例，至今已累計舉辦共20餘場，累計參與人數達近兩千人。</p>
+                </div>                
+            </div>
+        </div>
+        <div class="section year-2003" id="section8">
+            <div class="slide">
+                <div>
+                    <h3>2003 <small>取得OGC國際會員認證/成立易圖科技</small></h3>
+                    <p>升格為校內一級研究中心。取得Open GIS Consortium (OGC,國際開放式空間資訊協會)會員認證。</p>
+                    <p>
+                        成立育成公司-易圖科技，專責UAV發展及環境資訊製作。
+                        <br />
+                        <a href="http://www.easymap.tw" target="_blank">
+                            <img src="@Url.Content("~/images/Milestone/logo-easy-map.png")" alt="易圖科技 logo" />
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="section year-2004" id="section9">
+            <div class="slide">
+                <div>
+                    <h3>2004 <small>開啟車隊監控管理新契機</small></h3>
+                    <p>與台塑汽車貨運公司共同舉辦成果發表會，發表「智慧型衛星即時車隊管理系統」應用之高效益，開啟車隊監控管理新契機。</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="section year-2007" id="section10">
+            <div class="slide">
+                <div>
+                    <h3>2007 <small>育成公司正式轉型為科技公司</small></h3>
+                    <p>
+                        中心育成公司-巨鷗，正式轉型為科技公司，為首間育成公司成功升級轉型之企業典範。
+                        <br />
+                        <a href="http://www.geo.com.tw" target="_blank">
+                            <img src="@Url.Content("~/images/Milestone/logo-geotech.png")" alt="巨鷗科技。巨鷗整合行銷 logo" />
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="section year-2008" id="section11">
+            <div class="slide">
+                <div>
+                    <h3>2008 <small>通過CMMI認證/國際合作交流大躍進/成立天眼衛星科技</small></h3>
+                    <p>正式通過 CMMI Level 2 認證，為目前國內空間資訊領域唯一全組織部門均通過CMMI認證之典範。</p>
+                    <p>首度於OGC會議上發表報告，引起高度關注，為國際交流合作之一大躍進，並積極開拓國際版圖。</p>
+                    <p>
+                        成立育成公司-天眼衛星科技，專責車隊監控及派遣管理系統。
+                        <br />
+                        <a href="http://www.skyeyes.tw" target="_blank">
+                            <img src="@Url.Content("~/images/Milestone/logo-skyeyes.png")" alt="天眼衛星科技 logo" />
+                        </a>  
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="section year-2009" id="section12">
+            <div class="slide">
+                <div>
+                    <h3>2009 <small>整合監測技術並擴大應用，協助防救災有功</small></h3>
+                    <p>於莫拉克颱風期間成功整合觀測車、無人載具等多項技術投入防救災工作，將監測領域技術整合並擴大應用。<br />周主任因此事蹟於2012年榮獲行政院頒發「三等功績獎」。</p>
+                </div>
+            </div>
+        </div>
+        <div class="section year-2010" id="section13">
+            <div class="slide">
+                <div>
+                    <h3>2010 <small>邁向國際化之嶄新一頁</small></h3>
+                    <p>
+                        經核定為亞洲第一個OGC標準相容性檢測中心，<br />且逢甲大學正式成為二十個戰略與主要會員(Principal Member)之一，邁向國際化之嶄新一頁。
+                        <br />
+                        <a href="http://www.opengeospatial.org/ogc/members" target="_blank">
+                            <img src="@Url.Content("~/images/Milestone/ogc-principle-member.png")" alt="OGC Principle Members" />
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="section year-2011" id="section14">
+            <div class="slide">
+                <div>
+                    <h3>2011 <small>舉辦大型國際會議，成立OGC亞洲論壇</small></h3>
+                    <p>舉辦第77屆OGC技術委員會議（OGC TC/PC Meetings）與第一屆亞洲論壇（OGC Asia Forum）成立大會，<br />此OGC TC & II Day系列活動榮獲經濟部「台灣會展躍升會議獎」。</p>
+                </div>
+            </div>
+        </div>
+        <div class="section year-2013" id="section15">
+            <div class="slide">
+                <div>
+                    <h3>2013 <small>與日本AIST定期交流合作啟動/成立準線科技</small></h3>
+                    <p>與日本獨立行政法人產業技術總合研究所(AIST)開啟定期交流合作方案，成功打響亞洲知名GIS中心名號。</p>
+                    <p>
+                        成立育成公司-準線科技，專責環境監控預警硬軟體及整合。
+                        <br />
+                        <a href="http://www.focusit.com.tw" target="_blank">
+                            <img src="@Url.Content("~/images/Milestone/logo-focusit.png")" alt="準線智慧科技 logo" />
+                        </a> 
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="section year-2014" id="section16">
+            <div class="slide">
+                <div>
+                    <h3>2014 <small>歡慶成立20週年</small></h3>
+                    <p>歡慶成立20週年，現有50餘位國內外顧問群，160位專職人員，40位同仁具有國際專案管理師(PMP)證照，30位具有國際敏捷專案管理師(CSM) 證照；承接案量累計逾兩千件。</p>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- fullpage -->
+
+
+</div><!-- main -->
+
+<a class="scroll-tip" title="向下捲動頁面"></a>
+
+
+@section bodyScript{
+
+    <!-- FullPage.js -->  
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>  
+    <script type="text/javascript" src="@Url.Content("~/js/jquery.fullPage.min.js")"></script>
+    <!-- FullPage.js --> 
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            // menu
+            $(".indicator-current").addClass("active2");
+
+            var winH = $(window).height();
+            var winW = $(window).width();
+
+            if (winW < 600) {
+
+                $(".section").css({ 'height' :'auto' , 'min-height': winH , 'padding-bottom': '2em'});
+                $(".scroll-tip").hide();
+
+            } else {
+
+                // fullpage.js ----------------------------------------------
+                $('#fullpage').fullpage({
+                    anchors: [
+                        '1991',
+                        '1992',
+                        '1995',
+                        '1996',
+                        '1997',
+                        '1999',
+                        '2001',
+                        '2002',
+                        '2003',
+                        '2004',
+                        '2007',
+                        '2008',
+                        '2009',
+                        '2010',
+                        '2011',
+                        '2013',
+                        '2014'
+                    ],
+                    //slidesColor: ['#C63D0F', '#1BBC9B', '#7E8F7C'],
+                    navigation: true,
+                    loopTop: true,
+                    loopBottom: true,
+                    easing: 'easeOutCirc',  //http://jqueryui.com/resources/demos/effect/easing.html
+                    scrollingSpeed: 800,
+                    navigationPosition: 'right',
+                    navigationTooltips: [
+                        '1991 成立研究小組',
+                        '1992 開啟專案之路',
+                        '1995 正式核准成立GIS中心',
+                        '1996 開啟研發之路',
+                        '1997 出版專書/奠定車隊監控管理之基石',
+                        '1999 通過ISO認證/積極投入監測管理及災害防救',
+                        '2001 工程管考整合性資訊服務',
+                        '2002 首場GIS教育營隊活動',
+                        '2003 取得OGC國際會員認證/成立易圖科技',
+                        '2004-開啟車隊監控管理新契機',
+                        '2007 育成公司正式轉型為科技公司',
+                        '2008 通過CMMI認證/國際合作交流大躍進/成立天眼衛星科技',
+                        '2009 整合監測技術並擴大應用，協助防救災有功',
+                        '2010 邁向國際化之嶄新一頁',
+                        '2011 舉辦大型國際會議，成立OGC亞洲論壇',
+                        '2013 與日本AIST定期交流合作啟動/成立準線科技',
+                        '2014 歡慶成立20週年'
+                    ],
+                    afterLoad: function (anchorLink, index) {
+                        if (index == 2) {
+                            $(".scroll-tip").fadeOut();
+                        }
+                        if (index == 17) {
+                            $(".scroll-tip").fadeOut();
+                        }
+                        if (index == 1) {
+                            $(".scroll-tip").fadeIn();
+                        }
+                    }
+
+                });
+            }
+
+        });
+
+
+
+	</script>
+
+}
+

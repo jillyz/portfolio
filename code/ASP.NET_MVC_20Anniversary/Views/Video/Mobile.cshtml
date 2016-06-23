@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "全球夥伴祝賀";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section headerCSS {
+<style>
+    #videoFrame
+    {
+         position: absolute;
+         top: 40px;
+         left:0;
+         right:0;
+    }
+</style>
+}
+
+@section headerScript {
+
+}
+
+<iframe id="videoFrame"  src="//www.youtube.com/embed/videoseries?list=PLV10AoSbk_ctfEuVn1gXjy_gob7MCb78Y&index=3&autoplay=0&showinfo=1&rel=0&loop=1" frameborder="0" allowfullscreen></iframe>
+
+
+@section bodyScript{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // menu
+            $(".indicator-current").addClass("active4");
+
+            $("#videoFrame").width($(window).width()).height($(window).height() - 40);            
+        });
+        $(window).resize(function () {
+            $("#videoFrame").width($(window).width()).height($(window).height() - 40);
+        });        
+    </script>
+}

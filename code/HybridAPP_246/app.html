@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>APP demo</title>
+
+	<style>
+		html, body {
+			margin: 0;
+			padding: 0;
+		}
+		body {
+			background: #ebebeb;
+			text-align: center;
+		}
+		
+		.phone {	
+			display: inline-block;
+			position: relative;		
+			width: 340px;
+			margin: 10px auto;
+			padding: 70px 10px;
+			background: #111;
+			border-radius: 40px;
+		}
+
+
+		.phone:before {
+			content: "";
+			position: absolute;
+			left: 50%;
+			top: 30px;
+			display: block;
+			width: 120px;
+			height: 10px;
+			margin-left: -60px;
+			background:  #333;
+			border-radius: 5px;
+		}		
+
+		.phone:after {
+			content: "";
+			position: absolute;
+			left: 50%;
+			bottom: 13px;
+			display: block;
+			width: 50px;
+			height: 50px;
+			margin-left: -25px;
+			border: 3px solid #282828;
+			border-radius: 50%;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+
+		.screen {
+			width: 320px;
+			height: 568px;
+		}
+	</style>
+
+
+</head>
+<body>
+
+<p>此頁面為從PhoneGap開發檔案還原出來的版本，加載了一些其餘JS檔案，若載入過慢請見諒</p>
+<div class="phone">
+	<iframe class="screen" frameborder="0" scrolling="no" src="app/index.html"></iframe>	
+</div>
+
+<div class="phone">
+	<iframe class="screen" frameborder="0" scrolling="no" src="app/login.html"></iframe>	
+</div>
+
+</body>
+</html>
